@@ -1,0 +1,543 @@
+=======
+REACT
+=======
+
+1. React is a library but directly compete with other frameworks like angular & vue. 
+2. React has a component based architecture. We can reuse these components in other projects.
+3. npx-i-create-react-app is used to create a basic react app. Use react docs.
+4. There are two main folders Public &  SRC that we need to deal with. 
+   1. Public : Contains index.html
+   2. SRC : Contains index.js which is used to render App.js. Content in App.js is displayed on the website. 
+	    In SRC we will create components and they will be transferred to App.js. 
+5. index.html contains div with id = root. Code in index.js means that put App.js in this div with id = root and render it.
+   So this index.html is the main file which is getting rendered which displays App.js. File index.js is used to push App.js into index.html. 
+
+JSX
+-----
+
+1. class is written as className
+2. tabindex is written as tabIndex
+3. for is written as htmlFor
+4. Self closing tags in html should be closed using />
+5. We can write js in {} brackets. 
+6. Only one html element is allowed to be returned. 
+7. Using <>  </> JSX fragment you can write more than one html elements in the given tags. 
+8. Parenthesis is used after return because js can automatically insert semicolon. 
+
+
+Components & Props
+--------------------
+
+1. File name of component always begins with capital letter.
+2. We can create a component e.g Navbar and we can set certain variables we call these as props.
+3. We add these components e.g in App.js and we can pass the props from there. 
+4. We need to import propTypes from propTypes.
+5. We need to add the below code at the end of the component 
+
+	functionname.propTypes = {title: propTypes.string, aboutText: propTypes.string}
+
+   Here we are defining the data type of props. Title & aboutText are the examples of props.
+   We do this in order to avoid error, otherwise we could have passed props as number by mistake without getting any error. It is a kind of check.
+
+6. Default props - We can add default props which will show when no props are passed.
+
+  	functionname.defaultProps = {title: Add Text Here, aboutText: Add About Text}
+
+7. isRequired - We can add isRequired like:
+
+	functionname.propTypes = {title: propTypes.string.isRequired, aboutText: propTypes.string}
+
+   This will show error if title is undefined because it is required. In case default props are provided it will not show error.
+
+
+Aside  
+------
+
+1. props.alert && This means if this statement is not null.
+ 
+2. While using react router. <a> tag must be changed into link and href into to. Link must be imported from react router in order to use it.
+   If we do not do so, site will work but start reloading which we do not want. 
+
+3. While defining path in routing use exact path as keyword because react does partial matching as default. So it can take u to /user instead of users/home. 
+
+4. Git Deployment-V17
+
+5. CLS: Cumulative layout shift 
+
+6. HTTPS: You need to use HTTPS because some JS APIs won't work without it e.g. copy text, clear text etc.V19
+
+7. onClick requires a function not a function call. onClick = {() => {props.togglemode('primary')}} is correct, onClick = {props.togglemode('primary')} is wrong.
+
+8. Main logic for spinner is this.state.loading && <Spinner/>  
+
+9. Date Object:
+
+   let a = '2021-08-27T07:00:00Z'
+   let d = new Date(a)
+   d.getDate()
+   d.getTime()
+   d.getMonth()
+   d.getYear()
+   d.getMinutes()
+   d.toGMTString()
+
+
+
+========
+HOOKS
+========
+
+
+
+1. Features of class based components in function based components.
+2. Allows you to use state and other features of React without writing a class.
+3. Hooks are functions which hook into React state and lifecycle features from function based components.
+
+
+Types:
+-------
+
+
+1. useState
+
+   const [state, setState] = useState('state1')
+   The initial state is set to null. Function setState(state2) is used to change the state. 
+
+
+2. useEffect 
+
+   This works similar to componentDidMount. In the below example if: V58
+
+     1. We introduce useState hook and set the initial state (mentioned below)
+     2. Then we change the state (name: Sally, class: 10B) inside a function using settimeout of lets say 3 secs. We send function as props under value. 
+     3. And we import context to a component, e.g. About. 
+     4. Then we can change the state to new state using useEffect hook:
+
+        useEffect(() => {
+          a.update()
+         }, [])
+  
+        
+     5. So lets say <h1>My name is a.state.name and I'm in class a.state.class<h1/> will show larry and 5B but after 3 secs it will change its value to Sally and 10B
+
+
+3. useContext V57
+
+   React Context is a way to manage state globally. This saves prop drilling.
+   It can be used together with the useState Hook to share state between deeply nested components more easily than with useState alone.
+   
+   STEP-1
+ 
+   Below code is used to create context for note e.g in a file NoteContext.
+   In layman terms we are telling react that pls create context, we want to use context API. 
+
+   import { createContext } from "react";
+   const NoteContext = createContext(); 
+   export default NoteContext;
+
+   STEP-2
+
+   We'll create another file NoteState and import the NoteContext file in it, and write the below code:
+   We are creating states and passing them as props (in value) to all children.
+
+    const NoteState = (props) => {
+    
+    const state = {"name": "Parry", "class": "5B"}
+
+    return ( <NoteContext.Provider value={{ state }}>
+      {props.children}
+    </NoteContext.Provider> )
+
+   }
+
+   STEP-3
+
+   We'll go to the app.js and wrap all components(routing) in the <NoteState> <NoteState/> tag. 
+
+   
+   STEP-4
+
+   We'll import useContext from react & NoteContext from path in the component where we want to use state. V58
+   
+   const a = useContext(NoteContext)
+   console.log(a.name); prints Parry. 
+
+
+4. useLocation
+
+   The useLocation hook is a function that returns the location object that contains information about the current URL.
+   Whenever the URL changes, a new location object will be returned. V59
+   location.pathname will provide the location of path where user clicked e.g /home, /about etc.
+   
+   let location = useLocation();
+   
+   We can use useEffect like given below but it's not always required. 
+   Main logic of useLocation hook is location.pathname can be accessed.  
+
+   useEffect(() => {
+    console.log(location.pathname);
+
+  }, [location]);
+
+
+5. useRef 
+
+   Is a React Hook that lets you reference a value that’s not needed for rendering.
+   It can be used to access a DOM element directly. V66
+   We can put reference to e.g button element & then we can write code like 
+   ref.current.toggle()
+   It will help open, close or toggle a e.g modal window. 
+   In React, we can add a ref attribute to an element to access it directly in the DOM.
+
+
+6. useNavigate 
+
+   The useNavigate hook returns a function that lets you navigate programmatically. V69
+   e.g after loggin in with username & password user is taken to the homepage 
+   navigate("/")
+
+7. useSelector
+
+   Allows you to extract data from the Redux store state, using a selector function.
+   It will also subscribe to the Redux store, and run your selector whenever an action is dispatched.
+
+   const amount = useSelector((state) => state.amount);
+
+   In the above example useSelector pulled amount from the redux store 
+
+8. useDispatch 
+
+   It is a function that we import from react-redux library and assign it to a variable.
+   And with this, we are able to dispatch any action to the redux store by simply adding an action as an argument to the new variable.
+
+   const dispatch = useDispatch();
+
+   e.g useDispatch hook is used to interact with the action-creators in order to execute a particular action.
+   In redux project now we can use withdrawMoney(), depositMoney() which we created in action-creators.
+
+9. useReducer
+   
+   We can use this in place of useState hook as well for changing states. 
+
+   const initialState = 0; 
+
+   const reducer = (state, action) => {
+	if (action.type === "INCREMENT"){state + 1} or we can also write {action.payload + 1}
+   }
+         
+
+   const [state, dispatch] = useReducer(reducer, initialState); 
+
+   useReducer returns two elements of an array i.e. state & dispatch. 
+   Dispatch's main role is to trigger action. e.g. increment or decrement a number. We call dispatch() when we want to change state. 
+   e.g. dispatch ({type: "INCREMENT"}). Here type is property of action. Dispatch object takes two elements type & payload. 
+   Payload will be same as state or initialstate. We can use action.type and action.payload. 
+
+   Reducer is a pure function which takes present state and action as inputs and perform action on present state and returns a new state. 
+   Type is a property of action. 
+
+
+
+Class Based Components
+-----------------------
+
+1. Props can be used in two ways: 
+
+    i. Direct
+
+       {this.props.title}
+       {this.props.description}
+
+   ii. Destructuring syntax
+
+       let {title, description} = this.props : This should be nested between render & return. 
+       Then props can be used like {title}
+
+2. Whenever using constructor super() must be called.
+
+   constructor(){super(); }
+
+   If props are used inside a constructor then it must be mentioned inside () e.g.
+   constructor(props){super(props); document.title = this.props.category }
+
+3. Setting State : We can set initial state like :
+
+   articles = [];
+   constructor(){
+      super();
+      this.state = {articles : this.articles} here articles is an array. V25
+      this.state = {articles : [], loading: false, page: 1} as articles is an empty array, if its not empty we could have used the above syntax.
+   }
+   Now you can set state like:
+   this.setState = {{articles: parsedData.articles}}; One bracket is for js other is for object. 
+
+4. componentDidMount is run in the end i.e after constructor and render. It is used to change state. Constructor is not used to change state.V27
+
+   async componentDidMount(){
+   let url = 'url'
+   this.setState = {{loading: true}}
+   let data = await fetch(url)
+   let parsedData = await data.json()
+   console.log(parsedData)
+   this.setState = {{articles: parsedData.articles, totalResults: parsedData.totalResults, loading: false}};
+   }
+
+   We can also create an async function e.g updateNews and run this function inside componentDidMount like this.updateNews(). V33
+   
+5. Changing State: We can change state e.g mentioned above. We can also change state of other variables e.g:
+   
+   this.setState = {{page: this.state.page + 1 }};
+
+6. Like function based components static defaultProps & static propTypes can be set like this: 
+   
+   static defaultProps = {country: 'in', pageSize: '7'}
+   static propTypes = {country: 'PropTypes.string', pageSize: 'PropTypes.number'}
+
+7. Force Remount-V31: 
+   
+   Let's say we have several categories in news app like business, sports, politics etc. 
+   Now we have set up the router correctly but when we click on the category, change doesn't happen. Its because componentDidMount already mounted the news.
+   But when we reload the page the clicked category is displayed. We want it to display content on clicked category without reloading the page.
+   We need to provide unique key in the route for each category(category is the props). e.g.
+
+   <Route exact path = '/' key = 'general' category = 'general'/>
+   <Route exact path = '/business' key = 'business' category = 'business'/>
+
+8. React Component Lifecycle: 
+   
+   https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+   Stages:   
+
+   1. Mount
+   2. Update
+   3. Unmount
+
+   Methods:
+   
+   1. render(): This method is used to render the DOM (HTML). It runs during mounting and updating of a component. You cannot modify state inside it. 
+
+   3. componentDidMount(): It runs after the component output has been rendered to the DOM. It runs after the render method.
+                           We can set the state, use async methods, fetch data from API's etc.
+                          
+   4. componentDidUpdate(): This is invoked as soon as the updating happens. Most common use case of this method is updating DOM in response to props and state changes.
+
+   5. componentWillUnmount(): This method is called just before the component is unmounted or destroyed. Usually used to perform cleanups.
+
+
+Component Lifecycle
+=====================
+
+Mounting
+----------
+
+When component is created four methods are called in the order mentioned below.
+
+1. constructor() - constructs the component
+2. getDerivedStateFromProps() - Is used only when states depend upon changes to props.
+3. render()
+4. componentDidMount()
+
+Updating
+----------
+
+When component is updated five methods are called in the order mentioned below.
+
+1. getDerivedStateFromProps() - Is used only when states depend upon changes to props.
+2. shouldComponentUpdate() - This method by default returns true. Everytime there is change in state, this method is called to check if the component should update.
+                             Make this methods returns false if you do not want to render the changes in state.
+3. render()
+4. getSnapshotBeforeUpdate() - Invoked just before changes are rendered. It helps keep track of what is changed.
+
+Any value returned by this lifecycle is passed as a parameter to componentDidUpdate()
+
+5. componentDidUpdate() - It is invoked immediately after updating occurs. 
+
+
+Unmount
+---------
+
+1. componentWillUnmount()
+
+
+ASIDE
+=======
+
+1. We can send data from parent to child as props.
+
+2. We can send data from child to parent as callback. 
+   If we pass props from parent as function and recieve this prop in child, then child can pass parameter to this function. And this will be rendered by the parent.
+
+
+
+======
+REDUX
+======
+
+
+   Redux is a pattern and library for managing and updating application state, using events called "actions". 
+   It serves as a centralized store for state that needs to be used across your entire application, with rules ensuring that the state can only be updated in a predictable fashion.
+   Redux helps you manage "global" state - state that is needed across many parts of your application.
+
+   Download 
+
+   redux react-redux redux-thunk
+
+   There are three major elements in Redux
+
+   1. UI:
+
+      This demands the state
+
+   2. Action Creators:
+
+      Creates the action with two prameters:
+     
+      1. Type : 'Bring'
+      2. Payload: '1 ball + bat'
+
+   3. Reducer:
+
+      Execute the demand based upon type & payload. Execute changes in the state. 
+
+
+Steps for setting up redux store 
+----------------------------------
+
+
+1. We'll create a folder with name state and create two folders action-creators & reducers in it.
+
+   In action creators we'll create a file index.js and write:
+
+   const depositmoney = (amount) => {
+           return (dispatch) => {
+      dispatch({
+               Type : 'deposit'
+               Payload: 'amount'
+             })
+         }
+      }
+
+2. In reducer folder we'll create file amountreducer. 
+
+   export default reducer = (state=0, action) => {
+
+     if (action.type === 'deposit'){
+    	return	state + action.payload    
+	}
+    else{ return state }
+    }
+
+3. We can create multiple reducers. We can combine these reducers and export them in a single file.
+   We'll create index.js in reducers.
+   We'll import combinereducers from redux in this file.
+   And we'll import all the reducers in above example amountreducer. An write the following code.
+   
+   export default reducers = combineReducers({ amount: amountreducer})
+
+   If we have more reducers we can add in above object. 
+
+4. We'll create a redux store via file store.js in folder name state mentioned above.
+   This configures the store and it takes 3 variables:
+
+    1. Reducers
+    2. initial state (blank in example below)
+    3. Middleware
+  
+   export const store = configureStore (
+
+    {reducer:reducers},
+    {},
+    applyMiddleware(thunk),
+    
+    ) 
+
+5. We'll create index.js in state folder. And write following code:
+   
+   export * as actionCreators from "./action-creators/index"
+
+   If we want to use action-creators then we can use it directly from state itself using this file (which is in state folder)
+   This is created to increase the accessability to action-creators.
+
+
+6. In app.js or index.js, Wrap all components in <Provider store = {store}> </Provider>
+
+7. bindActionCreators V78
+   
+   We need to import this from redux & write the below code.
+
+   const actions = bindActionCreators(actionCreators, dispatch); here we need to use actions.withdrawMoney() 
+   const {withdrawMoney, depositMoney} = bindActionCreators(actionCreators, dispatch); we used destructuring here so we can write withdrawMoney()
+   
+   It will simpilify the code from:
+   
+   onClick = {() = {{dispatch(actionCreators.withdrawMoney(100)}}}
+
+   now we can write the same code like this:
+
+   onClick = { () => { withdrawMoney(100) } }
+
+
+Aside
+------
+
+1. ToDo app 
+
+style= {{ border: "2px solid white" }}
+style= {{ border: "2px solid white" }}
+style= {{ border: "2px solid white" }}
+style= {{ border: "2px solid white" }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+

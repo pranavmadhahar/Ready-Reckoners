@@ -1,0 +1,934 @@
+==================
+DATA TYPES IN JS
+==================
+
+1. Primitive Data Types
+
+   BBUNNSS
+   Boolean, Bigint, Undefined, Number, Null, String & Symbol.
+
+2. Non-Primitive Data Type 
+
+   It is object in JS. 
+
+
+=========================
+INSERTING DATA IN OBJECT
+=========================
+
+
+let obj = {a:1, b:2, c:3}
+
+obj ["d"] = "4"
+
+console.log(obj['b']) or console.log(obj.b)
+Both will return value of 2.
+
+
+=======
+LOOPS
+=======
+
+
+1. for loop
+2. for in loop (applies to keys of object)
+	for (a in obj){
+	console.log('Marks of' +a+ 'are' + obj[a])
+	}
+3. for of loop. (applies to values of object)
+	for (b of 'larry'){
+	console.log(b)
+	}
+	It will print l a r r y 
+4. while loop
+
+5. do while loop
+
+
+===========
+FUNCTIONS
+===========
+
+
+function sum (a, b){
+	return a + b;
+	console.log('done');
+	}
+If we call function sum(2, 3) then it will execute everything inside the fn. 
+If we call the function like 
+let x = sum(2, 3);
+console.log(x);
+then it will return 5 only & will not print done. 
+
+
+========
+STRINGS
+========
+
+
+In strings the index starts from zero. 
+If the length of string is 5 then its index go upto 4. 
+
+let name = "Larry"
+
+console.log(name.length). This will return 5.
+console.log(name[0]). This will return L.
+
+
+Escape Sequence Characters
+---------------------------
+
+\" - It will insert double or single quotes within double or single quotes
+
+     console.log ('Bana\'na) will print as Bana'na 
+
+\n - Newline
+\t - tab
+\r - carriage return
+
+
+String Methods
+---------------
+
+Strings are immutable. String methods do not change original string, it only returns a new string.
+You can search for more string methods on net. Commonly used ones are given below.
+
+let name = "Larry"
+let friend = "Naman"
+let friend2 = "  Meena      "
+
+1. console.log(name.length) - prints 5
+
+2. console.log(name.toUpperCase())
+
+3. console.log(name.toLowerCase())
+
+4. console.log(name.slice(2, 4)) - prints rr
+
+5. console.log(name.slice(2)) - prints rry
+
+6. console.log(name.replace('Lar', 'Par')) - prints Parry
+
+7. console.log(name.concat(' is a friend of ', friend, 'ok')) - prints Larry is a friend of Naman ok.
+
+8. console.log(friend2.trim()) - prints Meena
+
+9. console.log(name.startsWith('Lar')) - prints true
+
+10. console.log(name.endsWith('ry')) - prints true
+
+11. console.log(name.includes('ar')) - prints true
+
+12. let text = "How are you doing today?";
+    const myArray = text.split(" ");  
+    split() splits a string into an array of substrings, and returns the array
+    How,are,you,doing,today?
+    console.log(text.split(" ").length); prints 5 (words)
+
+
+========
+ARRAYS
+========
+
+
+Array is type of object. Arrays are mutable, arrays can be changed. 
+
+	
+Inserting data in Array
+------------------------
+
+let arr = [a, b, c]
+
+arr [3] = "d" 
+
+
+Changing data in Array
+-----------------------
+
+arr[0] = "x"
+
+console.log(arr.length) - prints 4
+
+
+Array Methods
+--------------
+
+1. toString()
+
+   console.log(arr.toString()); 
+
+2. join()
+
+   let p = arr.join("-"); prints a-b-c-d
+
+   It will return a string. 
+
+3. pop()
+
+   This will remove the last item. It changes or modifies the original array.
+
+   console.log(arr.pop()); Prints [a, b, c]
+   let r = arr.pop()
+   console.log(r); Prints d, Pop returns the popped element.
+
+4. push()
+   
+   This will add item in the end. It changes or modifies the original array.
+   
+   console.log(arr.push(e)); Prints [a, b, c, d, e]
+   let r = arr.push(e)
+   console.log(r); Prints 5, Push returns the new array length.
+
+5. shift()
+
+   This will remove the first item in the array. It changes or modifies the original array.
+
+   console.log(arr.shift()); Prints [b, c, d, e]
+   let r = arr.shift()
+   console.log(r); Prints a, Shift returns the popped element. 
+
+6. unshift()
+
+   This will add item in the begining of array. It changes or modifies the original array.
+
+   console.log(arr.unshift(a)); Prints [a, b, c, d, e]
+   let r = arr.unshift(a)
+   console.log(r); Prints 5, unshift returns the new array length.
+
+7. delete
+
+   Delete is not a method it is a operator. It will not change array length. 
+
+   delete arr[0] 
+   console.log(arr) Prints [empty 1st item, b, c, d, e]
+
+8. concat()
+
+   This will return a new array. Original arrays will not be modified.
+
+   let arr2 = [f, g, h]
+   let newArr = arr.concat(arr2);
+   console.log(newArr); Prints [a, b, c, d, e, f, g, h]
+
+9. sort()
+
+   This will sort items alphabetically. It considers items as strings. It changes or modifies the original array.
+
+   let num = [555, 22, 8, 650, 984, 1 , 1124]
+   num.sort();
+   console.log(num); Prints [1, 1124, 22, 555, 650, 8, 984]
+
+   --compare--
+
+   sort() takes additional compare function to sort in ascending or decending order
+   let compare = (a, b) => { return a - b } for ascending and b - a for decending. 
+
+   num.sort(compare); Prints [1, 8, 22, 555, 650, 984, 1124]
+
+10. reverse()
+
+    This will reverse the array. It changes or modifies the original array.
+
+    arr.reverse();
+    console.log(arr); Prints [h, g, f, e, d, c, b, a]
+
+11. splice()
+
+    This takes three arguments, in below example, 2, is the index to start, 3 numbers to remove and three numbers to add in its place.
+    It modifies the original array and returns deleted items. 
+
+    let num = [1, 2, 3, 4, 5, 6, 7]
+
+    let r = num.splice(2, 3, 33, 44, 55)
+    console.log(num); prints [1, 2, 33, 44, 55, 6, 7]
+    console.log(r); prints deleted items [3, 4, 5]
+
+12. slice()
+
+    This returns a new array. It doesn't modify the original array. 
+
+    let newNum = num.slice(3);
+    console.log(newNum); prints [4, 5, 6, 7]
+    let newNum2 = num.slice(1, 3); 
+    console.log(newNum2); prints [2, 3]
+
+
+Loops in Arrays
+----------------
+
+1. For loop
+
+   let num = [1, 2, 3, 4, 5]
+
+   for(let i=0, i<num.length, i++){
+	  console.log(num[i]);
+	}
+
+2. forEach() loop
+    
+   num.forEach((element)=>{
+	console.log(element*element);
+	})
+
+3. Array.from()
+
+   Used to create array from any other object.
+
+   let name = 'Larry'
+
+   let arr = Array.from(name);
+   console.log(arr); prints ['L', 'a', 'r', 'r', 'y']
+
+4. for of loop
+
+   This a better way to access the array elements(value) than for loop mentioned above. 
+
+   for (let items of num){
+	console.log(items)
+	}
+
+4. for in loop
+
+   This will return the keys of array elements which is index in case of arrays. 
+
+   for (let items in num){
+	console.log(items); this will return the keys 
+        console.log(num[i]); in case wants to print elements 
+	}
+
+5. map()
+
+   This runs a function on each item and returns a new array. 
+   We use map() when we need to create new array & we use forEach() when we need to apply some operation on the existing array.
+   We can use value, index, array in function values for both map and forEach. 
+
+   let arr = [1, 2, 3, 4, 5]
+   
+   #Example-1
+   let newArr = arr.map((value) => {
+	console.log(value); This will print all the values 
+	return value + 1;
+	})
+   console.log(newArr) prints [2, 3, 4, 5, 6]
+   
+   #Example-2
+   let newArr = arr.map((value, index, array) => {
+	console.log(value, index, array); This will print all the values, index & array ([1, 2, 3, 4, 5])
+	return value + index;
+	})
+   console.log(newArr) prints [1, 3, 5, 7, 9]
+
+6. filter()
+
+   This runs a function on each item and returns a new array. 
+   
+   let arr = [1, 2, 3, 4, 5]
+   let arr2 = arr.filter((a) => {
+		return a < 4;
+	     })
+   console.log(arr2); prints [1, 2, 3]
+
+7. reduce()
+
+   This reduces an array to a single value. 
+   Below function runs like this 1 + 2 = 3 + 3 = 6 + 4 = 10 + 5 = 15
+
+   let arr = [1, 2, 3, 4, 5]
+   let arr2 = arr.reduce((h1, h2) => {
+		return h1 + h2;
+	     })
+   console.log(arr2); prints 15
+
+   We can also write same code like below. Function can be created like a variable in JS.
+
+   let reduceFunc = (h1, h2) => {
+		return h1 + h2;
+	     }
+   let arr2 = arr.reduce(reduceFunc)
+   console.log(arr2); prints 15
+
+8. Object.values(object)
+   Returns an array of object values.
+
+9. array.find()
+
+
+=================
+WALKING THE DOM
+=================
+
+
+DOM tree refers to the html page where all the nodes are objects.
+Three main node types are
+1. Element Nodes
+2. Text Nodes
+3. Comment Nodes
+document.body will return a string.
+document.documentElement will return entire html as object.
+
+
+firstChild, lastChild, childNodes, hasChildNodes()
+----------------------------------------------------
+console.log(document.body.firstChild); prints first child node e.g div
+console.log(document.body.lastChild); prints last child node e.g script tag
+console.log(document.body.childNodes); prints list of all child nodes
+document.body.childNodes[0] === document.body.firstChild
+document.body.childNodes[document.body.childNodes.length-1] === document.body.lastChild
+Here length-1 gives the last index. 
+document.body.hasChildNodes() will return true if yes and false if no. 
+
+Element Only Navigation
+-------------------------
+
+console.log(document.body.firstElementChild); prints the first element child e.g. nav
+console.log(document.body.lastElementChild); 
+console.log(document.body.previousElementSibling); 
+console.log(document.body.nextElementSibling); 
+console.log(document.body.parentElement);   
+console.log(document.body.children); prints all elements which are children
+
+Table Navigation
+-----------------
+
+let t = document.body.firstElementChild.firstElementChild; lets assume a body has a div which contains a table. 
+console.log(t.rows); prints all the rows 
+console.log(t.caption); prints caption
+console.log(t.thead); prints table header
+console.log(t.tfoot); prints table footer
+console.log(t.bodies); prints all body 
+console.log(t.cells); prints all the rows
+console.log(t.rowIndex); prints index of row
+console.log(t.cellIndex); prints index of cells
+
+
+Searching The DOM
+-------------------
+
+1. Get Element
+
+   let nav = document.getElementbyId('navbar'); 
+   let cards = document.querySelectorAll('.cards'); This uses css selector (represented by .cards )
+   let this = doument.queryselector('.this'); This will return element with unique class this. Lets assuem there is one element with class 'this'.
+   let a = document.getElementsByTagName('a'); This will return all a elements. 
+   let a = document.getElementsByClassName('cards'); This will return all elements with class cards.
+   let a = document.getElementsByName('search'); This will return all elements with name = 'search', mostly used for input tags.
+   console.log(document.queryselector('.cards').getElementsByTagName('a'))
+
+2. Matches, Closest & Contains
+
+   console.log(id.matches('.cards')); comapres whether element matches given css selector.
+   console.log(span.closest('.cards')); looks for and returns the nearest ansestor with element included (.cards)
+   console.log(id1.contains('.cards')); Return true if element cards is inside id1. 
+   console.log(id1.contains('#id1')); Returns true in this case as well.
+
+   nav.style.color = 'red'; This will change text color of navbar to red.
+   console.log(cards); prints all cards elements. 
+   cards[0].style.color = 'red'; This will change text color of card1 to red.
+   cards[1].style.color = 'blue'; This will change text color of card2 to blue.
+   cards[2].style.color = 'black'; This will change text color of card2 to black.
+
+
+==============================
+EVENTS & OTHER DOM PROPERTIES
+==============================
+
+
+console.log show element as a DOM tree 
+console.dir show element as an object with all its properties.
+
+NodeName & TagName
+-------------------
+
+document.body.firstChild.nodeName; This will show the node (including, text, comment)
+document.body.firstElementChild.tagName;  This will only show the elements 
+document.getElementsByTagName('span')[0]; 
+
+
+innerHTML & outerHTML
+----------------------
+
+1. innerHTML property will get the HTML inside an element as a string.(valid for element nodes only)
+2. outerHTML property will get the HTML plus the element. 
+
+For other node types we can use:
+1. document.body.firstChild.nodeValue
+2. document.body.firstChild.data
+
+
+Text Content
+-------------
+
+console.log(document.body.textContent); prints all the text in body.
+
+
+Hidden Property
+----------------
+
+If we write hidden inside a tag as property then it will not be visible. 
+But if we write id.hidden = false then it will be displayed.(id of the element)
+
+
+Attribute Methods
+------------------
+
+1. first.getAttribute('class'); Here first is the id and it will return the class value. 
+2. first.hasAttriute('class'); It will return true or false. 
+3. first.setAttriute('hidden', 'true'); It will set attribute ('class', 'value')
+4. first.removeAttriute('class');
+5. first.attriute; will show collection of all attributes.
+6. Custom Attributes - We can create custom attributes prefix with data-, e.g. data-player='larry', data-game='mario'
+   first.dataset; will show all the custom attributes. 
+   first.dataset.player; will show the value as larry
+   first.dataset.game; will show value as mario
+
+
+Insertion Methods
+------------------
+
+Method-1 - let a = document.getElementsByTagName('div')[0];
+ 	   a.innerHTML = a.innerHTML + '<h1>Hello World!</>'; 
+	   
+
+
+Method-2 - let div = document.createElement('div');
+	   div.innerHTML = '<h1>Hello World!</>';
+	   document.body.append('div'); 
+           or
+ 	   a.appendChild('div');
+           a.append('div')
+	   a.prepend('div')
+           a.before('div')
+	   a.after('div')
+           a.replaceWith('div'); This will replace a with div. 
+
+
+insertAdjacentHTML
+-------------------
+
+first.insertAdjacentHTML('beforebegin', <div>Hello World!</div>)
+first.insertAdjacentHTML('beforeend', <div>Hello World!</div>)
+first.insertAdjacentHTML('afterbegin', <div>Hello World!</div>)
+first.insertAdjacentHTML('afterend', <div>Hello World!</div>)
+first.remove(); This will remove first
+
+
+className & classList
+-----------------------
+
+first.className = "text-black red"; It will replace or add whole string of classes.
+first.classList; will show all the classes in first (id)
+first.classList.remove('red'); it will remove the red class. 
+first.classList.add('red'); it will add the red class.
+first.classList.toggle('red'); it will add if its not present and remove if its present.
+first.classList.contains('red'); return true or false.     
+
+
+addEventListener
+-----------------
+
+Remember that function(x) must be created separately & not within the event listener otherwise it will not be removed.
+x must be the same function object while removal. 
+Instead if you write the entire function in removeEventListener then it will be treated as a new function & it will not work. V48
+
+x = ()=>{alert('Hello World!')}  
+btn.addEventListener('click', x)  
+
+let a = prompt('Enter your number')
+
+if (a==2){
+	btn.removeEventListener('click', x)
+        }
+
+
+Event Object
+-------------
+
+When an event happens browser creates an event object and put all details into it.
+
+console.log(event.target); It will show where the event happens (element e.g button)
+console.log(event.type); e.g pointer event
+console.log(e); It will print the event object 
+
+
+==========
+PROMISES
+==========
+
+We need promises where task execution will take some time and we do not want to wait for that. 
+For example we give order for the cake at bakery and tell them to inform us when done and we carry on with our other tasks.
+We use promises for parallel code execution. And we need to be informed back for the code execution. We do not want some of our code to be blocked for some parallel tasks.
+Whatever code you will write inside a promise, it will be executed in the background and will be notified when done. V56 will clear all doubts. 
+You can chain .then and keep adding new codes or you can add another promise in .then. This is known as promise chaining.
+You can also add multiple .then handlers which will run simultaneously after a promise is resolved
+When you define a promise object in your script, instead of returning a value immediately, it returns a promise.
+The promise has three states, which are pending, fulfilled, and rejected. 
+
+let p1 = New Promise ((resolve, reject) => {
+		alert("Hello");
+		resolve(56);
+		or resolve(true)
+	      })
+let p2 = New Promise ((resolve, reject) => {
+		
+		reject(new Error ('I'm an error'));
+	      })
+console.log(p1); prints 56, This will return a promise object. This contains two fields :
+		      1. State : Initially pending and changes to fulfilled. It is fulfilled with resolve or rejected, depending upon which one called.
+      		      2. Result: Undefined initially, changes to value if resolved or error when rejected. 
+
+
+p1.then((value) => {
+	console.log(value)  
+	}); 			prints true or 56 
+ 
+
+p2.catch((error) => {
+	console.log('Some error occurred in p2')
+	}); 
+
+We can write the code for p2 like this as well:
+
+p1.then((value) => {
+	console.log(value)  
+	}, (error) => {
+	   console.log('error')	
+		})
+
+
+Promise API
+------------
+
+1. Promise.all : let promise_all = Promise.all([p1, p2, p3])
+		 promise_all.then((value){ console.log(value) }); This will print array containing all the 3 values of resolved promisess. 
+   This will return values for all resolved promises. If any one fails (error), then it ignores all other.
+
+2. Promise.allSettled : let promise_all = Promise.allSettled([p1, p2, p3])
+		 promise_all.then((value){ console.log(value) }); This will print array containing all the 3 values of resolved promisess. 
+   Wait for all promises to settle and returns array of objects with status and value
+		
+3. Promise.race : let promise_race = Promise.race([p1, p2, p3])
+		 promise_race.then((value){ console.log(value) }); This will print first settled promise either as resolved or error.
+
+4. Promise.any : let promise_any = Promise.any([p1, p2, p3])
+		 promise_race.then((value){ console.log(value) }); This will print first resolved promise.  
+
+5. Promise.resolve : let promise_reject = Promise.resolve(7)
+		 promise_reject.then((value){ console.log(value) }); Returns a resolved promise with given value. 
+
+6. Promise.reject : let promise_reject = Promise.reject(new Error('Hey'))
+		 promise_reject.then((value){ console.log(value) }); Returns a rejected promise with given error. 
+
+
+=============
+ASYNC AWAIT
+=============
+
+Async is used to make asynchronous tasks synchronous. 
+Async ensures function returns a promise and wraps non promises in it. So we can use .then :
+
+const larry = async ()=> {return 7;}
+larry.then(()=> {alert})
+
+We can create async function and we can await promises in it.
+Since async fn returns a promise so async fn can be awaited inside another async fn.
+Await is required when completion of one task is necessary for begining of next task. 
+
+let value = await promise; 
+console.log(value); Let's say promise is resolved with value 9, so it will print 9 here. 
+
+Remember now value is not a promise, it is the result of the promise and we do not need to use value.then() in order to get the value. See mdn docs for more details.
+
+
+============================
+OBJECT ORIENTED PROGRAMMING
+============================	
+
+Object-oriented programming (OOP) is a programming paradigm that organizes software design around data, or objects, rather than functions and logic.
+
+Four pillars of OOP:
+
+1. Encapsulation : Encapsulation prevents external code from being concerned with the internal workings of an object.
+
+2. Inheritance   : This allows classes to be arranged in a hierarchy that represents "is-a-type-of" relationships. 
+		   For example, class Employee might inherit from class Person. 
+		   All the data and methods available to the parent class also appear in the child class with the same names.
+
+3. Polymorphism  : is when calling code can be independent of which class in the supported hierarchy it is operating on – the parent class or one of its descendants.
+		   For example, objects of type Circle and Square are derived from a common class called Shape.
+
+4. Abstraction   : Data abstraction is a design pattern in which data are visible only to semantically related functions, so as to prevent misuse.
+
+
+Prototype
+-----------
+
+Every object has specal property prototype. These properties(methods) are accessable to an object by default. 
+
+If you want to add any property(methods) in the prototype then it can be done like this:
+
+let a = {name1: "Larry", language: 'JS'}
+
+let p = {run : ()=> {alert('run')}}
+
+a.__proto__ = p ; a's prototype is p 
+
+p.__proto__ = {name2: 'jackie'} ; This is p's proto
+
+a.run(); First JS will look for method run in object a, if it's not there then it will automatically take it from the prototype. 
+console.log(a.name2); prints Jackie.; This is the result of prototype chaining. 
+
+
+Classes & Objects
+------------------
+
+Class is a template and object is an entity created from the class. 
+Class contains methods or properties. 
+
+class railwayForm{
+	constructor(name, address){this.name = railwayForm.capitalize(name)}
+	submit(){}
+	cancel(){}
+	static capitalize(){}
+}
+
+let larry = new railwayForm(name, address)
+larry.submit()
+
+
+Constructor
+------------
+
+Constructor is automatically called or run whenever we run a method with object. 
+
+
+Inheritance 
+------------
+
+class metroForm extends railwayForm {
+	metrocard(){}
+	cancel(){
+	super.cancel()
+	console.log('your booking is cancelled')
+	}
+}
+
+let larry = new metroForm(name, address)
+larry.submit()
+larry.cancel()
+larry.metrocard()
+
+
+Method Overwriting & Super keyword
+------------------------------------
+
+We can overite the class method by writing a new code for a given method. Super keyword is used when we do not want to write entirely new code.
+But we want some modification in the class method. We can write super.cancel() and add our own code into it to modify the method. 
+
+
+Static Methods
+---------------
+
+We can create static methods by using prefix static before the method. We can call this method as given above.
+Static methods are available to class as a whole & not to a particular object.
+Which means that we can access static methods by using railwayForm.capitalize() only & not this.capitalize() or capitalize() or larry.capitalize('larry').
+Static methods are often utility functions. Static properties cannot be directly accessed on instances of the class. Instead, they're accessed on the class itself.
+
+
+Getters & Setters
+------------------
+
+Here a is an object and name is a property of object a. ''Bruno' is value of property name. 
+Getter is a method to get the value of the property.
+Setter is a method to set or change the value of property. 
+
+class Animal {
+	constructor(name){ this._name = name }  
+	fly(){ console.log('I'm flying') }
+	get name(){ this._name = name }
+	set name(newName){ this._name = newName }
+}
+
+let a = new Animal ('Bruno')
+a.fly()
+console.log(a.name); prints Bruno, example of get name()
+a.name = "Jack" ; This will set name as Jack
+console.log(a.name)
+
+
+Instanceof
+-----------
+
+This checks whether an object belongs to certain class.
+
+console.log(a instanceof Animal); returns true. 
+
+
+
+=====================
+ADVANCE JS CONCEPTS
+=====================
+
+
+IIFE-Immediately invoked function expressions
+-----------------------------------------------
+
+This is used with async await to save the global namespace. V86
+
+
+Destructuring
+---------------
+
+1. let arr = [2, 3]
+   let [a, b] = arr
+   console.log(a, b); prints 2 3
+
+2. let arr = [2, 3, 4, 5, 6, 7, 8 ]
+   let [a, b, c, d] = arr
+   console.log(a, b, c, d, rest); prints 2 3 4 5 [6, 7, 8]
+
+3. let arr = [2, 3, 4, 5, 6, 7, 8 ]
+   let [a, , , ] = arr
+   console.log(a, rest); prints 2 [6, 7, 8] & omits 3, 4, 5
+
+4. let {a, b} = {a:1, b:7}
+   console.log(a, b); prints 1 7
+
+5. const {a, b} = obj
+   Then we can use syntax like obj.a 
+
+
+Spread Operator
+----------------
+
+1. Let's say we want convert an array into an object.
+
+   let arr = [2, 3, 4]
+   let obj = {...arr}
+   console.log(obj); return the array as object.
+
+2. function sum(v1, v2, v3){return v1 + v2 + v3}
+   console.log(sum(...arr))
+
+3. let obj = {name: 'larry', company: 'company xyz', address: 'xyx'}
+   console.log({...arr, name:'John'}); prints {name: 'John', company: 'company xyz', address: 'xyx'}
+
+
+Hoisting
+---------
+
+1. Function declarations are hoisted 
+   Below code will work
+   greet()
+   function geet(){console.log('Hello')}; This is a function and not function expression.
+
+2. Only declarations are hoisted initializations are never hoisted. 
+
+3. Var is global scoped so its declaration is hoisted as undefined. 
+   console.log(a); prints undefined
+   var a = 7
+
+4. let and const cannot be used before initialization. 
+
+5. Function & Class expressions cannot be hoisted.
+   Below code will throw error
+   greet()
+   let geet = () => {console.log('Hello')}; This is function expression as we are creating function as let greet = ...
+
+
+Closure
+--------
+
+A colusre is a function along with its lexical environment. You get a function bind with its lexical environment. 
+
+
+This 
+-----
+
+Inside an object this refers to the object, alone it refers to the window or global object, inside an event this refers to the element which has recieved the event.
+
+=======
+ASIDE
+=======
+
+1. Date Object:
+
+   let a = '2021-08-27T07:00:00Z'
+   let d = new Date(a)
+   d.getDate()
+   d.getTime()
+   d.getMonth()
+   d.getYear()
+   d.getMinutes()
+   d.toGMTString()
+
+   This will show local time currDate.toLocaleTimeString()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

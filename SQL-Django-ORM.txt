@@ -1,0 +1,757 @@
+======
+ABOUT
+======
+
+1. RDBMS - Relational Databse Management System.
+2. SQL - Structured query language was designed for managing data in relational databases and is useful in handling structured data. 
+3. Entity: A noun: person, place, or thing e.g book.
+4. Attributes: The data elements that characterize the entity and tell us more about the entity. e.g. title, pages, edition, ISBN
+5. Primary key: Uniquely identifies each tuple or row in a table and provides a way of defining relationships between tables
+6. Foreign key: Primary keys defined in other tables, creating a link between the tables.
+7. Entity relationship (ER) diagram : Represents entities called tables, and their relationships. The building blocks of an ER diagram are entities and attributes.
+8. An Entity-Relationship model is a tool for designing relational databases. Entities become tables, and attributes are translated into columns. 
+9. Queryset - Represents a collection of records in a database. 
+10.Migration: The process of synchronizing changes made to models with the database schema. 
+              Django’s migration system automatically generates SQL commands to create, modify, or delete database tables and fields.
+
+
+=============
+SQL COMMANDS
+=============
+
+
+1. SELECT * FROM Book : This will select and display all the rows and columns.
+
+2. SELECT book_id, title FROM Book : This will display the mentioned columns only.
+
+3. SELECT book_id, title FROM Book
+   WHERE book_id = 'B1'  : This will match the given book_id and display the same.(use <> operator for not equal to)
+
+4. SELECT COUNT(*) from Book
+
+5. select COUNT(COUNTRY) from Medals
+   WHERE country = "Canada"
+
+6. Select DISTINCT columnname from tablename : For displaying unique values
+   select DISTINCT Country from Medals
+   WHERE medaltype = "GOLD" : This will show list of unique countries which received gold medals. 
+
+7. SELECT * FROM Book LIMIT 10 : This will display only 10 values
+
+8. INSERT, UPDATE, DELETE is a DML(Data Manipulation Language) statement, used to read and modify data.
+
+9. INSERT INTO Author
+    (Author_ID, Lasttname, Firstname, email, City, Country)
+   VALUES('A1', 'Chong', 'Raul', 'rfc@ibm.com', 'Toronto', 'Cananda')
+
+10. UPDATE Author
+    SET Lastname = 'Katta'
+        Firstname = 'Lakshmi'
+    WHERE Author_id = 'A2'
+
+11. DELETE FROM Author
+    WHERE Author_id IN (A2, A3)
+
+12. CREATE TABLE provinces(
+     id char(2) 
+     name varchar(24)
+    ) 
+    In the above example id & name are name of columns & char & varchar are datatypes.
+
+13. ALTER TABLE Author
+    ADD COLUMN telephone_number BIGNIT;
+
+    ALTER TABLE Author
+    ADD COLUMN telephone_number SET DATA TYPE CHAR(20);
+
+    ALTER TABLE Author
+    DROP COLUMN telephone_number;
+
+14. DROP TABLE Author; - To remove the table from DB
+
+15. TRUNCATE TABLE Author
+     IMMEDIATE;        - This will remove all the data from the table. 
+
+15. SELECT title from Book - This code will show column title sorted in alphabetical order. Ascending is default.
+      ORDER BY title
+
+    SELECT title from Book - This code will show column title sorted in alphabetical order. This will show in descending order.
+      ORDER BY title DESC
+
+    SELECT title, pages from Book - This code will show column title & pages. This will sort w.r.t pages 
+      ORDER BY 2
+
+===========
+DJANGO ORM
+===========
+
+1. ORM Folder Structure
+ 
+   Django Project Folder
+   1. APP Folder -
+      1. models.py - contains model definitions 
+      2. migrations Folder - contains migration scripts. 
+   2. manage.py - The code snippet added here as the setting module of our project and be able to execute Django built-in commands such as migrations.
+   3. settings.py - Here we add DB and app info. 
+   4. write.py - for writing or creating or performing CRUD. 
+
+2. Models.py - from django.db import models
+              
+               class Test(models.Model):
+                     name = models.CharField(max_length=30)
+
+3. Generate Migration Scripts for standalone app(standalone is name of the app):
+
+   python manage.py makemigrations standalone
+
+4. Run Migration:
+  
+   python manage.py migrate
+
+
+=================
+CRUD WITH DJANGO
+=================
+
+1. Create and Save a model: 
+
+   course_cloud_app = Course(name ="Cloud Application Development with Database", 
+                             description ="Develop and deploy application on cloud")
+
+   course_cloud_app.save()
+
+   project_orm = Project(name = "object-relational mapping project",
+                         grade=0.2, course= course_cloud_app)
+
+   project_orm.save()
+
+2. Find All Objects(Retrieve):
+
+   courses = Course.objects.all()
+   
+3. Find objects with filter:
+
+   part_time_instructors = Instructor.objects.filter(is_full_time=False)
+
+4. Exclude & Filters:
+
+   filtered_instructors = Instructor.objects.filter(is_full_time=False).filter(total_learners__gt=30000).filter(first_name__startswith='J')
+   filtered_instructors = Instructor.objects.filter(is_full_time=True, total_learners__gt=30000, first_name__startswith='J')
+   filtered_instructors = Instructor.objects.exclude(is_full_time=True)
+
+5. Get a single object:
+
+   When there is single instructor name John.
+
+   instructor_john = Instructor.objects.get(first_name='John')
+
+6. Find objects in related fields:
+
+   Get courses with instructor's first name John:
+
+   courses = Course.objects.filter(instructors__first_name = 'John')
+
+   Here, instructors = models.ManyToManyField(instructor) is defined in class Course.
+   So we can use double underscore after instructors to match the given field. 
+   This is example of forward access. 
+
+   instructors = Instructor.objects.filter(course__name__contains='Cloud')
+   Here we are getting instructors who are featuring in course with name cloud.
+   This is example of backward access. When course is not explicitly defined under class instructor. 
+   
+
+7. Update:
+
+   learner_john.dob = date(1985, 3, 16)
+   learner_john.save()
+
+   1. Updating foreign key:
+      
+      project_orm.course = course_python
+      prokject_orm.save()
+
+   2. ManyToMany field
+
+      course_python.learners.add(learner_joe)
+      course_python.save()
+
+8. Delete:
+
+   project_orm.delete() - Delete the entire project_orm 
+
+   Course.objects.filter(name_contains='Python').delete() - Delete all courses name Python
+
+==========
+RELATIONS
+==========
+
+1. One to One:
+
+   User can be an instructor or a learner. One user refers to one instructor or learner & one instructor or learner refers to one user. 
+
+2. Many to one:
+
+   A course can have several lessons. But a lesson pertains to one course. 
+   A course has many to one relationship with lesson.
+
+   Note: When we define course in class lesson we define it as a foreign key. 
+
+3. One to Many:
+
+   A lesson can relates to single course. A course can have many lessons. 
+   A lesson has one to many relationship with course.
+
+3. Many to Many:
+
+   A course can have many instructors. An instructor can feature in many courses. 
+   A learner can take many courses. A course can have many learners.
+   So both instructor and learner share a many  to many relationship with course and vice versa. 
+
+
+NOTE: In Django, when you define a ForeignKey or ManyToManyField relationship between two models,
+      Django automatically creates a reverse relation on the target model. 
+      By default, the reverse relation is named using the lowercase name of the model that defines the relationship, followed by "_set".
+
+      For example, We have a model called Course and it has a ForeignKey relationship with a model called Lesson, 
+      Django will automatically create a reverse relation on the Course model named lesson_set. 
+      This allows you to access all the related lessons for a course, using course.lesson_set, e.g course.lesson_set.all().
+
+
+=====================
+STEP BY STEP PROCESS
+=====================
+
+STEP 1 :
+
+Create models(classes) in models.py 
+
+STEP 2:
+
+Generate Migration Scripts: 
+
+python manage.py makemigrations appname
+
+STEP 3:
+
+Run migrate:
+
+python manage.py migrate
+
+SETP 4:
+
+Write functions based on step 1 classes for performing CRUD in write.py. e.g.
+Run the created functions.
+
+clean_data()
+write_courses()
+write_instructors()
+write_lessons()
+write_learners()
+
+
+============
+MVC OR MVT
+============
+
+Django framework or server act as a controller.
+
+MODEL:
+
+1. Django models are classes mapped to database tables.
+
+2. Django model API's allows to perform CRUD operations.
+
+3. Developers can also write business logic in Django model classes as functions.
+
+VIEW:
+
+1. It is a python funtion which takes web requests and generates web response e.g web page, JSON, error etc.
+
+2. View interacts with Django model to get required data in the form of querysets or objects to generate a web response.
+
+3. View describes which data to be presented in the browser.
+
+TEMPLATE:
+
+1. Django uses templates to generate dynamic web pages which are rendered in user' browser.
+
+2. Template contains static html elements as well as python code describing how the dynamic content will be generated. 
+
+3. Template describes how data is presented. 
+
+
+===============
+DJANGO PROJECT
+===============
+
+
+1. Run command: django-admin startproject mysite
+
+2. Project Structure:
+
+   1. manage.py: cmd or command line interface used to interact with Django project to start the server, migrate models, and so on.
+
+   2. settings.py: Contains the settings and configurations for your Django project.
+
+   3. urls.py: Contains the URL and routing definitions of your Django app
+
+3. Once you have created the Django project container, you can add your first Django app to it e.g "onlinecourse".
+
+4. From the mysite project directory, run:
+  
+    python manage.py startapp onlinecourse
+
+5. Django will create a temporary app structure and some important app files.
+
+   1. admin.py: Includes everything you need to create and customize an admin site to manage users and content.
+
+   2. models.py: Contains the data models and ORM.
+
+   3. views.py: Contains view functions and classes to create views.
+
+   4. urls.py: Contains the URL declarations and routing for the app.
+
+   5. app.py: Contains the application configuration class.
+
+   6. Migrations: The migrations folder contains scripts for model migration.
+
+6. Include Django app in project: 
+
+   Open the settings.py file in the mysite folder, find the INSTALLED_APPS list in the settings file, 
+   and add a new entry called 'onlinecourse.apps.OnlinecourseConfig` to the list.
+   The OnlinecourseConfig is a configuration class that represents the onlinecourse app.
+
+7. Setup Database:
+
+   The mysite/settings.py file has a DATABASES dictionary to configure the databases for our app.
+   We add a database instance by adding its connection information such as engine, name, username, and password.
+
+8. Create and activate models:
+
+   Described in Step by Step process above.
+
+9. Create a simple view and template:
+
+   in onlinecourse/views.py write the following code:
+
+   from django.http import HTTPResponse   
+   from .models import Course
+
+   def course_list(request):
+
+     if request.method== 'GET':
+
+       course = Course.objects.get(name="cloud")
+       template = "<html>" \
+                  "<body> The first course we created is `%s.` " \
+                  "</body>" \
+                  "</html>" % course.name
+       return HTTPResponse(content=template)
+
+     else: 
+           return HTTPResponse('Request Processed')
+
+10. Configure view URL:
+
+    In onlinecourse/urls.py add the following code: 
+
+    from django.urls import path
+    from . import views
+
+    urlpatterns = [
+       path(route='', view=views.course_list, name='course_list')
+     ]
+
+11. Include onlinecourse urls.py in mysite/urls.py
+
+    from django.contrib import admin
+    from django.urls import include, path
+
+    urlpatterns = [
+
+       path('admin/', admin.site.urls),
+       path('onlinecourse/', include(onlinecourse.urls)) : It means whenever django recieves requests with suffix onlinecourse/
+     ]                                                     It will try to match any urls in onlinecourse.urls.py file  
+     
+12. Run the app(in mysite directory):
+   
+    python3 manage.py runserver
+
+
+=======
+DOCKER
+=======
+
+
+How docker works for (basic) python applications:
+
+1. Create a requirements.txt file. Which we use to tell Docker what python packages it needs to install
+2. Create a Dockerfile which contains instructions on how to build a Docker image
+3. Run docker compose up to create a container image, and run it
+4. Commit and push the image to a remote repo so others can run it exactly as you’ve configured!
+
+
+=============
+DJANGO ADMIN
+=============
+
+Keywords:
+==========
+
+1. Django admin site: A built-in feature of the Django web framework that serves as an interface and allows authorized users
+                      to perform various management operations on the data stored in the application’s database.
+
+2. Superuser: A user account with administrative privileges that allows superusers to perform administrative tasks and manage the application’s data.
+
+3. Admin class: A class that helps fine-tune the behavior, appearance, and functionality of models within the Django admin site.
+
+4. Inline class: Allow you to include related model instances in the same page/form as the parent model, instead of switching between different forms or screens.
+                      
+
+Process Flow:
+==============
+
+1. Create Admin user:
+
+   Create a super user
+
+   python manage.py createsuperuser
+
+2. Start server:
+
+   python manage.py runserver
+
+   Go to the admin site and login with credentials you created in step 1
+
+3. Register models with admin site:
+
+   Open onlinecourse/admin.py, and register Course & Instructor model and then refresh the admin site.
+
+   from django.contrib import admin
+   from .models import Course, Instructor
+
+   admin.site.register(Course)
+   admin.site.register(Instructor)
+
+4. Developers may only want to include some of the model fields in the admin site and to specify a particular order. 
+   To select the fields to include, we create a model admin class and add a fields list with the field name we want to be included in the model.
+
+   Create and register a course model admin class
+
+   class CourseAdmin(admin.ModelAdmin):
+       fields= ['pub_date', 'name', 'description']
+
+   admin.site.register(Course, CourseAdmin)
+   
+   After refreshing the admin site and trying to add a course, only pub date, name, and description are shown and can be edited.
+
+5. Add related objects: 
+
+   One course may contain many lessons and questions. Instead of adding each model one by one using its own admin form, 
+   we can add course and lessons together on one form, using admin.StackedInline or admin.TabularInline objects. 
+   We can create a LessonInLine object by specifying its model to be Lesson and `extra` to be 5, 
+   which means we want to add at most 5 lessons together with a course at the same time.
+
+   Create and add StackedInline object
+
+   class LessonInline(admin.StackedInline):
+     model = Lesson
+     extra = 5
+
+   class CourseAdmin(admin.ModelAdmin):
+     inlines= [LessonInline]
+
+  After refreshing the page, you can see that a Lessons section appears within the Course admin form. 
+  You can add the title, order, and content of a lesson, which will be added into the course automatically by Django.
+
+6. Customize the change list:
+
+   When we display multiple courses or other models in a tabular form, we need to determine the fields to appear in the table.
+   For example, for a list of courses, we only want to show the name and publication date of the course in the table.
+
+   Add list_display field
+
+   class CourseAdmin(admin.ModelAdmin):
+     list_display = ['name','pub_date']
+
+7. Add search and filters:
+
+   Add search_fields and list_filter fields
+
+   class CourseAdmin(admin.ModelAdmin):
+     search_fields = ['name']
+     list_filter = ['pub_date']
+
+  A search bar and filter menu will appear after the page refreshes. 
+
+
+==========
+TEMPLATES
+==========
+
+
+1. To add a template file to our onlinecourse app, we create a folder under the onlinecourse root folder called `templates`.
+
+2. Within the `templates` folder we create a second `onlinecourse` folder.
+
+3. In this onlinecourse folder we create html templates. 
+
+   Note: We have two onlinecourse folders in the template path. 
+         The main reason is the second onlinecourse acts as a name space to distinguish template files with the same name in other apps.
+         The best way to ensure that we’re pointing Django at the right template is by name spacing the templates by putting them inside another directory
+         named for the onlinecourse itself. 
+
+4. After a template file is created, it will be rendered with a context, which is a dictionary-like object returned by views.
+   Rendering replaces variables with their values, which are looked up in the context, and executes tags. Everything else is output as is. 
+
+5. Django example template:
+
+   Here course and course_list are variables from the context. 
+
+   course_list.html file:
+
+   {% if course_list %}
+      <ul>
+      {% for course on course_list %}
+              <h1> {{course.name}}</h1>
+              <p> {{course.description}}</p>
+      {% endfor %}
+      </ul>
+
+   {% else %}
+      <p> No courses are available </p>
+   {% endif %}
+
+6. Render templates with context:
+
+   Now we have created template html file above, it needs to be filled with data. This logic is handled by views.
+   Below is an example of index view, which first find all courses in database.
+   Then, we create a dictionary-like object called context and add a `course_list` key with an iterable courses QuerySet.
+   Next, instead of returning an HttpResponse object directly, we use a render method here to combine a given template with a given context dictionary.
+   As a result, the render method returns an HTTPResponse wrapping the rendered text.
+   In our index view example, the first argument is the original http request, the second argument is a relative path to the template html file,
+   and the third argument is the context which will be integrated with the template file.
+   
+
+   An index view to return all courses.
+
+   def index(request):
+       courses = Course.objects.all()
+       context= {
+            'course_list': courses
+       }
+       return render(request, 'onlinecourse/course_list.html', context)
+
+7. Link a CSS Stylesheet:
+
+   <head>
+        {% load static %}
+        <link rel='stylesheet' type='text/css' href={% static 'onlinecourse/course_list.css' %}
+   </head>
+
+
+==================
+CLASS BASED VIEWS
+==================
+
+
+1. Class-based views (CBVs): In Django, class-based views refer to a method of defining views using classes instead of functions. 
+                             CBVs provide a more structured and reusable approach to handling HTTP requests and generating responses.
+
+2. Generic views: Generic views in Django are a type of class-based view that offers pre-defined, reusable views for common use cases. 
+                  They aim to reduce repetitive code and simplify common web development patterns.
+
+3. Function-based views (FBVs): In Django, function-based views are a way of defining views using regular Python functions. 
+                                They are the simplest and most basic approach for handling HTTP requests and generating responses in Django.
+     
+
+Examples of Function, Class & Generic based views:
+===================================================
+
+
+Function-based course list view:
+
+ def popular_course_list(request):
+    context = {}
+    if request.method == 'GET':
+        course_list = Course.objects.order_by('-total_enrollment')[:10]
+        context['course_list'] = course_list
+        return render(request, 'onlinecourse/course_list_no_css.html', context)
+
+Function-based enroll view:
+
+ def enroll(request, course_id):
+    if request.method == 'POST':
+       course = get_object_or_404(Course, pk=course_id)
+       # Create an enrollment
+       course.total_enrollment += 1
+       course.save()
+       return HttpResponseRedirect(reverse(viewname='onlinecourse:course_details', args=(course.id,)))
+
+Class based course list view:
+
+class CourseListView(View):
+    # Handles get request
+    def get(self, request):
+        context = {}
+        course_list = Course.objects.order_by('-total_enrollment')[:10]
+        context['course_list'] = course_list
+        return render(request, 'onlinecourse/course_list.html', context)
+
+Class based enroll view:
+
+class EnrollView(View):
+    # Handles post request
+    def post(self, request, *args, **kwargs):
+        course_id = kwargs.get('pk')
+        course = get_object_or_404(Course, pk=course_id)
+        # Increase total enrollment by 1
+        course.total_enrollment += 1
+        course.save()
+        return HttpResponseRedirect(reverse(viewname='onlinecourse:course_details', args=(course.id,))) 
+
+Generic Course list View:
+
+# Note that CourseListView is subclassing from generic.ListView instead of View
+# so that it can use attributes and override methods from ListView such as get_queryset()
+
+class CourseListView(generic.ListView):
+    template_name = 'onlinecourse/course_list.html'
+    context_object_name = 'course_list'
+
+    # Override get_queryset() to provide list of objects
+    def get_queryset(self):
+       courses = Course.objects.order_by('-total_enrollment')[:10]
+       return courses
+
+Generic Course Detail View:
+
+# Note that CourseDetailsView is now subclassing DetailView 
+
+class CourseDetailsView(generic.DetailView):
+    model = Course
+    template_name = 'onlinecourse/course_detail.html'
+
+
+
+=============================================
+DJANGO AUTHENTICATION & AUTHORIZATION SYSTEM
+=============================================
+
+
+1. To authenticate or login a user with username and password, we first create a webpage template to receive the credentials.
+
+2. Once we submit the form (in template), we will send a POST request to the onlinecourse login view to authenticate the user.
+
+3. Username and password can be entered in login page and sent to a login view in the backend. 
+
+4. For the login view (in views), we first obtain the username and password from the POST attribute of the request object.
+   We use the authenticate method provided by Django authentication framework, which returns a valid user if the username and password match the database records.
+   It returns “None” if the provided credentials do not match.
+
+5. Finally, we can use the login method to login the user and redirect to an index view.
+
+6. Once a user is logged in, Django creates a unique session with a session ID.
+   Then it queries the user information and appends it to the session so that the server will know which user is being identified by the unique session id.
+
+7. The web session stores stateful data for users visiting a web site, 
+   so that site and user can perform a series of actions with server without a login for each action.
+   The browser side also stores the session ID in its COOKIE for identifications within the site.
+
+8. We can use the COOKIES attribute to get the session id and session attribute to get the dictionary-like session data.
+
+9. If the user is authenticated, we should be able to see a valid session id and the session dictionary data should contain information about the user such as user id.
+   If the user is not authenticated, we receive session id as “None” and an empty session dictionary.
+
+10. Logging out a user is simple. We just call the logout method with the http request object.
+
+11. Creating a registration form is similar to creating a login form. 
+    We can point the action url of the form to a registration view with post method, and add two input elements to receive the username and password from users. 
+
+12. The registration page is similar to a login page. It receives username and password and sends them to a registration view. 
+    The registration view receives username and password from the POST attribute, and calls User model manager’s create_user method to create a new user.
+    User can then be logged in and redirected to the onlinecourse index page.
+
+13. User authorization in Django is managed mainly by three models: User, Permission, and Group. We explained the User model in authentication.
+
+14. The Permission model has many-to-many relationships with User to store the types of objects and how users can access them. 
+
+15. The Group model provides a convenient way to manage users with the same permissions.
+    The easiest way to manage permissions and groups is with Django admin site, but you can also choose to manage them programmatically using APIs.
+
+16. In Django, you can create and assign permissions to each model you have defined. The four default permissions are: View, Add, Change, and Delete. 
+    For example, we have Can add, Can change, Can delete, and Can view permissions for our course model. 
+
+17.  Sometimes we want to group users with the same permissions together. 
+     With Django Group model, you can create user groups and assign permissions to groups. 
+     For example, we can create an Instructors group with Course add, change, delete, and view permissions.
+     We can create another group, Learners, who can only view the course content and 
+     we can easily add a new instructor user to the Instructors group to grant the user all the instructor permissions automatically.
+
+
+======================
+DEPLOYING DJANGO APPS
+======================
+
+
+1. To deploy reliable, scalable, and maintainable Django apps, you need to deploy them on web servers.  
+
+2. Since most web servers are not written in Python, Django apps need extra interfaces to talk to web servers. 
+
+3. The Web Server Gateway Interface, or WSGI, is the main Python standard for communicating between Web servers and applications. 
+
+4. The Asynchronous Server Gateway Interface is another web server interface the Django app supports. 
+
+5. Infrastructure as a Service and Platform as a Service offerings allows you to focus on your app development and 
+   deploy apps without worrying about the underlying infrastructure and platform. 
+
+   
+
+
+   
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+  
+
+
+   

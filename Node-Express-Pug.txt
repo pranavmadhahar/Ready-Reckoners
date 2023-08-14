@@ -1,0 +1,48 @@
+NODE.JS
+--------
+
+Node.js is a runtime environment for js.
+Server can be set up for code reference go to their website. 
+Built in modules can be used for different purposes, you do not need to remember them all, for reference you can search for them on the internet. 
+There are three kinds of modules. 1. Build in 2. Custom modules (built by you) 3. Third party modules (we can install them with npm)
+Node REPL - Node works on Read Evaluate Print Loop. Node.Js REPL or Read-Evaluate-Print Loop is an interactive shell for the Node.js environment which means we can write any valid Javascript code in it.
+In REPL shell _ stores the previous variable. If we type _ then it will return the last variable. 
+If we print tab twice it will return certain variables which are globally available. You do not need to import them. 
+We can create node server (V67) by using if else statements, use reference from node.js website. But it is inconvenient.
+
+MODULES
+---------
+
+Common JS Modules
+
+You can create module e.g mod.js then you need to export it by calling e.g module.exports = average, and import it by calling const average = require(./mod) then you can directly call this fn. 
+If you are exporting more fns then you can create object e.g. module.exports = {avg:average, fac:factorial}. And you can import it by calling const mod = require(./mod). 
+Then you can use this by calling mod.average. or you can use destructuring to use it directly like const {avg:average, fac:factorial} = require(./mod) Reference V68.
+
+ES6 Modules
+
+For creating ES6 modules. Directly write export as prefix in the functions in modules file and use import {avg:average, fac:factorial} from "./mod" in the file where it needs to be used. 
+If you using export default function then it can be directly imported e.g. import avg from "./mod" i.e without destructuring.V97
+
+
+NPM 
+-----
+
+npm --version or node --version tells the version installed 
+npm init will initialize the node package in the folder by creating package,json file and node modules folder.
+npm init -y will skip the interactive part and create the package directly.
+npm install express will dowload the package and show it in dependencies in package.json file.
+npm install slugify@1.3.5 will download the given version.
+^1.3.5 means major.minor.patch. ^ means install exact version, ~1.3.5 means install latest version including any new patch. >1.3.5 will install version greater than the given version. 
+npm view slugify version will show its installed version. 
+npm install nodemon --save-dev. This will make nodemon as dev dependencies & will show as same in package.json. npm i -D can also be used.
+npm install nodemon --global. This will make nodemon available globally i.e you can use it in any other projects as well. 
+Express is a node.js framework which helps & simplify routing & API's apart from setting up the server. See Express70 folder for more details.
+if you write code . and press enter in console it will open the folder in new window. 
+
+PUG 
+-----
+
+Template engine - we give inputs and engine produces and serves html files based on that. 
+Things to remember in gym & dance projects is how to take references for express, pug. And how to write html in pug.
+Template Inheritance-V79- You need to create a file base.pug. Content of this file will be displayed accross entire website. It is a kind of form which needs to filled with help of e.g home.pug, about.pug, contact.pug. 

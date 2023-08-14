@@ -1,0 +1,191 @@
+import numpy as np
+
+myarr = np.array([3, 6, 32, 7])
+ 
+myarr = np.array([3, 6, 32, 7], np.int8) - This will create 8 bit integer for small no's.
+
+myarr - shift+enter - This will create numpy array
+
+myarr = np.array([[3, 6, 32, 7]], np.int64) - This is two dimentional array i.e with rows and columns.
+
+myarr[0, 1] - This will return 6 (0 row and  1st column)
+
+myarr.shape - return (1, 4) i.e one row and 4 columns
+
+myarr.dtype - return ('int64') - Search for numpy reference we can use. (int32, float64 etc)
+
+myarr.size
+
+
+===============
+ARRAY CREATION
+===============
+
+1. FROM PYTHON OBJECTS:
+
+   listarray = np.array([1, 2, 3], [5, 8, 5], [0, 3, 1])
+   listarray
+   output: array([1, 2, 3]
+                 [5, 8, 5]
+                 [0, 3, 1])
+   listarray.dtype - prints dtype('int32')
+   listarray.shape - prints (3, 3)
+   listarray.size - prints 9 
+
+NOTE: We can create array by using sets but then its dtype will be object which is not efficient, we prefer int or float. 
+
+2. INTRINSIC NUMPY ARRAY CREATION OBJECTS:
+
+ a) zeros = np.zeros((2, 5))
+
+    zeros 
+
+    output: array([[0, 0, 0, 0, 0]
+                 [0, 0, 0, 0, 0]])
+
+ b) rng = np.arange(15)
+
+    rng 
+
+    output: array([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14])
+
+ c) lspace = np.linspace(1,5,12) - This will give 12 equally spaced elements between 1 & 5.
+
+ d) emp = np.empty((4, 6)) - This will give array of 4 rows and 6 columns with random elements.
+
+ e) emp_like = np.empty_like(lspace) - This will take an array and copy its size and create an empty array with random elements. 
+
+ f) ide = np.identity(45) - This will create an array of identity matrix of 45*45. 
+
+ g) arr = np.arange(99) - This will give array of 98 
+    arr.reshape(3, 33) - This will rearange the array with 3 rows and 33 columns. 
+    arr.ravel() - This will change the array to the one dimentional shape as it was previously. 
+
+=====
+AXIS
+=====
+
+1. Axis0 - This represents or span the rows 
+
+2. Axis1 - This spans the columns 
+
+   In one dimentional array there is only one axis i.e axis0. 
+
+3. x = ([1,2,3],[4,5,6],[7,1,0])
+
+   ar = np.array(x)
+
+   ar - This will return array([[1, 2, 3]
+                                [4, 5, 6]
+                                [7, 1, 0]])
+
+4. ar.sum(axis=0)
+
+   output: array([12, 8, 9])
+
+   ar.sum(axis=1)
+
+   output: array([6, 15, 8])
+
+   ar.T - Transpose the array 
+
+   output: array([[1, 4, 7]
+                  [2, 5, 1]
+                  [3, 6, 0]])
+
+5. ar.flat
+
+   for i in ar.flat 
+     print(i)
+
+   output: 1,2,3,4,5,6,7,1,0
+
+6. ar.ndim - This will return the dimensions. 2 in this case.
+
+7. ar.size - 9, This will return the number of total elements 
+
+8. ar.nbytes - 36, This will show total bites consumed by array. 
+
+9. one = np.array([1, 3, 4, 634, 2])
+
+   one.argmax()
+
+   output: 3 - This will return index where the max value element is located 3 in this case. 
+
+10. one.argmin() - This will return 0. 
+
+11. one.argsort() - This will return array of indexes in ascending order. 
+
+    output: array([0, 4, 1, 2, 3], dtype=int32)
+
+12.  arr
+     output: array([[1, 2, 3]
+                   [4, 5, 6]
+                   [7, 1, 0]])
+
+     ar.argmin() - 8
+     ar.argmax() - 6
+     ar.argmax(axis=0) - array([2,1,1])
+     ar.argmax(axis=1) - array([2, 2, 0])
+     ar.argsort(axis=1) - array([0, 1, 2],
+                                [0, 1, 2],
+                                [2, 1, 0])
+
+13. numpy allows matrix operations on array e.g.
+
+    ar1 + ar2 
+    ar1 * ar2 
+
+14. np.sqrt(ar)
+
+    This will give array of square root of array.
+
+15. ar.sum() - sum of all elements
+    ar.max() - max of all elements 
+    ar.min() - min of all elements.
+
+16. np.where(ar>5) - This will give tuple of indexes to locate the ar elements greater than 5.
+
+17. np.count_nonzero(ar) - 8, This will give no. of non zero elements.
+    np.nonzero(ar) - This will give tuple of indexes for every axis for nonzero elements.
+
+18. u = np.array([1, 2])
+    v = np.array([3, 1])
+
+    result = np.dot(u, v) 
+    output: 5 - 1*3 + 2*1
+
+19. Plotting Mathematical Functions
+
+    x = np.linespace(0, 2, np.pi, 100)
+    y = np.sin(x)
+
+    import matplotlib.pyplot as plt
+    %matplotlib inline
+
+    plt.plot(x, y)
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+

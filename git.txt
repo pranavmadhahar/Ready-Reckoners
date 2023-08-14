@@ -1,0 +1,113 @@
+--GIT COMMANDS--
+
+git config --global user.name "FIRST_NAME LAST_NAME"- add user name 
+git config --global user.email "MY_NAME@example.com" - add user email
+git status - will return status 
+git init - to start tracking files.
+git add --a or git add . - to stage all files or changes.
+git add first.txt - to stage a particular file.
+git commit -m "initial commit" - to commit and add message. 
+git log - will return the log along with commit and key.
+rm -rf .git - it will deleted all the files and folder of git. Use it carefully.
+git clone https://github.com/tensorflow/tensorflow.git Tensorflow- - will create clone of repository.
+git diff - it compare working directory with staging area.
+git diff --staged - it compare present staging area with last commit.
+git commit -a -m "Direct commit"- This is used to directly commit skipping the staged part. It stage and creates commit for all tracked files. Untracked file will not go to commit.
+git rm ""third.txt" - It will remove/delete the file and also stage the file.
+git mv first.txt first_renamed.txt - It will rename the file and also stage the file.
+git rm --cached first.txt - If git was tracking this file earlier and now it has been mentioned in gitignore then we need to run this command to now stop tracking this file. 
+git log -p - It will show only all commits(with diff/changes) along with logs.
+git log -p -n - It will show only n commits(with diff/changes) along with logs.
+git log --stat - Return all commits with short summary.
+git log --pretty=oneline - Show all the commits, with one commit in one line. 
+git log --pretty=short - Show all the commits, with short details.
+git log --pretty=full - Show all the commits, with some details.
+git log --pretty=format:"%h -- %an" - %h will show hash commit in short & %an will show author name. Read git log docs for more commands. 
+git log --since=2.days - Show logs for past 2 days. Likwise u can use .weeks, .months, .years
+git commit --amend - This is used to merge the commits. Vim editor will get opened and you can press i for edit and then press esc and then :wq and then press enter.
+git restore --staged first.txt - It will unstage the file and restore to previous status as modified.
+git restore - It will restore all the files. Use it carefully. 
+git checkout --first.txt - It will restore the file to previous commit. 
+git checkout --f - It will restore all the files to the last commit.
+git config --global alias.st status - It means status will be displayed by using coomand st (git st). Alias is used to modify commands into aliases. 
+git config --global alias.unstage 'restore --staged--' - This will replace the command git restore --staged to git unstage.
+git config --global alias.last 'log -p -1' - This will replace the command git log -p -1 to git last.
+git revert HEAD --no-edit -  you can back out your changes by using a git revert command like the following.  
+                             You can either specify the id of your commit that you can see from the previous log output
+                             or use the shortcut HEAD to rollback the last commit:
+                             If you don’t specify the --no-edit flag you may be presented with an editor screen showing the message with changes to be reverted.
+                             In that case, press the Control (or Ctrl) key simultaneously with X.
+
+--BRANCHING--
+
+git checkout -b develop - It will create new branch with the name develop. It will also take u into the new branch develop.
+git branch branchname - It will also create a new branch with given name.
+git checkout master - It will take u into the master branch.
+git checkout develop - It will take u into the develop branch.
+git branch - It will show all the branches. With asterix indicating the active branch. 
+git merge filename - It will merge the branched file with the master. VS code will ask to resolve the merge conflict. 
+                     run git add. & then run git commit & vim editor will get open then press esc :wq and press enter. Branched file will get merged. 
+                     You need to first go into the master branch to initiate merge by using git checkout command. 
+git branch -v - It will show last commit by every branch. With commit hash and message.
+git branch --merged - Show already merged branches.
+git branch --no-merged - Show not merged branches.
+git branch -d develop - Delete branch with name develop. Gives error if it is not merged.
+git branch -D develop - Delete without showing error, even if it is not merged.
+---before changing branch run commit so that tree should be clean.---
+
+--GITHUB-- 
+
+First create the repository in github. 
+git remote add origin git@github.com: pranavmadhahar/learning.git (origin is the name of url, learning.git is the name of repository u have created in github)
+git remote - This will show the name of url (origin)
+git remote -v - This will show two url for pull (fetch) and push. 
+git push -u origin master - This will push code in repository.
+git push origin branchname - This will push branch in repository. Before doing that u need to run git checkout branchname. 
+git push origin branchname:mybranch - This create branch by name of mybranch in remote.
+git push -d origin branchname - This will delete branch in remote. 
+git pull - To fetch the updated codebase and to merge it with the local repo. 
+git fetch - To fetch the updated codebase for review for changes in the master without merging with the local repo. 
+git diff - To comapre the changes with the origin repo. 
+
+--TO CREATE A NEW KEY--
+
+First go to settings and then go to SSH & GPG keys.
+Add title (Pranav's Personal Computer Thinkpad)
+$ ssh-keygen -t ed25519 -C "pranav.madhahar@gmail.com" - Copy & paste this code in g-bash & press enter leave the fields blank and press enter.
+eval "$(ssh-agent -s)" - Copy & paste this code in g-bash & press enter. It will return e.g. agent pid 1688 
+$ ssh-add ~/.ssh/id_ed25519 - Copy & paste this code in g-bash & press enter. You key is generated here.
+tail ~/.ssh/id_ed25519.pub - Copy & paste this code in g-bash & press enter. To get your key.
+Copy and paste your key in the github add key container and press add ssh key button.
+git push -u origin master - To push your code in github repository.
+
+---LINUX COMMANDS---
+
+pwd - present working directory
+ls - lists content 
+cd - change directory
+touch error.log - it will create file error.log.txt
+touch .gitignore - it will create file with name .gitignore.txt, you can add file names of files you want to ignore in this file. If you want to ignore e.g all error.log files then u can add *.log. If u want ignore folder e.g dir, then u can add dir/.
+if u add /dir/ in .gitnignore file, then git will only ignore outer dir folder but not if dir exists inside another folder. 
+mkdir myrepo - It will create a new directory by name of myrepo.
+ls -la .git - It will show the contents of the sub-directory git which houses local repos.
+touch newfile - This will create an empty file by name of newfile.
+echo 'Here is some text in my newfile.' >> newfile - This will add the the text in newfile mentioned in '...'
+cat newfile - This will show the text in newfile. 
+
+
+---CLONING---
+
+Go the github repository and click clone button
+copy the url or directly download.
+Go to your laptop and open terminal go to the directory where you want to clone
+Type git clone and paste the url, press enter. 
+
+---TO BE EXPLORED---
+
+git-format-patch
+git am
+git-daemon
+git revert
+
+
+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

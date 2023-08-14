@@ -1,0 +1,117 @@
+CRUD OPERATION --CREATE READ UPDATE DELETE
+-------------------------------------------
+
+CREATING & SHOWING DB & COLLECTIONS
+------------------------------------
+
+show dbs - It will show all the databases.
+use Larry - It will switch to db Larry. If there is no such db then it will create a db with name Larry.
+show collections - It will show all collections in the database. 
+db.text.insert({"name": "Sherry" }) - It will insert 'name: Sherry' in collection 'text' (also it will create one if it doesn't exists earlier) in db Larry.
+db.anotherCollection.insertOne({a: 89}) --This will insert collection by name of anotherCollection with a:89 as data in sherrykart database.
+--Database and collections are only visible when there is some data in it. 
+
+FINDING DATA 
+-------------
+
+db.items.find() --For finding all items in collection in selected db.
+db.items.find({rating: 3.5}) --This query will return objects with rating 3.5.
+db.items.find({rating: {$gte: 3.5}}) --This query will return objects with rating greater than equal to (gte) 3.5.
+db.items.find({ rating: {$lt: 3.5}, price: {$gt: 4000} }) --And Operator
+db.items.find({ $or:[ {rating: {$gt: 3.0}}, {price: {$gt: 100000}} ] }) --OR Operator
+--Projection for getting only ratings or getting both ratings & quantity--
+db.items.find({rating: {$gt: 3.5}}, {rating: 1}) --This will return rating field only--
+db.items.find({rating: {$gt: 3.5}}, {rating: 1, qty: 1}) --This will return rating & quantity fields. 
+
+
+INSERTING DATA
+---------------
+
+db.items.insertOne({name: 'Samsung 30s', price: 22000, rating: 4.5, qty: 233, sold: 98})
+db.items.insertMany([{name: 'Samsung 30s', price: 22000, rating: 4.5, qty: 233, sold: 98}, {name: 'Moto 30', price: 15000, rating: 3.5, qty: 135, sold: 345}, {name: 'Realme 80s', price: 125000, rating: 2.5, qty: 650, sold: 52}])
+db.items.insertMany([{name: 'Samsung 30s', price: 22000, rating: 4.5, qty: 233, sold: 98}, {name: 'Moto 30', price: 15000, rating: 3.5, qty: 135, sold: 345}, {name: 'Realme 80s', price: 125000, rating: 2.5, qty: 650, sold: 52, isBig: 'True'}] )
+--Here 'items' is the name of the collection we want to create and insert our data. 
+
+DELETING DATA
+--------------
+
+db.items.deleteOne({price: 22000}) --Will delete the first item in case there are multiple enteries matching the criteria.(filter object)
+db.items.deleteMany({price: 125000}) --Deletion process works in a similar way as find process
+
+UPDATING DATA
+--------------
+
+db.items.updateOne({name: 'Moto 30'}, {$set: {price: 2}}) --This means set price of moto 30 to 2. This will update only one out of all moto 30.
+db.items.updateMany({name: 'Moto 30'}, {$set: {price: 1, rating: 1}}) --This means set price and rating of all moto 30 to 1. This will update all the enteries with name moto 30.
+
+MONGOOSE
+---------
+
+--Setting Up Mongoose--
+
+-STEP-1-
+
+const mongoose = require("mongoose");
+main().catch((err) => console.log(err));
+
+-STEP-2-
+
+async function main() {
+  await mongoose.connect("mongodb://127.0.0.1:27017/contactDance"); --Here contactDance is the name of db.
+    console.log('We are connected');
+}
+
+--To Initialize CRUD Operations--
+
+-STEP-1-DEFINE SCHEMA
+
+ const ContactSchema = new mongoose.Schema({
+    name: String,
+    phone: String,
+    email: String,
+    address: String,
+    desc: String
+  });
+
+  -OPTIONAL METHODS-
+
+  ContactSchema.methods.speak = function speak() {
+    const greeting = "My name is " + this.name;
+
+    console.log(greeting);
+  };
+
+
+-STEP-2-COMPILE MODEL
+
+const Contact = mongoose.model("Cont", ContactSchema); --"Cont" is name of collection in contactDance database.
+
+-HOW TO CREATE DATA-
+
+const Larry = new Contact ({name: 'Larry', phone: '1234567', email: 'xyz@gmail.com', address: '#420', desc: 'mnbvcx'})
+console.log(Larry.phone); (It will return 1234567)
+Larry.speak(); (It will return My name is Larry)
+var myData = new Contact(req.body); --This syntax is used when storing data from form on website. 
+
+
+-HOW TO SAVE DATA-
+
+1.  await Larry.save();
+
+2.  Below syntax is used when saving data from form on website.
+
+  myData.save().then(() => {
+        res.send("Your item has been send to the database.")
+    }).catch(() => {
+        res.status("400").send('Item was not saved to the database.')
+    });
+
+-HOW TO FIND DATA-
+
+  const Conts = await Contact.find(); --"Conts" is name of collection.
+  console.log(Conts);
+
+  await Contact.find({ name: 'Larry'}); --Contact is contact we need to find in Conts.
+
+  await Contact.findById(id);
+

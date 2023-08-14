@@ -1,0 +1,34 @@
+
+Front End : It is what the client sees and interact with
+            Front-end developers work on the parts of the website or app that the user sees and interact with. 
+
+Back End : These are the resources which are required to respond to client requests, supplies data & provides other services securely.
+           Back-end developers work on the logic and functionality that keeps the website or app running and responding to users’ inputs.
+
+API's, Endpoints & Routes process requests from frontend.
+Backend developers create routes to direct requests to correct service. 
+API's provide a way for cloud apps to access resources from backend. 
+
+API : API is a code that works with data. 
+      Code that allows two software programs to communicate with each other.
+
+Endpoints : Can be API or routes. 
+            The point at which an API connects with the software program.
+
+Route : Path to a website or page. 
+
+Frameworks : Provide a standard way to build an application. Frameworks dictate architecture and program flow.
+
+Libraries : Reusable collections of code
+
+DOM: Is a programming interface bwtween HTML & JS. 
+
+DOM Tree : Is an in-memory representation of a document on web. It contain nodes i.e. text nodes, comment nodes, headers & paragraph. 
+
+Document Object : HTML documents which get loaded in to browser becomes document objects and can be accessed by script. 
+
+Web Workers : Web Workers are a simple means for web content to run scripts in background threads.
+              The worker thread can perform tasks without interfering with the user interface.
+
+The HTML DOM API: The HTML DOM API is made up of the interfaces that define the functionality of each of the elements in HTML, 
+                  as well as any supporting types and interfaces they rely upon e.g. It provides access to and control of HTML elements via the DOM.

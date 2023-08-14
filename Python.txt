@@ -1,0 +1,2669 @@
+======================
+DATA TYPES IN PYTHON
+======================
+
+In python everything is an object. 
+
+1. Number - Integer, Float & Complex
+2. String - Data is immutable
+3. Boolean
+4. Lists - just like array [1, 2, 3] - Data is mutable
+5. Tuples - ( ("parrot", "sparrow"), ("lion", "tiger") ) - Data is immutable 
+6. Dictionary - mapped data - key-value pairs - just like objects
+7. Sets - Sets are immutable.
+8. Expressions - Are the operations python performs e.g. 45+30+67 is an expression. Add operations, multiplication operations etc
+
+======================
+ARTHEMETIC OPERATORS
+======================
+
+1. // - Floor division operator - Divides and returns whole numbers without decimals 
+
+2. % - Modulus operator - Divides and returns the remainder. 
+
+3. ** - Exponential Operator - 5**3 = 5*5*5 
+
+==============
+TYPECASTING 
+==============
+
+Conversion of one data type into other data type. 
+Python supports variety of methods in order to achieve this viz. list(), tuple(), str(), float(), int()
+
+There are two type of typecasting:
+1. Explicit - initiated by us. a = "1" b = "2", print(int(a) + int(b))
+2. Implicit - initiated by python. e.g. a = 1.9 (float) b = 8 (int), a + b = 9.9 (which is float)
+
+
+================
+INPUT FUNCTION
+================
+
+ a = input("Enter your name: ")
+
+ print("My name is: ", a)
+
+
+==========
+STRINGS
+==========
+
+ Strings are immutable.
+
+ Anything enclosed in ''' ''' will get printed.
+ 
+ loops in strings
+ -----------------
+
+ name = "larry"
+
+ for character in name:
+ print(character)
+ prints l a r r y 
+
+
+ String Slicing 
+ ---------------
+
+ name = "larry,shubham"
+ fruit = "mango"
+ print(len(name)) will print 13 
+ print(name[0:5]) will print larry
+ print(name[:5]) will print larry
+ print(fruit[0:-3]) will print ma (total length(5) - 3 = 2)
+ print(fruit[-3:-1] will print ng (5-3=2 : 5-1=4) which is same as print(fruit[2, 4])
+
+
+ String Methods
+ ---------------
+
+ 1. upper()
+
+    name = "larry"
+    print(name.upper()) - This will return a new string. 
+
+ 2. lower()
+
+    print(name.lower())
+
+ 3. rstrip()
+
+    name = "larry!!!!!!!"
+    print(name.rstrrip("!")) - prints larry
+    removes trailing and not leading exclamation marks.
+ 
+ 4. replace()
+
+    print(name.replace("larry", "john")) prints john
+    This will replace all occurances. 
+
+ 5. split()
+
+    a =  "!!!larry !!! hello"
+    print(a.split(" "), It will split the string with space and combine them in a list. 
+    [!!!larry, !!!, hello]
+
+ 6. capitalize()
+
+    Capitalize the first character of the string and rest to lowercase. 
+    bloghead = "introduction to python"
+    print(bloghead.capitalize()) - prints Introduction to python. 
+
+ 7. center()
+
+    Moves the string to the center by adding space. 
+    print(bloghead.center())
+
+ 8. count()
+
+    Counts the occurrances of given parameter in the string. 
+    print(a.count("larry"))
+
+ 9. endswith()
+
+    print(a.endswith("hello") prints true 
+    str1 = "welcome to the console !!!"
+    print(str1.endswith("to", 4, 10)) returns true
+    It will slice characters from 4-10 
+
+ 10. find()
+
+     str1 = "He's name is Dan. He is an honest man"
+     print(str1.find("is"))
+     This will return the first occurrance of is and returns its index, 10 in above example.
+     This will return -1 if it finds nothing.
+
+ 11. index()
+
+     This is same as find(), but it will throw error in case it doesn't find anything. 
+
+ 12. isalnum()
+
+     Checks if the string is alpha numeric and returns true or false. 
+
+ 13. isalpha()
+   
+     Checks if string consists of alphabets only and returns true or false. 
+
+ 14. islower()
+
+     Checks if all the characters are in lowercase and returns true or false.
+
+ 15. isprintable()
+
+     Checks if all the characters are printable and returns true or false.
+     e.g /n character is not printable if it is present in the string it will return false. 
+
+ 16. isspace()
+
+      Checks for white space with spacebar or tab and returns true or false.
+
+ 17. istitle()
+
+     b = "To Kill A Mockingbird"
+     print(b.istitle()) returns true 
+     Checks if the first letter of each word of string is capitalized. else returns false.
+
+ 18. isupper()
+
+     Same as islower().
+
+ 19. startswith()
+
+     Same as endswith. 
+
+ 20. swapcase()
+
+     Changes lowercase to uppercase and vice versa.
+
+ 21. title()
+
+     Converts first letter of each word of string in capital letter. 
+
+ 22. f-strings
+
+     letter = "My name is {1} and I am from {0}"
+
+     country = "India"
+     name = "Larry"
+  
+     print(letter.format(country, name) prints My name is Larry and I am from India - This is old method
+     print(f"My name is {name} and I am from {country}") prints My name is Larry and I am from India - This is f-string method. 
+
+     txt = "For only {price: 2f} dollars!"
+     txt = f"For only {price: 2f} dollars!"
+     price = 49.09999
+
+     print(txt.format(price = 49.09999)) prints For only 49.10 dollars! - This is old method
+     print(txt) prints For only 49.10 dollars! - This is f-string method.
+
+23. docstring
+
+    It is written right below the function name or right above the function body.     
+
+    def square(n):
+     '''Takes in number n, returns square of n''' - This is docstring 
+       print(n**2)
+
+    print(square.__doc__) This will print the docstring Takes in number n, returns square of n
+
+24. Stride: 
+    
+    Below code will print every second value of string.
+
+    e = 'clocrkr1e1c1t'
+    print(e[::2])
+
+
+
+==============
+IF-ELSE-ELIF
+==============
+
+
+num = int(input("Enter the value of num: "))
+
+if (num < 0):
+    print("Number is negative")
+
+elif(num == 0):
+    print("num is zero")
+
+elif(num == 999):
+    print("num is special")
+
+else:
+    print("num is positive")
+
+--------------------
+Nested if-else-elif
+--------------------
+
+if (num < 0):
+    print("Number is negative")
+
+elif(num > 0):
+
+   if(num <= 10):
+      print("Numer is between 1-10")
+
+    elif(num > 10 and num <= 20):
+      print("Numer is between 11-20")
+
+    else:
+      print("Numer is greater than 20")
+
+else:
+    print("Numer is zero")
+
+
+
+============
+MATCH CASE
+============
+
+
+ x = int(input("Enter the value of x: "))
+
+ match x:
+   
+   case 0: 
+    print("x is zero")
+
+   case 4: 
+    print("x is four")
+
+   case _: 
+    print("x")
+
+We can also use it with if else statement. 
+
+  match x:
+   
+   case 0: 
+    print("x is zero")
+
+   case 4: 
+    print("x is four")
+
+   case _ if (x!=90): 
+    print(x, "is not 90")
+
+   case _ if (x!=80): 
+    print(x, "is not 80")
+
+   case _: 
+    print(x)
+
+
+=======
+LOOPS
+=======
+
+
+1. FOR LOOP
+
+
+   Strings:
+
+   name = "Abhishek"
+
+   for i in name:
+    print(i)
+    if(i == b)
+      print("This is something special")
+
+   Lists: 
+
+   colors = ["Red", "Green", "Blue"]
+
+   for color in colors:
+    print(color)
+    for i in color:
+      print(i)
+
+   range(): 
+
+   for k in range(5):
+    print(k + 1) - This prints 0-5
+
+   for k in range(1, 9):
+    print(k + 1) - This prints 1-9
+
+   for k in range(1, 12, 3):
+    print(k + 1) - This prints 1, 4, 7, 10, 
+ 
+   Third parameter(3) is the step argument. It defines the incrementation default is 1. 
+
+
+2. WHILE LOOP
+
+
+  Incremental while loop:
+  ------------------------
+   
+  i = 0
+  while (i < 3):
+   print(i)
+   i = i + 1
+
+
+  i = int(input("Enter the number: "))
+  while (i <= 38):
+   i = int(input("Enter the number: "))
+   print(i)
+  Print("Done with the loop")
+   
+  Loop will ask for initial value from user. And then keep printing the value once, till number is <= 38. If condition is false loops stop. 
+
+
+  Decremental while loop:
+  ------------------------
+
+  count = 5
+  while(count > 0 )
+   print(count)
+   count = count - 1
+
+  
+  Else with while loop:
+  ----------------------
+
+  As soon as the while loop statement becomes false interpreter comes out of while loop and else statement is executed. 
+
+  count = 5
+  while(count > 0 )
+   print(count)
+   count = count - 1
+
+  else: 
+    print("I am inside else")
+
+  
+  How to emulate do while loop in python:
+  ----------------------------------------
+
+  while True:
+   number = int(input("Enter a positive number: "))
+   print(number)
+   if not number > 0:
+    break
+
+  i = 0 
+  while True:
+   print(i)
+   i = i + 1
+   if (i % 100 == 0):
+    break
+
+
+3. Break & Continue 
+
+   break means leave the loop. 
+   continue means skip the iteration not the loop. 
+
+   for i in range(12):
+
+    if(i == 10):
+      print("Skip the iteration")
+      continue
+    print("5 x", i, "=", 5 * i)
+
+   This will print the multiplication table of 5, but at 5*10 instead of 50 it will print skip the iteration. And continue to 5*11. 
+
+   
+===========
+FUNCTIONS
+===========
+
+
+def calculateGmean(a, b):
+    mean = a * b / (a + b)
+    print(mean)
+
+ c = 8
+ d = 7
+
+ calculateGmean(c, d) prints the mean 3.733333
+
+
+FUNCTION ARGUMENTS
+---------------------
+
+1. Default Argument
+
+   We can provide default value to arguments in function. 
+
+   def average(a=9, b=1):
+
+    print("The average is ", (a + b)/2)
+
+   average() This will print 5, due to default values
+   average(4, 2) This will print 3, here it will ignore default since values are provided. 
+   average(5) This will print 3, it will take value of a=5 & b=1 default value
+   average(b=9), This will take default value of a=9 & b=9 is provided and calculate the average. 
+
+   def name(fname, mname = "John", lname = "Watson"):
+      print("Hello", fname, mname, lname)
+
+   name("Amy") This will print Hello Amy John Watson
+
+
+2. Variable length argument
+
+   As tuple:
+
+   def average(*numbers): 
+     sum = 0
+     for i in numbers:
+       sum = sum + i
+     print("Average is: ", sum/len(numbers))
+
+   As dictionary:
+
+   def name (**name):  
+
+     print("Hello", name[fname], name[mname], name[lname])
+
+   name(mname="Barnes", lname="Buchnan", fname="James") prints Hello James Buchnan Barnes.
+
+
+=======
+LISTS
+=======
+
+
+marks = [3, 5, 6, "Larry", True]
+
+print(marks) prints [3, 5, 6, "Larry", True]
+print(marks[:]) prints [3, 5, 6, "Larry", True]
+print(marks[1:-1]) This is same as print(marks[1:4]), len(marks)-1 = 5-1 = 4, prints [5, 6, "Larry"]
+print(marks[1:4:2]) prints [5, "Larry"]
+
+
+List Comprehension:
+---------------------
+
+
+lst = [i for i in range(4)]
+lst = [i*i for i in range(4)]
+lst = [i*i for i in range(10) if i % 2 == 0]
+
+
+print(lst) print [0, 1, 2, 3]
+print(lst) print [0, 1, 4, 9]
+print(lst) print [0, 4, 16, 36, 64]
+
+
+List Methods:
+---------------
+
+1. append()
+
+   l = [11, 45, 1, 2, 4, 6, 1]
+   l.append(7)
+   print(l) prints [11, 45, 1, 2, 4, 6, 1, 7]
+
+2. sort()
+
+   l.sort()
+   print(l) prints [1, 2, 4, 6, 7, 11, 45]
+   l.sort(reverse = True) prints [45, 11, 7, 6, 4, 2, 1]
+
+3. reverse()
+
+   l.reverse()
+   print(l) - This method reverses the original list. 
+
+4. index()
+
+   l.index(1) prints 2, returns the first occurance of index of the given item in list.
+
+5. count()
+
+   l.count(1) prints 2, This returns how many times 1 is occuring in list 
+
+6. copy()
+
+   m = l.copy() This creates copy of the list.
+   m[0] = 33
+   print(m) prints [33, 45, 1, 2, 4, 6, 1]
+
+7. insert()
+
+   l.insert(1, 899) - inserts 899 at index-1
+   print(l) prints [11, 899, 45, 1, 2, 4, 6, 1]
+
+8. extend()
+
+   m = [900, 1000, 1100]
+
+   l.extend(m)
+   print(l) prints [11, 45, 1, 2, 4, 6, 1, 900, 1000, 1100]
+   Incase we do not want to modify original list:
+   k = l + m
+   print(k) prints [11, 45, 1, 2, 4, 6, 1, 900, 1000, 1100]
+
+
+======================
+PEP-8, ZEN OF PYTHON
+======================
+
+
+PEP-8 : Is a document that provides set of guidlines and best practices on how to write python code.
+        The primary focus of PEP-8 is to improve the readability and consistency of python code.
+        PEP stands for python enhancement proposal and they are several of them.
+
+
+ZEN OF PYTHON : If you type import this then a poem is printed which is zen of python. 
+
+
+===========  
+RECURSION
+===========   
+
+When a function calls itself it is called recursion.
+
+def factorial(n):
+
+  if(n == 0 or n == 1):
+    return 1
+  else:
+    return n * factorial(n-1)
+
+ print(factorial(5))
+
+ The programme will process like this:
+
+ 5 * factorial(4)
+ 5 * 4 * factorial(3)
+ 5 * 4 * 3 * factorial(2)
+ 5 * 4 * 3 * 2 * factorial(1)
+ 5 * 4 * 3 * 2 * 1
+
+
+Fibonacci Series 
+
+def f(n):
+  if (n == 0):
+    return 0
+  elif (n == 1):
+    return 1
+  else:
+    return f(n - 1) + f(n - 2)
+
+
+=========
+SETS
+=========
+
+
+Set is a collection of well defined objects.
+Set is unordered collection of data items. Since sets do not maintain order. Items cannot be accessed using index. 
+Set do not take duplicate values. Set only take value of object once. 
+Sets are immutable.
+
+s = {2, 4, 2, 6}
+
+print(s) - prints {2, 4, 6}
+
+Since dictionary and set both use {} so we can create empty set like:
+
+s = {} - This will create empty dictionary
+s = set() - This will create empty set. 
+
+
+For loop in Sets
+==================
+
+for value in s:
+ print(value) - prints 2, 6, 4. It can print items in any order.
+
+
+=============
+SET METHODS
+=============
+
+
+1. union()
+
+   s1 = {1, 2, 5, 6}
+   s2 = {3, 6, 7}  
+
+   print(s1.union(s2)) - prints {1, 2, 3, 5, 6, 7}
+
+2. update()
+   
+   print(s1.update(s2)) - prints {1, 2, 3, 5, 6, 7}
+
+   Note that while union() doesn't change the s1. But update() updates the s1 with 3, 7. 
+
+3. intersection()
+
+   This will return items which are contained in both sets. 
+
+4. intersection_update()
+
+   This will update the set with values which are contained in both sets and remove all other items. 
+
+5. symmetric_difference()
+
+   All those items which are not common in both sets. 
+
+6. symmetric_difference_update()
+
+   This will update the set with values which are not common in both sets.
+
+7. difference()
+
+   Prints items that are only present in the original set and not in both the sets and returns a new set
+
+8. difference_update()
+   
+   Prints items that are only present in the original set and not in both the sets and updates into the existing set from another set.
+
+9. isdisjoint()
+
+   Checks if items of given set are present in another set. This method returns False if items are present, else it returns True.
+
+10. issuperset()
+
+    Checks if all the items of a particular set are present in the original set. It returns True if all the items are present, else it returns False.
+
+11. issubset()
+
+    Checks if all the items of the original set are present in the particular set. It returns True if all the items are present, else it returns False.
+
+12. add()
+
+    cities = {"Tokyo", "Madrid", "Berlin", "Delhi"}
+    cities.add("Helsinki")
+    print(cities) - prints {'Tokyo', 'Helsinki', 'Madrid', 'Berlin', 'Delhi'}
+
+13. remove()/discard()
+
+    cities = {"Tokyo", "Madrid", "Berlin", "Delhi"}
+    cities.remove("Tokyo")
+    print(cities)
+
+    The main difference between remove and discard is that, 
+    if we try to delete an item which is not present in set, then remove() raises an error, whereas discard() does not raise any error.
+
+14. pop()
+
+    This method removes the last item of the set but the catch is that we don’t know which item gets popped as sets are unordered.
+    However, you can access the popped item if you assign the pop() method to a variable.
+
+    cities = {"Tokyo", "Madrid", "Berlin", "Delhi"}
+    item = cities.pop()
+    print(cities)
+    print(item)
+    
+    Output:
+    {'Tokyo', 'Delhi', 'Berlin'} Madrid
+
+15. del
+
+    cities = {"Tokyo", "Madrid", "Berlin", "Delhi"}
+    del cities
+    print(cities)
+
+    Output:
+    NameError: name 'cities' is not defined We get an error because our entire set has been deleted and there is no variable called cities which contains a set.
+
+17. clear()
+
+    This method clears all items in the set and prints an empty set.
+
+    cities = {"Tokyo", "Madrid", "Berlin", "Delhi"}
+    cities.clear()
+    print(cities) - prints set()
+
+18. Check if item exists
+
+    info = {"Carla", 19, False, 5.9}
+    if "Carla" in info:
+       print("Carla is present.")
+    else:
+       print("Carla is absent.")
+
+
+
+============
+DICTIONARY
+============
+
+
+Dictionaries are ordered collection of data items.
+They store multiple items in a single variable. Dictionary items are key-value pairs that are separated by commas and enclosed within curly brackets {}.
+
+1. Accessing single values:
+
+   info = {'name':'Karan', 'age':19, 'eligible':True}
+   print(info['name']) - This will throw error if the item is not found.
+   print(info.get('eligible')) - This will print none if value is not found. 
+
+2. Accessing multiple values:
+
+   info = {'name':'Karan', 'age':19, 'eligible':True}
+   print(info.values()) - prints dict_values(['Karan', 19, True])
+
+3. Accessing keys:
+
+   info = {'name':'Karan', 'age':19, 'eligible':True}
+   print(info.keys())
+
+4. Accessing key-value pairs:
+
+   info = {'name':'Karan', 'age':19, 'eligible':True}
+   print(info.items()) - prints dict_items([('name', 'Karan'), ('age', 19), ('eligible', True)])
+
+
+   for info in info.keys():
+     print(info[key])
+
+
+====================
+DICTIONARY METHODS
+====================
+
+Same as lists, sets, tuples. Read the python dictionary documentation online for more details. 
+
+
+=====================
+FOR LOOP WITH ELSE
+=====================
+
+We can use else with both for and while loops. After all the iterations of the for or while loop else statement will be executed. V35
+
+
+=============================
+EXCEPTION OR ERROR HANDLING
+=============================
+
+V36
+
+try:
+  code
+except: 
+  code 
+
+or
+
+try:
+  code
+except exception as e: - We can also suffix valueerror, indexerror, memoryerror to except. 
+  code 
+
+
+==========
+FINALLY 
+==========
+V37
+
+try:
+  l = [1, 5, 6, 7]
+  i = int(input("Enter the index: "))
+  print(l[i])
+except: 
+  print("Some error occured")
+finally:
+ print("It always get executed") - Irrespective of try or except. If we do not wrap the code in finally even then the code will run in this case.
+                                   So why use finally ? Refer below code:
+
+
+ def func1():   
+   try:
+    l = [1, 5, 6, 7]
+    i = int(input("Enter the index: "))
+    print(l[i])
+    return 1
+   except: 
+    print("Some error occured")
+    return 0
+   finally:
+    print("It always get executed") - Irrespective of try or except. 
+
+ x = func1()
+ print(x) - This will show the return value based on user input, and execute the finally as well. 
+            If we do not wrap the code in finally then the function will return with respective value. 
+
+
+===============
+CUSTOM ERRORS
+===============
+
+
+We can throw custom errors by using the 'raise' keyword. 
+
+a = int(input("Enter any value between 5 and 9"))
+
+if(a<5  or a>9):
+  raise  ValueError("Value should be between 5 and 9")
+
+
+====================
+SHORT HAND IF ELSE
+====================
+
+
+a = 330000
+b = 3303
+print("A") if a > b else print("=") if a == b else print("B")
+
+c = 9 if a>b else 0
+print(c)
+
+
+====================
+ENUMERATE FUNCTION
+====================
+
+
+The enumerate function is a built-in function in Python that allows you to loop over a sequence (such as a list, tuple, or string)
+and get the index and value of each element in the sequence at the same time.
+
+marks = [12, 56, 32, 98, 12,  45, 1, 4]
+
+Without using enumerate:
+
+index = 0
+for mark in marks:
+  print(mark)
+  if(index == 3):
+    print("Harry, awesome!")
+  index +=1
+
+Using enumerate:
+
+for index, mark in enumerate(marks):
+  print(mark)
+  if(index == 3):
+    print("larry, awesome!")
+
+Loop over a list and print the index and value of each element
+
+fruits = ['apple', 'banana', 'mango']
+
+for index, fruit in enumerate(fruits):
+    print(index, fruit)
+
+
+============================
+PYTHON VIRTUAL ENVIRONMENT
+============================
+
+V43
+
+
+===================
+IMPORTS IN PYTHON
+===================
+
+
+import math
+
+Once a module is imported, you can use any of the functions and variables defined in the module by using the dot notation.
+For example, to use the sqrt function from the math module, you would write:
+
+import math
+
+result = math.sqrt(9)
+print(result)  # Output: 3.0
+
+
+from keyword
+==============
+
+from math import sqrt
+
+result = sqrt(9)
+print(result)  # Output: 3.0
+
+You can also import multiple functions or variables at once by separating them with a comma:
+
+from math import sqrt, pi
+
+result = sqrt(9)
+print(result)  # Output: 3.0
+print(pi)  # Output: 3.141592653589793
+
+
+importing everything
+======================
+
+from math import *
+
+result = sqrt(9)
+print(result)  # Output: 3.0
+
+print(pi)  # Output: 3.141592653589793
+
+
+The "as" keyword
+===================
+
+import math as m
+
+result = m.sqrt(9)
+print(result)  # Output: 3.0
+
+print(m.pi)  # Output: 3.141592653589793
+
+
+The dir function
+==================
+
+Python has a built-in function called dir that you can use to view the names of all the functions and variables defined in a module.
+
+import math
+
+print(dir(math))
+
+
+======================================
+if "__name__ == "__main__" in Python
+======================================
+
+
+def main():
+    # Code to be run when the script is run directly
+    print("Running script directly")
+
+if __name__ == "__main__":
+    main()
+
+
+In Python, the __name__ variable is a built-in variable that is automatically set to the name of the current module.
+When a Python script is run directly, the __name__ variable is set to the string __main__ 
+When the script is imported as a module into another script, the __name__ variable is set to the name of the module.
+
+
+=====================
+OS MODULE IN PYTHON
+=====================
+
+
+The os module in Python is a built-in library that provides functions for interacting with the operating system.
+It allows you to perform a wide variety of tasks, such as reading and writing files, interacting with the file system, and running system commands.
+
+Reading and writing files The os module provides functions for opening, reading, and writing files.
+For example, to open a file for reading, you can use the open function:
+
+import os
+
+# Open the file in read-only mode
+f = os.open("myfile.txt", os.O_RDONLY)
+
+# Read the contents of the file
+contents = os.read(f, 1024)
+
+# Close the file
+os.close(f)
+
+
+To open a file for writing, you can use the os.O_WRONLY flag:
+
+import os
+
+# Open the file in write-only mode
+f = os.open("myfile.txt", os.O_WRONLY)
+
+# Write to the file
+os.write(f, b"Hello, world!")
+
+# Close the file
+os.close(f)
+
+Interacting with the file system
+==================================
+
+import os
+
+# Get a list of the files in the current directory
+files = os.listdir(".")
+print(files)  # Output: ['myfile.txt', 'otherfile.txt']
+
+You can also use the os.mkdir function to create a new directory:
+
+import os
+
+# Create a new directory
+os.mkdir("newdir")
+
+Running system commands
+=========================
+
+import os
+
+# Run the "ls" command and print the output
+output = os.system("ls")
+print(output)  # Output: ['myfile.txt', 'otherfile.txt']
+
+import os
+
+# Run the "ls" command and get the output as a file-like object
+f = os.popen("ls")
+
+# Read the contents of the output
+output = f.read()
+print(output)  # Output: ['myfile.txt', 'otherfile.txt']
+
+# Close the file-like object
+f.close()
+
+
+For creating folders
+=========================
+
+import os
+
+if (not os.path.exists("data")): - If data folder does not exists in path then create folder with name data. 
+
+   os.mkdir('data') - This will create folder with name data
+
+for i in range(0, 100):
+
+  os.mkdir(f"data/Day{i+1}") - This will create 100 folders with name 1-100
+
+
+==========
+FILE I/O
+==========
+
+
+Reading:
+========
+
+f = open('myfile.txt', 'r')
+contents = f.read()
+f.close()
+print(contents)
+
+
+Writing:
+========
+
+f = open('myfile.txt', 'w')
+f.write('Hello, world!')
+f.close
+
+
+APPEND:
+=======
+
+Keep in mind that writing to a file will overwrite its contents. If you want to append to a file instead of overwriting it, you can open it in append mode.
+
+f = open('myfile.txt', 'a')
+f.write('Hello, world!')
+
+
+The 'with' statement:
+=====================
+
+Alternatively, you can use the with statement to automatically close the file after you are done with it.
+
+with open('myfile.txt', 'r') as f:
+    # ... do something with the file
+
+
+========================
+READLINES & WRITELINES
+========================
+
+Readlines:
+==========
+
+f = open('myfile.txt', 'r')
+while True:
+    line = f.readline()
+    if not line:
+        break
+    print(line)
+
+
+Writelines:
+==========
+
+f = open('myfile.txt', 'w')
+lines = ['line 1\n', 'line 2\n', 'line 3\n']
+f.writelines(lines)
+f.close()
+
+If you want to add newlines between the strings, you can use a loop to write each string separately:
+
+f = open('myfile.txt', 'w')
+lines = ['line 1', 'line 2', 'line 3']
+for line in lines:
+    f.write(line + '\n')
+f.close()
+
+
+==================
+SEEK() AND TELL()
+==================
+
+
+with open('file.txt', 'r') as f:
+  # Move to the 10th byte in the file
+  f.seek(10) - This will leave the first 10 characters of the string 
+
+  # Read the next 5 bytes
+  data = f.read(5) -  This will read 5 characters after leaving the first 10. 
+
+
+with open('file.txt', 'r') as f:
+  # Read the first 10 bytes
+  data = f.read(10)
+
+  # Save the current position
+  current_position = f.tell() - This will tell the position w.r.t the seek. 10 in the above case.
+
+  # Seek to the saved position
+  f.seek(current_position)
+
+
+with open('sample.txt', 'w') as f:
+  f.write('Hello World!')
+  f.truncate(5) - This will retain Hello as first 5 characters and remove all the others. 
+
+with open('sample.txt', 'r') as f:
+  print(f.read())
+
+
+================
+LAMBDA FUNCTION
+================
+
+def double(x):
+
+ return x*2
+
+double = lambda x: x*2
+
+
+====================
+MAP, FILTER, REDUCE
+====================
+
+
+MAP:
+
+def cube(x):
+ return x*x*x
+
+l = [1, 2, 4, 6, 4, 3]
+
+newl = list(map(cube, l))
+
+print(newl)
+
+
+FLITER:
+
+
+def filter_function(a):
+  return a>2
+
+newl2 = list(filter(filter_function, l))
+
+print(newl2)
+
+
+REDUCE:
+
+You need to import reduce first 
+
+from functools import reduce
+
+def mysum(a, b):
+ return a + b
+
+sum = reduce(mysum, l)
+
+print(sum)
+
+
+==========
+IS VS ==
+==========
+
+
+a = (1, 2)
+b = (1, 2)
+
+print (a is b) - exact location of object in memory
+print (a == b) - value 
+
+
+
+===================
+CLASSES & OBJECTS
+===================
+
+CLASS: Think about this step as creating a blue print that we will use to create objects.
+
+ATTRIBUTES: All the data that make up that class, which we call attributes.
+
+METHODS: They are functions that interact with objects. e.g We can create a method called add_radius(r) that increases the radius by r.
+
+SELF: The term self contains all the attributes. e.g self.color gives the value of the attribute color and self.radius will give you the radius of the object.
+
+class Details:
+
+ name = 'Rohan'
+ age = '20'
+
+obj1 = Details()
+print(obj1.name)
+print(obj1.age)
+
+
+=============
+CONSTRUCTOR
+=============
+
+
+A constructor is a special method in a class used to create and initialize an object of a class.
+Constructor is invoked automatically when an object of a class is created.
+
+In object-oriented programming, the term "constructor" refers to a special type of method that is automatically executed when an object is created from a class.
+The purpose of a constructor is to initialize the object's attributes, allowing the object to be fully functional and ready to use.
+
+
+Default Constructor:
+====================
+
+When the constructor doesn't accept any arguments from the object and has only one argument, self, in the constructor.
+
+class Details:
+  def __init__(self):
+    print("animal Crab belongs to Crustaceans group")
+
+obj1=Details()
+
+Parameterized Constructor:
+==========================
+
+When the constructor accepts arguments along with self
+
+class Details:
+    def __init__(self, animal, group):
+        self.animal = animal
+        self.group = group
+
+obj1 = Details("Crab", "Crustaceans")
+
+print(obj1.animal, "belongs to the", obj1.group, "group.")
+ 
+
+============
+DECORATORS
+============
+
+
+Decorators takes a function and modifies it.
+
+
+def greet(fx):
+ def mfx():
+   print("Good Morning")
+   fx()
+   print("Thanks for using this function")
+ return mfx
+
+
+@greet
+def hello()
+ print("hello World")
+
+hello()
+
+or we can also write code like this:
+
+def hello()
+ print("hello World")
+
+greet(hello)()
+
+
+In case of arguments
+=====================
+
+def greet(fx):
+ def mfx(*args, **kwargs): - *args for taking arguments as tuple and  **kwargs  for taking arguments as dictionary 
+   print("Good Morning")
+   fx(*args, **kwargs)
+   print("Thanks for using this function")
+ return mfx
+
+
+def add(a, b):
+
+ print(a+b)
+
+greet(add)(1, 2)
+
+
+====================
+GETTERS AND SETTERS
+====================
+
+Getters in Python are methods that are used to access the values of an object's properties.
+They are used to return the value of a specific property, and are typically defined using the @property decorator.
+
+class MyClass:
+    def __init__(self, value):
+        self._value = value
+
+    @property
+    def value(self):
+        return self._value
+
+MyClass class has a single property, _value, which is initialized in the init method.
+The value method is defined as a getter using the @property decorator, and is used to return the value of the _value property.
+
+To use the getter, we can create an instance of the MyClass class, and then access the value property as if it were an attribute:
+
+>>> obj = MyClass(10)
+>>> obj.value
+10
+
+
+SETTER
+========
+
+The getters do not take any parameters and we cannot set the value through getter method.
+For that we need setter method which can be added by decorating method with @property_name.setter.
+
+class MyClass:
+    def __init__(self, value):
+        self._value = value
+
+    @property
+    def value(self):
+        return self._value
+
+    @value.setter
+    def value(self, new_value):
+        self._value = new_value
+
+>>> obj = MyClass(10)
+>>> obj.value = 20
+>>> obj.value
+20
+
+
+
+============
+INHERITANCE
+============
+
+
+When a class derives from another class. The child class will inherit all the public and protected properties and methods from the parent class.
+In addition, it can have its own properties and methods,this is called as inheritance.
+
+
+class BaseClass:
+  Body of base class
+class DerivedClass(BaseClass):
+  Body of derived class
+
+
+Single Inheritance:
+===================
+
+class Parent:
+    def func1(self):
+        print("This function is in parent class.")
+ 
+class Child(Parent):
+    def func2(self):
+        print("This function is in child class.")
+ 
+object = Child()
+object.func1()
+object.func2()
+
+
+Multiple Inheritance:
+=====================
+
+class Mother:
+    mothername = ""
+ 
+    def mother(self):
+        print(self.mothername)
+ 
+ 
+class Father:
+    fathername = ""
+ 
+    def father(self):
+        print(self.fathername)
+ 
+ 
+class Son(Mother, Father):
+    def parents(self):
+        print("Father name is :", self.fathername)
+        print("Mother :", self.mothername)
+
+s1 = Son()
+s1.fathername = "Mommy"
+s1.mothername = "Daddy"
+s1.parents()
+
+
+Multilevel Inheritance:
+=======================
+
+
+class Grandfather:
+ 
+    def __init__(self, grandfathername):
+        self.grandfathername = grandfathername
+ 
+ 
+class Father(Grandfather):
+    def __init__(self, fathername, grandfathername):
+        self.fathername = fathername
+        Grandfather.__init__(self, grandfathername)
+class Son(Father):
+    def __init__(self, sonname, fathername, grandfathername):
+        self.sonname = sonname
+        Father.__init__(self, fathername, grandfathername)
+ 
+    def print_name(self):
+        print('Grandfather name :', self.grandfathername)
+        print("Father name :", self.fathername)
+        print("Son name :", self.sonname)
+s1 = Son('Prince', 'Rampal', 'Lal mani')
+print(s1.grandfathername)
+s1.print_name()
+
+
+Hierarchical Inheritance:
+=========================
+
+When more than one derived class are created from a single base this type of inheritance is called hierarchical inheritance.
+In this program, we have a parent (base) class and two child (derived) classes.
+
+class Parent:
+    def func1(self):
+        print("This function is in parent class.")
+
+class Child1(Parent):
+    def func2(self):
+        print("This function is in child 1.")
+      
+class Child2(Parent):
+    def func3(self):
+        print("This function is in child 2.")
+ 
+ object1 = Child1()
+object2 = Child2()
+object1.func1()
+object1.func2()
+object2.func1()
+object2.func3()
+
+
+Hybrid Inheritance:
+===================
+
+class School:
+    def func1(self):
+        print("This function is in school.")
+ 
+ 
+class Student1(School):
+    def func2(self):
+        print("This function is in student 1. ")
+ 
+ 
+class Student2(School):
+    def func3(self):
+        print("This function is in student 2.")
+ 
+ 
+class Student3(Student1, School):
+    def func4(self):
+        print("This function is in student 3.")
+ 
+object = Student3()
+object.func1()
+object.func2()
+
+
+=============================
+ACCESS MODIFIERS/SPECIFIERS
+=============================
+
+
+Access specifiers or access modifiers in python programming are used
+to limit the access of class variables and class methods outside of class while implementing the concepts of inheritance.
+
+Public Access Specifier:
+========================
+
+All the variables and methods (member functions) in python are by default public.
+Any instance variable in a class followed by the ‘self’ keyword ie. self.var_name are public accessed.
+
+
+class Student:
+    # constructor is defined
+    def __init__(self, age, name):
+        self.age = age               # public variable
+        self.name = name             # public variable
+
+obj = Student(21,"Harry")
+print(obj.age)
+print(obj.name)
+
+
+Private Access Modifier:
+========================
+
+Private members of a class (variables or methods) are those members which are only accessible inside the class. We cannot use private members outside of class.
+A convention has been established to indicate that a variable or method should be considered private by prefixing its name with a double underscore (__).
+This is known as a "weak internal use indicator" and it is a convention only, not a strict rule.
+Code outside the class can still access these "private" variables and methods, but it is generally understood that they should not be accessed or modified.
+
+
+class Student: 
+    def __init__(self, age, name): 
+        self.__age = age      # An indication of private variable
+        
+        def __funName(self):  # An indication of private function
+            self.y = 34
+            print(self.y)
+
+class Subject(Student):
+    pass
+
+obj = Student(21,"Harry")
+obj1 = Subject
+
+# calling by object of class Student
+print(obj.__age)
+print(obj.__funName())
+
+# calling by object  of class Subject
+print(obj1.__age)
+print(obj1.__funName())
+
+
+Private members of a class cannot be accessed or inherited outside of class.
+If we try to access or to inherit the properties of private members to child class (derived class). Then it will show the error.
+
+
+==============
+Name mangling:
+==============
+
+
+Name mangling in Python is a technique used to protect class-private and superclass-private attributes from being accidentally overwritten by subclasses. 
+Names of class-private and superclass-private attributes are transformed by the addition of a single leading underscore and a double leading underscore respectively.
+
+
+class MyClass:
+    def __init__(self):
+        self._nonmangled_attribute = "I am a nonmangled attribute"
+        self.__mangled_attribute = "I am a mangled attribute"
+
+my_object = MyClass()
+
+print(my_object._nonmangled_attribute) # Output: I am a nonmangled attribute
+print(my_object.__mangled_attribute) # Throws an AttributeError
+print(my_object._MyClass__mangled_attribute) # Output: I am a mangled attribute
+
+
+In the example above, the attribute _nonmangled_attribute is marked as nonmangled by convention, but can still be accessed from outside the class.
+The attribute __mangled_attribute is private and its name is "mangled" to _MyClass__mangled_attribute,
+so it can't be accessed directly from outside the class, but you can access it by calling _MyClass__mangled_attribute
+
+
+Protected Access Modifier:
+==========================
+
+In object-oriented programming (OOP), the term "protected" is used to describe a member (i.e., a method or attribute) of a class that is intended to be accessed only by the class itself and its subclasses.
+In Python, the convention for indicating that a member is protected is to prefix its name with a single underscore (_).
+For example, if a class has a method called _my_method, it is indicating that the method should only be accessed by the class itself and its subclasses.
+
+It's important to note that the single underscore is just a naming convention, and does not actually provide any protection or restrict access to the member.
+The syntax we follow to make any variable protected is to write variable name followed by a single underscore (_) ie. _varName.
+
+class Student:
+    def __init__(self):
+        self._name = "Harry"
+
+    def _funName(self):      # protected method
+        return "CodeWithHarry"
+
+class Subject(Student):       #inherited class
+    pass
+
+obj = Student()
+obj1 = Subject()
+
+# calling by object of Student class
+print(obj._name)      
+print(obj._funName())     
+# calling by object of Subject class
+print(obj1._name)    
+print(obj1._funName())
+
+
+
+===============
+STATIC METHODS
+===============
+
+
+Static methods in Python are methods that belong to a class rather than an instance of the class.
+They are defined using the @staticmethod decorator and do not have access to the instance of the class (i.e. self).
+They are called on the class itself, not on an instance of the class. 
+Static methods are often used to create utility functions that don't need access to instance data.
+
+class Math:
+    @staticmethod
+    def add(a, b):
+        return a + b
+
+result = Math.add(1, 2)
+print(result) # Output: 3
+
+In this example, the add method is a static method of the Math class. 
+It takes two parameters a and b and returns their sum.
+The method can be called on the class itself, without the need to create an instance of the class.
+
+
+=============================
+INSTANCE VS CLASS VARIABLES
+=============================
+
+
+Class Variables:
+================
+
+Class variables are defined at the class level and are shared among all instances of the class.
+They are defined outside of any method and are usually used to store information that is common to all instances of the class.
+For example, a class variable can be used to store the number of instances of a class that have been created.
+
+
+class MyClass:
+    class_variable = 0
+    
+    def __init__(self):
+        MyClass.class_variable += 1
+        
+    def print_class_variable(self):
+        print(MyClass.class_variable)
+        
+
+obj1 = MyClass()
+obj2 = MyClass()
+
+obj1.print_class_variable() # Output: 2
+obj2.print_class_variable() # Output: 2
+
+
+In the example above, the class_variable is shared among all instances of the class MyClass.
+When we create new instances of MyClass, the value of class_variable is incremented.
+When we call the print_class_variable method on obj1 and obj2, we get the same value of class_variable.
+
+
+Instance Variables:
+===================
+
+
+Instance variables are defined at the instance level and are unique to each instance of the class.
+They are defined inside the init method and are usually used to store information that is specific to each instance of the class.
+For example, an instance variable can be used to store the name of an employee in a class that represents an employee.
+
+
+class MyClass:
+    def __init__(self, name):
+        self.name = name
+        
+    def print_name(self):
+        print(self.name)
+
+obj1 = MyClass("John")
+obj2 = MyClass("Jane")
+
+obj1.print_name() # Output: John
+obj2.print_name() # Output: Jane
+
+
+In the example above, each instance of the class MyClass has its own value for the name variable.
+When we call the print_name method on obj1 and obj2, we get different values for name.
+
+
+
+===============
+CLASS METHODS
+===============
+
+
+A class method is a type of method that is bound to the class and not the instance of the class.
+In other words, it operates on the class as a whole, rather than on a specific instance of the class.
+Class methods are defined using the "@classmethod" decorator, followed by a function definition. 
+The first argument of the function is always "cls," which represents the class itself.
+
+USE CASE:
+=========
+
+Class methods are useful in several situations. For example, you might want to create a factory method that creates instances of your class in a specific way.
+You could define a class method that creates the instance and returns it to the caller.
+Another common use case is to provide alternative constructors for your class.
+This can be useful if you want to create instances of your class in multiple ways, but still have a consistent interface for doing so.
+
+
+class ExampleClass:
+    @classmethod
+    def factory_method(cls, argument1, argument2):
+        return cls(argument1, argument2)
+
+In this example, the "factory_method" is a class method that takes two arguments, "argument1" and "argument2." 
+It creates a new instance of the class "ExampleClass" using the "cls" keyword, and returns the new instance to the caller.
+
+It's important to note that class methods cannot modify the class in any way. 
+If you need to modify the class, you should use a class level variable instead.
+
+
+Class Methods as Alternative Constructors:
+==========================================
+
+There are times when you may want to create an object in a different way, or with different initial values, than what is provided by the default constructor.
+This is where class methods can be used as alternative constructors.
+
+A class method belongs to the class rather than to an instance of the class.
+One common use case for class methods as alternative constructors is when you want to create an object from data that is stored in a different format,
+such as a string or a dictionary.
+For example, consider a class named "Person" that has two attributes: "name" and "age". The default constructor for the class might look like this:
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+
+
+But what if you want to create a Person object from a string that contains the person's name and age, separated by a comma?
+You can define a class method named "from_string" to do this:
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    @classmethod
+    def from_string(cls, string):
+        name, age = string.split(',')
+        return cls(name, int(age))
+
+Now you can create a Person object from a string like this:
+
+person = Person.from_string("John Doe, 30")
+
+Another common use case for class methods as alternative constructors is when you want to create an object with a different set of default values
+than what is provided by the default constructor. For example, consider a class named "Rectangle" that has two attributes: "width" and "height".
+The default constructor for the class might look like this:
+
+
+class Rectangle:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+
+But what if you want to create a Rectangle object with a default width of 10 and a default height of 5? You can define a class method named "square" to do this:
+
+
+class Rectangle:
+  def __init__(self, width, height):
+    self.width = width
+    self.height = height
+
+  @classmethod
+  def square(cls, size):
+    return cls(size, size)
+
+Now you can create a square rectangle like this:
+
+rectangle = Rectangle.square(10)
+
+
+
+==============================================
+dir(), __dict__ and help() METHODS IN PYTHON
+==============================================
+
+
+
+The dir() method:
+=================
+
+Returns a list of all the attributes and methods (including dunder methods) available for an object.
+
+>>> x = [1, 2, 3]
+>>> dir(x)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+
+
+The __dict__ attribute:
+=======================
+
+The __dict__ attribute returns a dictionary representation of an object's attributes. It is a useful tool for introspection. Example:
+
+>>> class Person:
+...     def __init__(self, name, age):
+...         self.name = name
+...         self.age = age
+...
+>>> p = Person("John", 30)
+>>> p.__dict__
+
+OUTPUT:
+{'name': 'John', 'age': 30}
+
+
+The help() mehthod:
+===================
+
+
+The help() function is used to get help documentation for an object, including a description of its attributes and methods. Example:
+
+>>> help(str)
+Help on class str in module builtins:
+
+class str(object)
+ |  str(object='') -> str
+ |  str(bytes_or_buffer[, encoding[, errors]]) -> str
+ |
+ |  Create a new string object from the given object. If encoding or
+ |  errors is specified, then the object must expose a data buffer
+ |  that will be decoded using the given encoding and error handler.
+ |  Otherwise, returns the result of object.__str__() (if defined)
+ |  or repr(object).
+ |  encoding defaults to sys.getdefaultencoding().
+ |  errors defaults to 'strict'.
+
+
+
+================
+SUPER KEYWORD
+================
+
+
+The super() keyword in Python is used to refer to the parent class.
+It is especially useful when a class inherits from multiple parent classes and you want to call a method from one of the parent classes.
+
+When a class inherits from a parent class, it can override or extend the methods defined in the parent class.
+However, sometimes you might want to use the parent class method in the child class.
+This is where the super() keyword comes in handy.
+
+
+class ParentClass:
+    def parent_method(self):
+        print("This is the parent method.")
+
+class ChildClass(ParentClass):
+    def child_method(self):
+        print("This is the child method.")
+        super().parent_method()
+
+child_object = ChildClass()
+child_object.child_method()
+
+
+The super() keyword is also useful when a class inherits from multiple parent classes.
+In this case, you can specify the parent class from which you want to call the method.
+
+class ParentClass1:
+    def parent_method(self):
+        print("This is the parent method of ParentClass1.")
+
+class ParentClass2:
+    def parent_method(self):
+        print("This is the parent method of ParentClass2.")
+
+class ChildClass(ParentClass1, ParentClass2):
+    def child_method(self):
+        print("This is the child method.")
+        super().parent_method()
+
+child_object = ChildClass()
+child_object.child_method()
+
+In this example, the ChildClass inherits from both ParentClass1 and ParentClass2.
+The child_method calls the parent_method of the first parent class using the super() keyword.
+
+
+===================
+METHOD OVERRIDING
+===================
+
+
+It's important to note that when you override a method, the new implementation must have the same method signature as the original method.
+This means that the number and type of arguments, as well as the return type, must be the same.
+
+
+class Shape:
+    def area(self):
+        pass
+
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return 3.14 * self.radius * self.radius
+
+
+SUPER METHOD:
+==============
+
+The super function allows you to call the base class method from the derived class method,
+and can be useful when you want to extend the behavior of the base class method, rather than replace it.
+This allows you to extend the behavior of the base class method, while still maintaining its original behavior.
+
+
+class Shape:
+    def area(self):
+        print("Calculating area...")
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        print("Calculating area of a circle...")
+        super().area()
+        return 3.14 * self.radius * self.radius
+
+
+====================
+OPERATOR OERLOADING
+====================
+
+
+Operator Overloading allows developers to redefine or customize the behavior of mathematical and comparison operators for custom data types.
+This means that you can use the standard mathematical operators (+, -, *, /, etc.) and comparison operators (>, <, ==, etc.) in your own classes, just as you would for built-in data types like int, float, and str.
+
+Here we are redefining the add operator for addition of vector i.e How a vector should be added. 
+
+class Vector:
+  def __init__(self, i, j, k):
+    self.i = i
+    self.j = j
+    self.k = k
+
+  def __str__(self):
+    return f"{self.i}i + {self.j}j + {self.k}k"
+
+  def __add__(self, x):
+    return Vector(self.i + x.i,  self.j+x.j, self.k+x.k) - This will return output as vector datatype. 
+
+v1 = Vector(3, 5, 6)
+print(v1)
+
+v2 = Vector(1, 2, 9)
+print(v2)
+
+print(v1 + v2)
+print(type(v1 + v2))
+
+
+
+============
+TIME MODULE 
+============
+
+
+time.time():
+============
+
+The time.time() function returns the current time as a floating-point number,
+representing the number of seconds since the epoch (the point in time when the time module was initialized).
+
+import time
+
+print(time.time())
+# Output: 1602299933.233374
+
+
+time.sleep():
+=============
+
+import time
+
+print("Start:", time.time())
+time.sleep(2)
+print("End:", time.time())
+
+# Output:
+# Start: 1602299933.233374
+# End: 1602299935.233376
+
+
+time.strftime():
+================
+
+
+The time.strftime() function formats a time value as a string, based on a specified format.
+This function is particularly useful for formatting dates and times in a human-readable format,
+such as for display in a GUI, a log file, or a report. Here's an example:
+
+
+import time
+
+t = time.localtime()
+formatted_time = time.strftime("%Y-%m-%d %H:%M:%S", t)
+
+print(formatted_time)
+# Output: 2022-11-08 08:45:33
+
+
+from datetime import date
+
+today = date.today()
+
+print(today)
+
+
+======
+ASIDE
+======
+
+COMMAND LINE UTILITY
+WALRUS OPERATOR
+
+
+==============
+SHUTIL MODULE
+==============
+
+
+ The following are some of the most commonly used functions in the shutil module:
+
+ 1. shutil.copy(src, dst): This function copies the file located at src to a new location specified by dst. If the destination location already exists, the original file will be overwritten.
+
+ 2. shutil.copy2(src, dst): This function is similar to shutil.copy, but it also preserves more metadata about the original file, such as the timestamp.
+
+ 3. shutil.copytree(src, dst): This function recursively copies the directory located at src to a new location specified by dst. If the destination location already exists, the original directory will be merged with it.
+ 
+ 4. shutil.move(src, dst): This function moves the file located at src to a new location specified by dst. This function is equivalent to renaming a file in most cases.
+
+ 5. shutil.rmtree(path): This function recursively deletes the directory located at path, along with all of its contents. This function is similar to using the rm -rf command in a shell.
+
+
+EXAMPLE:
+========
+
+import shutil
+
+# Copying a file
+shutil.copy("src.txt", "dst.txt")
+
+# Copying a directory
+shutil.copytree("src_dir", "dst_dir")
+
+# Moving a file
+shutil.move("src.txt", "dst.txt")
+
+# Deleting a directory
+shutil.rmtree("dir")
+
+
+===============
+REQUEST MODULE
+===============
+
+Installation:
+=============
+
+pip install requests
+
+Get Request:
+============
+
+import requests
+
+response = requests.get("https://www.google.com")
+print(response.text)
+
+or we can use json.loads()
+
+result = json.loads(response.text) 
+
+df1 = pd.DataFrame(results) i in order to create a pandas df. 
+
+if data is in nested format you can use
+
+df2 = pd.json_normalize(results)
+
+
+Post Request:
+=============
+
+import requests
+
+url = "https://api.example.com/login"
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+    "Content-Type": "application/json"
+}
+data = {
+    "username": "myusername",
+    "password": "mypassword"
+}
+
+response = requests.post(url, headers=headers, json=data)
+
+print(response.text)
+
+
+
+===========
+GENERATORS
+===========
+
+
+A generator function returns a generator object, which can be used to generate the values one-by-one as you iterate over it.
+Generators are a powerful tool for working with large or complex data sets, as they allow you to generate the values on-the-fly,
+rather than having to create and store the entire sequence in memory.
+
+In Python, you can create a generator by using the yield statement in a function.
+The yield statement returns a value from the generator and suspends the execution of the function until the next value is requested.
+
+One of the main benefits of generators is that they allow you to generate the values on-the-fly,
+rather than having to create and store the entire sequence in memory. This makes generators a powerful tool for working with large or complex data sets,
+as you can generate the values as you need them, rather than having to store them all in memory at once.
+
+Another benefit of generators is that they are lazy, which means that the values are generated only when they are requested.
+This allows you to generate the values in a more efficient and memory-friendly manner, as you don't have to generate all the values up front.
+
+
+def my_generator():
+    for i in range(5):
+        yield i
+
+gen = my_generator()
+print(next(gen))
+print(next(gen))
+print(next(gen))
+print(next(gen))
+print(next(gen))
+# Output:
+# 0
+# 1
+# 2
+# 3
+# 4
+
+
+==================
+FUNCTION CACHING
+==================
+
+
+Function caching is a technique for improving the performance of a program by storing the results of a function call
+so that you can reuse the results instead of recomputing them every time the function is called.
+This can be particularly useful when a function is computationally expensive, or when the inputs to the function are unlikely to change frequently.
+The maxsize parameter is used to specify the maximum number of results to cache. If maxsize is set to None, the cache will have an unlimited size.
+
+BENEFITS
+=========
+
+1. Function caching can have a significant impact on the performance of a program, particularly for computationally expensive functions.
+   By caching the results of a function, you can avoid having to recompute the results every time the function is called,
+   which can save a significant amount of time and computational resources.
+
+2. Another benefit of function caching is that it can simplify the code of a program by removing the need to manually cache the results of a function.
+   With the functools.lru_cache decorator, the caching is handled automatically, so you can focus on writing the core logic of your program.
+
+import functools
+
+@functools.lru_cache(maxsize=None)
+def fib(n):
+    if n < 2:
+        return n
+    return fib(n-1) + fib(n-2)
+
+print(fib(20))
+# Output: 6765
+
+
+===================
+REGULAR EXPRESSION
+===================
+
+
+Regular expressions, or "regex" for short, are a powerful tool for working with strings and text data in Python.
+They allow you to match and manipulate strings based on patterns, making it easy to perform complex string operations with just a few lines of code.
+
+SEARCHING FOR A PATTERN
+========================
+
+import re
+
+# Define a regular expression pattern
+pattern = r"expression"
+
+# Match the pattern against a string
+text = "Hello, world!"
+
+match = re.search(pattern, text)
+
+if match:
+    print("Match found!")
+else:
+    print("Match not found.")
+
+
+TO FIND ALL OCCURANCES
+=======================
+
+import re
+
+pattern = r"expression"
+text = "The cat is in the hat."
+
+matches = re.findall(pattern, text)
+
+print(matches)
+# Output: ['cat', 'hat']
+
+
+Replacing a pattern
+====================
+
+import re
+pattern = r"[a-z]+at"
+text = "The cat is in the hat."
+
+matches = re.findall(pattern, text)
+
+print(matches)
+# Output: ['cat', 'hat']
+
+new_text = re.sub(pattern, "dog", text)
+
+print(new_text)
+# Output: "The dog is in the dog."
+
+
+Extracting information from a string
+=======================================
+
+import re
+
+text = "The email address is example@example.com."
+
+pattern = r"\w+@\w+\.\w+"
+
+match = re.search(pattern, text)
+
+if match:
+    email = match.group()
+    print(email)
+# Output: example@example.com
+
+
+
+===========
+ASYNC IO
+===========
+
+
+import asyncio
+
+async def my_async_function():
+    # asynchronous code here
+    await asyncio.sleep(1)
+    return "Hello, Async World!"
+
+async def main():
+    result = await my_async_function()
+    print(result)
+
+asyncio.run(main())
+
+
+Another way to schedule tasks concurrently is as follows:
+
+
+L = await asyncio.gather(
+        my_async_function(),
+        my_async_function(),
+        my_async_function(),
+    )
+print(L)
+
+
+
+================
+MULTITHREADING
+================
+
+
+Multithreading is a technique in programming that allows multiple threads of execution to run concurrently within a single process. 
+we can use the threading module to implement multithreading.
+
+
+import threading
+
+def my_func():
+  print("Hello from thread", threading.current_thread().name)
+  thread = threading.Thread(target=my_func, args=[])
+  thread.start()
+  thread.join()
+
+import threading
+import time
+
+def func(seconds):
+  print(f"Sleeping for {seconds} seconds")
+  time.sleep(seconds)
+  return seconds
+
+  t1 = threading.Thread(target=func, args=[4])
+  t2 = threading.Thread(target=func, args=[2])
+  t3 = threading.Thread(target=func, args=[1])
+  t1.start()
+  t2.start()
+  t3.start()
+  
+  t1.join()
+  t2.join()
+  t3.join()
+
+We can use concurrent.futures and import threadpool executor in order to achive this when the workload requires more threads.
+
+
+SAME EXAMPLE USING THREADPOOL EXECUTER:
+=======================================
+
+def poolingDemo():
+  with ThreadPoolExecutor() as executor:
+    # future1 = executor.submit(func, 3)
+    # future2 = executor.submit(func, 2)
+    # future3 = executor.submit(func, 4)
+    # print(future1.result())
+    # print(future2.result())
+    # print(future3.result())
+
+
+USING MAP FUNCTION
+===================
+
+While working you need to download so many things, u will be having a list of url's.
+
+l = [3, 5, 1, 2] - func is taking seconds here in this case as parameters. 
+
+results = executor.map(func, l)
+
+for result in results:
+ print(result)
+
+
+================
+MULTIPROCESSING
+================
+
+
+Multiprocessing is a Python module that provides a simple way to run multiple processes in parallel.
+It allows you to take advantage of multiple cores or processors on your system and can significantly improve the performance of your code.
+This is quite similar to the multithreading.
+
+import concurrent.futures
+import requests
+import multiprocessing
+
+Here we created a function which downloads images from the url.
+
+def downloadFile(url, name):  
+  print(f"Started Downloading {name}")
+  response = requests.get(url)
+  open(f"files/file{name}.jpg", "wb").write(response.content)
+  print(f"Finished Downloading {name}")
+ 
+
+Here we are using multiprocessing. 
+
+url = "https://picsum.photos/2000/3000"
+# pros = []
+# for i in range(50):
+#   # downloadFile(url, i)
+#   p = multiprocessing.Process(target=downloadFile, args=[url, i])
+#   p.start()
+#   pros.append(p)
+
+# for p in pros:
+#   p.join()
+
+with concurrent.futures.ProcessPoolExecutor() as executor:
+
+  l1 = [url for i in range(60)] - This list is for url's
+  l2 = [i for i in range(60)] - This list is for names. 
+
+  results = executor.map(downloadFile, l1, l2)
+  for r in results:
+    print(r)
+
+
+======
+JSON
+======
+
+
+Writing JSON to a File:
+=======================
+
+import json
+person = {
+    'first_name' : 'Mark',
+    'last_name' : 'abc',
+    'age' : 27,
+    'address': {
+        "streetAddress": "21 2nd Street",
+        "city": "New York",
+        "state": "NY",
+        "postalCode": "10021-3100"
+    }
+}
+
+
+# writing JSON object
+
+with open('person.json', 'w') as f: 
+    json.dump(person, f)
+
+
+Serialization using dumps() function:
+=====================================
+
+json_object = json.dumps(person, indent = 4) 
+  
+# Writing to sample.json 
+
+with open("sample.json", "w") as outfile: 
+    outfile.write(json_object) 
+
+
+Reading JSON to a File or Deserialization:
+==========================================
+
+import json 
+  
+# Opening JSON file 
+with open('sample.json', 'r') as openfile: 
+  
+    # Reading from json file 
+    json_object = json.load(openfile) 
+  
+print(json_object) 
+print(type(json_object)) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+ 
+ 
+
+ 
