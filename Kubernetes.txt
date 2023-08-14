@@ -1,0 +1,615 @@
+KUBERNETES
+===========
+
+
+ORCHESTRATOR
+==============
+
+Helps in deploy and manage containers dynamically. Kubernetes perform this role: 
+
+   1. Deploy
+   2. Zero downtime update
+   3. Scale
+   4. Self-heal containers
+
+Applications that are designed to meet above requirements are called cloud native. 
+
+
+CONTAINER ORCHESTRATION
+========================
+
+Container orchestration is a process that automates the container lifecycle of container-based applications. 
+This includes deployment, management, scaling, networking, and availability. 
+
+FEATURES:
+----------
+
+1. Defining which container images make up the application, and where they are located (in what registry).
+
+2. Improving provisioning and deployment of containers for a more automated, unified, and smooth process.
+
+3. Securing network connections between containers.
+
+4. Ensuring availability and performance by relocating the containers to another host if an outage or shortage of system resources occurs.
+
+5. Scaling containers to meet demand, and load balance requests. 
+
+6. Handling resource allocation and scheduling of containers to the underlying infrastructure.
+
+7. Performing rolling updates and roll backs.
+
+8. Conducting health checks to ensure applications are running, or performing the necessary actions when checks fail.
+
+
+What is Kubernetes ?
+=====================
+
+1. It is a container orchestrator. But it is much more than that.
+
+2. You can run it on your own machine or on cloud.
+
+3. You can migrate it from one provider to another provider.
+
+
+What Kubernetes is not.
+========================
+
+1.  It is not a traditional, all-inclusive platform as a service. 
+
+2.  It is not rigid or opinionated but, more of a flexible model that supports an extremely diverse variety of workloads, including stateless, stateful, and data-processing workloads.
+
+3.  It does not provide continuous integration/ continuous delivery pipelines to build applications or deploy source code.
+
+4.  It does not prescribe logging, monitoring, and alerting solutions. Organizations are free to select and integrate third-party and open source tools.
+
+5.  And, it does not provide built-in middleware, databases, or other services. 
+
+
+KUBERNETES CONCEPTS
+====================
+
+1. PODS & WORKLOADS: Pods represent the smallest deployable compute object and the higher-level abstractions to run workloads.
+
+2. SERVICES: Services expose applications running on sets of Pods. Each Pod is assigned a unique IP address. Sets of Pods have a single DNS name.
+
+3. STORAGE: Kubernetes supports both persistent and temporary storage for Pods. 
+
+4. CONFIGURATION: Refers to the provisioning of resources for configuring Pods. 
+
+5. SECURITY: Security measures for cloud-native workloads, which enforce security for Pod and API access. 
+
+6. POLICIES: Policies for groups of resources, ensuring that Pods match to Nodes so that the kubelet can find them and run the Pods.
+
+7. SCHEDULING & EVICTION: That runs and proactively terminates one or more Pods on resource-starved Nodes.
+
+8. PREEMPTION: Which is all about prioritization. Preemption terminates lower priority Pods so that Pods with higher priority can schedule and run on Nodes.
+
+9. ADMINISTRATION: Cluster administration provides the details necessary to create or administer a cluster.
+
+
+KUBERNETES CAPABILITIES
+========================
+
+1. AUTOMATED ROLLOUTS & ROLLBACKS: Progressively rolls out changes to application. Monitors application health and ensures instances are running. Rollback changes.
+
+2. STORAGE ORCHESTRATION: Automatically mounts your chosen storage, whether from local storage, network storage or public cloud. 
+
+3. HORIZONTAL SCALING: Scales loads automatically based on commands or metrics. 
+
+4. AUTOMATED BIN PACKING: Increases utilization and cost savings using a mix of critical and best-effort workloads.
+                          Performs container auto-placement based on resource requirements and conditions without sacrificing high availability.
+
+5. SECRET & CONFIGURATION MANAGEMENT: Of sensitive information including credentials, passwords, Auth tokens, and SSH keys.
+                                      Handles deployments and updates to secrets and configuration without rebuilding images. 
+
+6. IPv4 & IPv6 DUAL PACK: Kubernetes assigns both IPv4 and IPv6 addresses to Pods and Services.
+
+7. BATCH EXECUTION: Kubernetes manages batch and continuous integration workloads and automatically replaces failed containers.
+
+8. SELF-HEAL: It self-heals failing or unresponsive containers. 
+
+9. LOAD BALANCING:  It discovers Pods using IP addresses or a DNS name, and load balances traffic for better performance and high availability.
+
+9. ADDING FEATURES: Kubernetes adds features to your cluster without modifying source code.
+
+
+KUBERNETES ECO-SYSTEM
+======================
+
+The Kubernetes ecosystem includes public cloud providers, frameworks, management, tools, monitoring and logging, security, and load balancing.
+
+
+CLUSTER
+========
+
+Control plane + Nodes
+
+Worker nodes are the VMs or servers where the application is running
+Control plane which is previously known as master node manages the worker nodes using kubeCTL(CLI).
+
+
+Controllers
+============
+
+Controllers ensure that your desired state is always met. There are various kind of controllers e.g. deployment controller. 
+
+
+Architecture of Control Plane
+==============================
+
+Control plane is collections of various components that helps us in managing the overall health of the cluster. 
+Whatever you want to do is managed by control plane e.g. create pods, scale pods, delete pods etc. 
+Control plane consists of:
+
+1. API server: kube CTL communicates with the api server. It recieves YAML files (manifest files) over https which contain instructions.
+               It listens at https port 443
+
+2. Etcd: Its a database which stores the info about the cluster. 
+
+3. Controller manager: Its like a manager for controllers. It has four functionalities
+
+       1. Desired State: e.g. I want to run 4 pods all the time. 
+       2. Current State: e.g. I said 4 pods should be running but only 3 are running. 
+       3. Differences: Constantly listens to the api server for the changes.
+       4. Make the changes
+     
+4. Scheduler: This schedule the desired tasks to worker nodes. 
+
+2,3,4, all interact with the API server. 
+
+
+Architecture of Worker nodes
+==============================
+
+1. Kube proxy: Responsible for networking. Communicating with outside network. e.g it will provide unique ip address to worker nodes.
+               Maintain network rules that allow communication to pods. This communication can come from within or outside of cluster. 
+
+2. Kubelet: Interacts with the API server of control plane and execute tasks. 
+
+3. Container Runtime: Download images and run containers. Docker is a well known runtime. 
+
+1,2 communicates with API Server of control plane. Kubelet also communicates with container runtime.
+
+
+OBJECTS
+========
+
+
+OBJECT: In the real world, an object is something that has an identity, a state, and a behavior. A window or a shopping cart are examples of objects.
+        A software object is a bundle of data that has an identity, a state, and a behavior. Examples include variables, data structures, and specific functions. 
+
+ENTITY: Another term is “entity,” which also has an identity and associated data. For example, in banking, a customer account is an entity.
+
+PERSISTENT: It means something will last even if there is a server failure or network attack.
+            An example is persistent storage. Kubernetes objects are persistent entities.  Examples include: Pods, Namespaces, ReplicaSets, Deployments, and more.
+
+KUBERNETES OBJECTS: Kubernetes objects consist of two main fields - object spec and status. 
+                    The object spec is provided by the user which dictates an object’s desired state. 
+                    Status is provided by Kubernetes. This describes the current state of the object.
+                    Kubernetes works towards matching the current state to the desired state.
+
+LABELS: Labels are key/value pairs attached to objects. They are intended for identification of objects. 
+        However, a label does not uniquely identify a single object. Many objects can have the same labels. This helps to organize and group objects. 
+        Label selectors are the core grouping method in Kubernetes. They allow you to identify a set of objects.
+
+NAMESPACES: Namespaces provide a mechanism for isolating groups of resources within a single cluster. 
+            This is useful when teams share a cluster for cost-saving purposes or for maintaining multiple projects in isolation.
+            Namespaces are ideal when the number of cluster users is large. 
+            Examples of namespaces are kube-system, intended for system users and the default namespace used to hold users’ applications. 
+
+POD:  It is a scheduling unit. A Pod is the simplest unit in Kubernetes. A Pod represents a process or a single instance of an application running in the cluster.
+      A Pod usually wraps one or more containers. Creating replicas of a Pod serves to scale an application horizontally. 
+
+YAML FILES:  YAML files are often used to define the objects that you want to create. 
+
+REPLICASETS: Create and manage horizontoally scaled running pods. It enables scaling by creating or deleting pods.
+             It always tries to match the actual state to the desired state. Can be created using CLI or YAML.
+             It is recommended to first create deployment and then scale the deployment using replicaset rather creating standalone replicaset. 
+             kubectl scale deploy hello-kubernetes --replicas=3
+
+DEPLOYMENT: Provide updates for pods and replicasets.
+
+SERVICE: Is a REST object. Provide policies for accessing pods and cluster. Assigns unique IP address to pods for accessability. 
+
+         Why service is needed?
+         -----------------------
+ 
+         A service is needed because Pods in a cluster can be destroyed and new Pods can be created at any time. 
+         This volatility leads to discoverability issues because of changing IP addresses.
+         A Service keeps track of Pod changes and exposes a single IP address or a DNS name and utilizes selectors to target a set of Pods. 
+         For native Kubernetes applications, API endpoints are updated whenever changes are detected to the Pods in the Service. 
+         For Non-native applications, Kubernetes uses a virtual-IP-based bridge or load balancer in between the applications and the backend Pods. 
+
+         Service Types:
+         ---------------
+
+         1. ClusterIP: ClusterIP is the default and most common service type. Kubernetes assigns a cluster-internal IP address to the ClusterIP Service 
+                       that makes the Service only reachable within the cluster. A ClusterIP service cannot make requests to Service from outside the cluster.
+                       You can set the ClusterIP address in the Service definition file. 
+                       For example, communication between the front-end and back-end components of your app.
+
+         2. NodePort:  An extension of ClusterIP Service, a NodePort Service creates and routes the incoming requests automatically to the ClusterIP Service. 
+
+         3. External Load Balancer(ELB): An extension of the NodePort Service, an External Load Balancer, or ELB, creates NodePort and ClusterIP Services automatically.
+                                         An ELB integrates and automatically directs traffic to the NodePort Service. 
+                                         To expose a Service to the Internet, you need a new ELB with an IP address. 
+                                         You can use a cloud provider’s ELB to host your cluster. 
+
+         4. External Name: The External Name Service type maps to a DNS name and not to any selector and requires a `spec.externalName` parameter. 
+                           The External Name Service maps the Service to the contents of the externalName field that returns a CNAME record and its value. 
+                           You can use an External name to create a Service that represents external storage
+                           and enable Pods from different namespaces to talk to each other. 
+
+
+INGRESS: Ingress is an API object that, when combined with a controller,
+         provides routing rules to manage external users’ access to multiple services in a Kubernetes cluster.
+         In production, Ingress exposes applications to the Internet via port 80 (for HTTP) or port 443 (for HTTPS) 
+
+DAEMONSET: DaemonSet is an object that makes sure that Nodes run a copy of a Pod. As nodes are added to a cluster, Pods are added to the nodes. 
+           If you delete a DaemonSet, all Pods are removed. DaemonSets are ideally used for storage, logs, and monitoring nodes. 
+
+STATEFULSET:  A StatefulSet is an object that manages stateful applications, manages deployment and scaling of Pods,
+              and provides guarantees about the ordering and uniqueness of Pods.
+              A StatefulSet maintains a sticky identity for each Pod request and provides persistent storage volumes for your workloads. 
+
+JOBS: A job creates Pods and tracks the Pod completion process. Jobs are re-tried until completed. Deleting a job will remove the created Pods.
+      Suspending a Job will delete its active Pods until the job resumes. A job can run several Pods in parallel.
+      And a CronJob is regularly used to create Jobs on an iterative schedule.
+
+
+
+NODE STRUCTURE
+===============
+
+Worker node which is a server, contains container runtime which contains POD which contains container. 
+
+
+
+How to work with Kubernetes?
+==============================
+
+1. Create microservices. Divide your various application components into separate parts. 
+
+2. Containerize it. Add each microservice into container. 
+
+3. Put every container in pods. 
+
+4. Deploy these pods to controlers. 
+
+
+COMMANDS
+=========
+
+
+Structure:
+-----------
+
+kubectl [command] [type] [name] [flags]
+
+
+Imperative commands: 
+--------------------
+
+Create, update & delete live objects directly.
+kubectl run nginx --image nginx
+
+
+Imperative object configuration: 
+---------------------------------
+
+Uses templates to ensure proper deployment.
+kubectl create -f nginx.yaml
+
+
+Declarative commands or Declarative object configuration: 
+----------------------------------------------------------
+
+ -Stores configuration data in files.
+ -Operations are identified by kubectl, not the user.
+ -Works on individual files or directories.
+ -kubectl apply -f nginx/
+
+
+1. minikube start : This will set up cluster with one node.
+
+2. minikube stop
+
+3. minikube delete
+
+4. minikube status
+
+5. kubectl get pods
+
+6. kubectl get nodes
+
+7. minikube dashboard
+
+8. minikube docker-env
+
+9. docker container ls : Shows containers required by kubernetes.
+
+10. minikube ssh : inside minikube then run docker ps : This will show all the containers running inside minikube.
+
+11. kubectl config view : This shows info about cluster.
+
+12. kubectl config current-context : This will show current content e.g minikube
+
+13. kubectl get all: Shows all the pods, services, deployments. 
+
+14. kubectl delete pod pod id 
+
+15. kubectl get deployments 
+
+16  kubectl delete deployments deployment id
+
+17. kubectl port-forward nginx-pod 8080:80 : Whenever I go to port 8080 of my local host rout it to port 80 of nginx.
+
+
+Steps for creating Pod
+=======================
+
+1. First create yamil file e.g pod.yamil
+
+2. kubectl create -f pod.yamil
+
+
+AUTOSCALING
+============
+
+ReplicaSets provide a good start for scaling, but you don’t always want 10 instances of your resource running. 
+You should be able to scale as needed. Kubernetes autoscaling helps optimize resource usage and costs by automatically scaling a cluster in line with demand. 
+Kubernetes enables autoscaling at two different layers: the cluster or node level and the pod level. 
+
+TYPES:
+
+1. Horizontal Pod Autoscaler (or HPA): It increases or decreases the number of pods. 
+
+2. Vertical Pod Autoscaler (or VPA): It increases or decreases the resource size or speed of the pods. 
+                                     For example, increasing resouce size  e.g cpu from 4 to 8 or memory from 10 GB to 18 GB. 
+
+3. Cluster Autoscaler (or CA): It adjusts the number of nodes in a cluster in relation to the increase or decrease in demand. 
+
+kubectl autoscale deploy hello-kubernetes --min=2 --max=5 --cpu-percent=50 (create a new pod when cpu usage reaches 50% across cluster)
+
+
+ROLLING UPDATES
+================
+
+These are automated updates that runs on scheduled basis. 
+
+STEPS:
+
+1. Add livenessprobe  and readinessprobe to your deployments.
+
+2. Add a rolling update strategy to YAML file.
+
+
+OPENSHIFT
+==========
+
+1. Openshift runs on top of kubernetes cluster, with object data stored in etcd. It has microservices based architecture. 
+
+2. Docker provides the abstraction for lightweight linux based container images.
+
+3. Kubernetes provides cluster management & container orchestraction on multiple hosts. 
+
+4. Openshift adds: 
+
+   1. Source code management, builds & deployments for developers.
+   2. Managing & promoting images at scale.
+   3. Application management at scale.
+   4. Team & user tracking management. 
+
+5. In Openshift environment Kubernetes runs on Red Hat Enterprise Linux CoreOS
+   Openshift consists of following components or services:
+   
+   1. Cluster services : e.g networking, registry, router, monitoring etc.
+   2. Platform services : Help users manage their workloads & includes serverless builds, CI/CD pipelines, Full-Stack logs etc
+   3. Application services : Help users build cloud native apps & includes databases, runtimes, languages, Business automation etc
+   4. Developer services : Increases developer productivity & includes developer CLI, VS code extentions, IDE plugins etc.
+
+6. Openshift offers CLI known as os, since Openshift runs on top of Kubernetes, a copy of kubectl is also included with oc.
+   But oc offers extra features such as DeploymentConfigs, BuildConfigs, Routes, ImageStreams and ImageStreamTags. 
+   And additional commands like ‘new-app’ are also supported by oc, which makes it easier to get new applications started using existing source code or prebuilt images. 
+
+
+BUILD
+======
+
+1. A Build is the process of transforming inputs into an object. For example, transforming source code to a container image.
+
+2. A Build requires a build configuration file (or BuildConfig), which defines the build strategy and input sources.
+
+3. Commonly used Build strategies are: Source-to-Image (S2I), Docker, and Custom.
+
+4. A build input source provides content for builds. You can use the following build inputs, listed in order of precedence:
+   Inline Dockerfile definitions, Content extracted from existing images, Git repositories, Binary (or Local) inputs, Input secrets, and External artifacts.
+
+5. Note that multiple inputs can be combined into a single build. And, an inline Dockerfile takes precedence and overwrites any external Dockerfile.
+
+
+IMAGESTREAM
+============
+
+1. An ImageStream is an abstraction for referencing container images within OpenShift.
+
+2. An ImageStream continuously creates and updates container images, but does not contain actual image data.
+   Instead, it points to images stored in internal and external registries, or to other ImageStreams.
+
+3. A single ImageStream can consist of many different tags such as latest, dev and test. And each tag points to a certain image in a registry. 
+
+4. To deploy an application, you’ll refer to the image stream tag rather than hardcode the registry URL and tag. 
+
+5. If the source image location changes, you’ll update the image stream definition, rather than individually updating all the deployments.
+
+6. An ImageStream also provides a trigger capability that automatically invokes builds and deployments when a new version of an image is available. 
+   Rather than running builds manually, we can automate the process using triggers: 
+
+   1. Webhook triggers: Send a request to an API endpoint. And they also support generic webhooks and the more often used GitHub webhooks 
+                        which send the trigger request to the API endpoint on any new commit or a pull request or other circumstances. 
+
+   2. Image change trigger: Triggers builds when a new version of an image is available. 
+                            For instance, if you build your application using a Node.js base image, that image is updated when security fixes are released, and other updates occur. 
+
+   3. Configuration change trigger: Causes a new build to run when you create a new BuildConfig resource. 
+
+
+OPERATOR
+=========
+
+1. Operators automate cluster tasks and act as a custom controller to extend the Kubernetes API. 
+   Operators use CRDs and custom controllers to automate cluster tasks
+
+2. Operators run in a Pod and interact with the API server, package, deploy, and manage Kubernetes applications, 
+   and automate app creation, configuration, and management via continuous real-time decisions.
+
+3. Operators provide: 
+
+   1. Ease of repeatable installation and upgrade processes. 
+   2. Regular full-system health checks of each component in the system. 
+   3. Over-the-air (or OTA) updates for components and software vendors’ content. 
+   4. A way to collect and spread knowledge from field engineers to all users.
+   5. And integration with APIs and CLI tools, such as kubectl and oc commands. 
+
+4. Custom resource definitions(CRD) stores and retrieves objects in Kubernetes API.
+
+5. CRDs extend Kubernetes functionality beyond built-in resources like Deployments and Pods. 
+
+6. They make the Kubernetes API more modular and flexible.
+
+7. Users can install CRDs in clusters, but each CRD is available only in the cluster it is installed. 
+
+8. Once installed, CRD objects are accessible using kubectl, similar to pods and other resources. 
+
+9. Custom controllers are used to change the state of cluster. Controllers match a cluster’s actual state with its configured state. 
+   Custom controllers do the same reconciling for custom resources.
+
+10. Combining CRDs and custom controllers creates a declarative API. This combination is known as "The Operator Pattern".
+
+11. Custom controllers interpret CRD data as the desired state and match a cluster’s actual state to the CRD data.
+
+
+OPERATOR FRAMEWORK
+-------------------
+
+
+12. The Operate Framework is an open-source toolset that covers coding, testing, delivery, and Operator updates. 
+
+13. The Operator SDK (which includes Helm, Go, and Ansible) helps authors build, test, and package their Operators without requiring knowledge of Kubernetes API complexities. 
+
+14. The Operator Lifecycle Manager (or OLM) controls the install, upgrade, and role-based access control (or RBAC) of Operators in a cluster. 
+
+15. The Operator Registrystores CRDs, cluster service versions (or CSVs), and Operator metadata for packages and channels. 
+    It runs in Kubernetes or OpenShift clusters to provide the Operator catalog data to OLM.
+
+16. The OperatorHub web console lets cluster administrators find Operators to install on their cluster. 
+
+17. Operator Maturity Model: 
+
+    The sophistication of Operator management logic varies depending on the type of service represented by the operator.
+
+    Level-1: Basic Install    
+    Level-2: Seamless Upgrades
+    Level-3: Full Lifcycle
+    Level-4: Deep Insights
+    Level-5: Auto Pilot
+
+    Level-1 & Level-2 is provided by Helm & all Levels are provided by Ansible & Go.
+
+18. Operator Examples:
+
+    1. Deploying an application to the OpenShift cluster. This can go beyond deployments to include Secrets, ConfigMaps, and storage resources.
+
+       To deploy a whole application: 
+
+       Create a custom resource(CRD) for that app. And then a custom controller for that CRD.
+       The Operator logic determines how to reconcile the actual and configured states. 
+       A CRD requires the creation of deployments, services, storage, and other objects. 
+       The OperatorHub view of the OpenShift web console enables operator installation with one click. 
+       OperatorHub has many different types of Operators available,
+       including: Red Hat Operators, Certified Operators from independent service vendors partnered with Red Hat, 
+       Community Operators from the open-source community but not officially supported by Red Hat, And custom Operators defined by users.
+       You can install many tools from the Kubernetes ecosystem via the OperatorHub. An example is the Istio service mesh.
+
+    2. Scaling the application with the help of multiple replicas based on the application type. 
+
+    3. Automation of rote tasks in a cluster, like taking and restoring back-ups of an application’s state.
+
+
+ISTIO
+======
+
+
+SERVICE MESH:
+=============
+
+1. A service mesh is a dedicated layer for making service-to-service communication secure and reliable.
+
+2. Service meshes provide traffic management, security & observability (of service behavior to troubleshoot and optimize applications).
+   
+3. The “Service mesh” term describes the software that creates a security or network domain with the pattern for achieving the above capabilities. 
+
+4. Istio is a platform-independent service mesh often used on Kubernetes.
+
+
+ISTIO FUNCTIONS
+================
+
+Istio exhibits these four concepts:
+
+1. Connection to control traffic
+
+2. Secures services
+
+3. Enforces policies
+
+4. Observes (traffice flow)
+    
+
+HOW ISTIO WORKS WITH MICROSERVICES?
+====================================
+
+1. There are two main components in Istio, the control plane and the data plane. 
+
+2. The control plane takes the desired configuration and dynamically programs and updates the proxy servers as the environment changes.
+   Communication between services is handled by the data plane. 
+
+3. If a service mesh is absent, the network cannot identify the type of traffic that flows, the source, or the destination and cannot make necessary decisions.
+
+4. All network traffic is intercepted by, a proxy, called Envoy proxy(which is present in every service), 
+   which is used by the service mesh(ISTIO), and allows many features depending on the configuration.
+
+5. The control plane takes the desired configuration and its view of the services and dynamically programs and updates the proxy servers as the environment changes.
+
+6. Consider the application architecture in which the UI talks to an ordering microservice. 
+   The ordering microservice interacts with the Inventory microservice, which then talks to a database. 
+   Service-to-service communication enables any microservices architecture, but as that communication gets more complex, a service mesh can help improve it.
+
+7. Istio performs traffic shifting by gradually migrating the traffic from one version of a microservice to other versions.
+
+8. The team begins by sending 5 percent of traffic to that second version. And over time, the team can increase this to 50 percent and eventually to 100 percent.
+   Similarly, Istio request routing allows you to perform A/B tests and direct a particular version of a microservice to a subset of users
+   while sending the original version to the remaining users. The process ensures that a new version increases user engagement or performance. 
+
+9. Istio defends from man-in-the-middle attacks by encrypting traffic between microservices. 
+
+10. Istio makes it easy to implement policies for service access control so that services can only talk to the other required services.
+    In above example, the UI service would be unable to directly communicate with the Inventory service, even if it tried. 
+
+11. Istio provides service communication metrics. These metrics cover the four basic service monitoring needs: latency, traffic, errors, and saturation. 
+    For example, Istio provides metrics on request counts so that you can see how much traffic your requests are receiving and request duration, 
+    so that you can find bottlenecks and ensure that there are prompt responses.
+
+12. Istio is a service mesh that supports four concepts of connection, security, enforcement, and observability. It is commonly used with Microservices applications. 
+
+
+
+
+#NOTE: Check Lens tool video by KK. Other tools kubescape, kubeshop(monokle), datree
+
+
+
+
+
+
+

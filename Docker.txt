@@ -1,0 +1,173 @@
+DOCKER
+=======
+
+Docker is a tool which helps to create containers, manage containers & scale containers.
+
+Docker contains few parts:
+
+1. Runtime: The role of runtime is to start and stop the container. It is of two types 
+
+            1. run c : It works with the os and starts and stops the container. This is low level process 
+            2. container d : Its role is to manage run c. How to interact container with the internet e.g. pulling the images etc. This is high level process. 
+
+2. Engine : This is we(client) use to interact with the docker(daemon or host process). Client communicates with daemon via docker CLI using APIs. 
+
+3. Orchestration: This allows us to manage containers. e.g. to update app from version1 to version2 in all the containers.           
+
+
+DOCKERFILE
+===========
+
+It is a list of instructions for creating an image. Contains all the info for running your software in base container.
+It is a plain text file. This is used to create custom docker image. 
+
+Docker file to image process flow -  Docker file -> Docker Client -> Docker Server -> Usable Image -> Container
+----------------------------------
+
+HOW TO CREATE A CUSTOM IMAGE
+=============================
+
+1. Choose a base image. 
+2. Run commands for your software.
+3. Specify base command to be run on startup. 
+
+Commands -
+
+Create a file naming Dockerfile and write the below code in it. 
+
+1. FROM Alpine - Create a base image of alpine. 
+
+2. RUN apk add --update redis - Run redis in it. This will change the fs snapshot 
+
+3. CMD ["redis-server"] - This will set the base command which will run on startup. It means run this executable command when the container has started. 
+
+                          Then run docker build . or docker build -t myimage:v1 . command and it will generate custom image, myimage is the name if image. 
+                          
+ 			  Then run docker run myimage:v1 command to for creating the container. 
+
+
+IMAGE
+======
+
+An immutable file that contains the source code, libraries, and dependencies that are necessary for an application to run. 
+Images are templates or blueprints for a container. Immutability means, Images are read-only; if you change an image, you create a new image.
+
+1. Read only template with instruction for creating docker container.
+
+2. Built using instructions in a Dockerfile. A new read only image layer is created for each instruction.
+
+3. When you change the Dockerfile and rebuild the image, the Docker engine only rebuilds the changed layers.
+   Images can share these layers, which saves a lot of disk space as well as network bandwidth when sending and receiving images.
+
+4. When you instantiate this image, you get a running container. At this point, a writeable container layer is placed on top of the read-only layers.
+   The writeable layer is needed because containers are not immutable as images. 
+
+5. Images contain os files as well, which are required to run the main application. 
+
+6. Container image naming: hostname/repository:Tag; docker.io/ubuntu:18.04
+
+   The hostname identifies the image registry.. A repository is a group of related container images. 
+   The tag provides information about a specific version or variant of an image.
+   Consider the image name docker.io/ubuntu:18.04. The hostname docker.io refers to the Docker Hub registry.
+   When using the Docker CLI, you can exclude the docker.io hostname.
+   The repository name ubuntu indicates an Ubuntu image. Finally, the tag, shown here as 18.04, represents the installed Ubuntu version.
+
+Image consist of: 
+
+file system snapshot + startup command 
+
+
+CONTAINER
+==========
+
+1. A container is a unit of software that encapsulates everything needed to build, ship, and run applications.  
+
+2. Docker architecture consists of the Docker client, the Docker host, and the container registry. 
+
+3. The Docker host contains objects such as the Dockerfiles, images, containers, networks, storage volumes, and other objects, such as plugins and add-ons. 
+
+4. Docker is an open platform used for developing, shipping, and running applications as containers. 
+
+5. Containers lower deployment time and costs, improve utilization, automate processes, and support next-gen applications (microservices). 
+   Major container vendors include Docker, Podman, LXC, and Vagrant. 
+
+6. Docker containers are not a good fit for applications based on monolithic architecture or applications that require high performance or security. 
+
+
+COMMANDS
+=========
+
+docker ps or docker images - This will show all the containers which are running presently.
+
+docker ps --all - This will show all the containers which are presently running as well as which were running previously and now stopped. 
+
+docker logs container id - This will return logs in the container. To get to know whats happening inside a container.
+
+docker stop container id - This will stop the container from running. 
+
+docker kill container id - To kill the container process.
+
+docker exec -i -t container id sh - The sh will open terminal inside container. -i will attach the command inside the container. -t will format the display. 
+
+docker run -it ubuntu: 16.04 - This will open terminal inside ubuntu. it means interactive environment.
+
+docker container ls - This will also show list of all containers.
+
+docker container exec -it continer id bash - This will attach & open the bash shell inside the container. 
+
+docker ps -a - This will show all the containers that are stopped.
+
+docker rm container id - This will remove the container. 
+
+docker inspect continer id - This will show all the info about the container.
+
+docker container prune -f - Delete all the containers that are stopped. 
+
+docker run -d alpine ping www.google.com - This will run alpine and ping google in the background. d means detach mode. 
+
+docker logs --since 5s container id - This will show logs for past 5 secs. 
+
+docker run -d -p 8080:80 nginx - This will run the app on the port on the computer. Whatever the traffic is coming to nginx inside the container, forward all the 
+                                 requests coming to the localhost 8080 to inside container's port 80. 
+
+docker commit -m "added names.txt file" container id names_ubuntu:1.01 - This will create a new image by name of names_ubuntu.
+
+	In the above command, first we have run ubuntu container and then created a file names.txt and written some text in it.
+	Now we want to create an image of it so that we can share with others.
+
+docker images -q - This will show all the container ids. 
+
+docker rmi $(docker images -q) - This will remove all the images. 
+           
+
+DOCKER RUN 
+===========
+
+docker run = docker create + docker start
+
+docker create - This will create the container but will not start it. This will return a hash string. 
+
+docker start -a  - This will execute the container and display the output of the container. 
+		   -a means attach to the container and give container's output to my terminal. 
+
+
+TAGGING IMAGES
+===============
+
+docker build -t larry/redis:latest .  - Here -t means we want to add a tag. Larry is the docker username. Redis is the image name. Latest refers to version details.  
+
+docker run larry/redis - This will run the image which is created in above step. 
+
+
+DOCKER OBJECTS
+===============
+
+1. Docker contains objects such as Dockerfile, image, container, network, storage, plugins and add-ons.
+
+2. Network: are used for isolated network communications. 
+
+3. Storage: By default, data doesn’t persist when the container no longer exists. Docker uses volumes and bind mounts to persist data even after a container stops.
+
+4. Plugins: such as storage plugins, provide the ability to connect to external storage platforms.
+
+

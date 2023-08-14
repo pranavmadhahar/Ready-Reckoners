@@ -1,0 +1,775 @@
+CLOUD COMPUTING 
+
+
+CHARACTERSTICS
+----------------
+
+1. On demand self service
+
+You get access to cloud resources such as processing power, storage and network you need,
+using a simple interface, without requiring human intervention with each service provider.
+
+2.Broad network access
+
+Cloud computing resources can be accessed via the network through standard mechanisms and platforms
+such as mobile phones, tablets, laptops and workstations. 
+
+3.Resource Pooling
+
+Is what gives cloud providers ecomomies of sacle, which they pass on to their customers.
+Making cloud cost efficient. Resources dynamically assigned based on demand.
+
+4. Rapid Elasticity
+
+You can access more resources when you need them and scale back when you don't.
+
+5. Measured Service
+
+You pay for what you use or reserve as you go.
+Resource usage is monitored, measured & reported transparently based on utilization. 
+
+
+CLOUD DEPLOYMENT MODELS
+-------------------------
+
+1. Public 
+
+leverage cloud services over the open internet on hardware owned by the cloud provider.
+But its usage is shared by other companies. 
+
+2. Private
+
+The cloud infrastructure is provisioned for exclusive use by a single organisation.
+It could run on-premises or it could be owned, managed, and operated by a service provider. 
+
+3. Hybrid
+
+Mix of both public and private clouds. Working together seamlessly. 
+
+
+CLOUD SERVICE MODELS
+----------------------
+
+1. Infrastructure as a service (IaaS)
+
+You get access to infrastructure and physical computing resources e.g. servers, networking, storage & data center space.
+Without the need to manage or operate them. 
+
+
+2. Platform as a service (Paas)
+
+You get access to the platform, i.e the hardware & software tools, 
+Usually those needed to develop and deploy applications to users over the internet. 
+
+
+3. Application as a service (SaaS)
+
+It is a software licencing and delivery model in which software and applications are centrally hosted. 
+and licensed on a subscription basis, and sometimes also referred to as 'on-demand software'.
+
+
+KEY DRIVERS FOR MOVING TO CLOUD
+----------------------------------
+
+1. Agility
+
+2. Flexibility
+
+3. Competitiveness
+
+
+KEY CONSIDERATIONS FOR MOVING TO CLOUD
+-----------------------------------------
+
+1. Infrastructure and Workloads
+
+The cost of building and operating data centers can become astronomical.
+On the other hand, low initial costs and pay-as-you-go attributes of cloud computing can add up to significant cost savings.
+Also, a point to consider is that not all workloads may be ready for the cloud, as is. 
+
+2. SaaS and development platforms
+
+Organizations need to consider if paying for application access is a more viable option than purchasing off-the-shelf software and subsequently investing in upgrades.
+
+3. Speed and productivity
+
+What it means for them to get a new application up and running in ‘x’ hours on the cloud versus a couple of weeks, even months on traditional platforms.
+And the person-hour cost efficiencies they gain from using cloud dashboards, real-time statistics, and active analytics.
+
+4. Risk exposure
+
+Lastly, organizations need to consider the impact of making a wrong decision, their risk exposure. 
+Is it riskier, for example, for them to invest in the hardware and software or rent by the hour? 
+Is it safer for them to work on a 12-month plan to build, write, test, and release the code if they’re uncertain about adoption?
+And is it better for them to “try” something new paying-as-you-go rather than making long-term decisions based on little or no trial or adoption?
+
+
+BENEFITS OF CLOUD ADOPTION
+-----------------------------
+
+1. Flexibility
+
+Efficiency, and Strategic Value. Cloud gives us flexibility. 
+Users can scale back or scale up services to fit their needs, customize applications, and access cloud services from anywhere with an internet connection. 
+Cloud infrastructure scales on demand to support fluctuating workloads. Organizations can determine their level of control with as-a-service options. 
+Users can select from a menu of pre-built tools and features to build a solution that fits their specific needs.
+And Virtual Private Clouds, encryption, and API keys help keep data secure.
+
+2. Efficiency
+
+Enterprise users can get applications to market quickly without worrying about underlying infrastructure costs or its maintenance.
+Cloud-based applications and data are accessible from virtually any internet-connected device.
+Hardware failures do not result in data loss because of networked backups.
+Cloud computing uses remote resources, saving organizations the cost of servers and other equipment, and paying on use-basis.
+
+3. Competitive Advantage
+
+Cloud services give enterprises a competitive advantage by providing the most innovative technologies available while managing the underlying infrastructure, 
+thus enabling organizations to focus on their priorities. While cloud brings great opportunity.
+
+
+CHALLANGES OF CLOUD ADOPTION
+-------------------------------
+
+1. Data security, associated with loss or unavailability of data causing business disruption.
+
+2. Governance and sovereignty issues.
+
+3. Legal, regulatory, and compliance issues.
+
+4. Lack of standardization in how the constantly evolving technologies integrate and interoperate.
+
+5. Choosing the right deployment and service models to serve specific needs.
+
+6. Partnering with the right cloud service providers.
+
+7. Concerns related to business continuity and disaster recovery.
+
+
+=========================
+CLOUD COMPUTING MODELS
+=========================
+
+
+1. IaaS - Infrastructure as a Service
+
+A form of cloud computing that delivers fundamental compute, network, and storage resources to consumers on-demand, over the internet, on a pay-as-you-go basis.
+The cloud provider hosts the infrastructure components traditionally present in an on-premises data center as well as the virtualization or hypervisor layer.
+Customers can create or provision virtual machines (or VMs) in their choice of Region and Zone available from the Cloud Provider. 
+These VMs typically come pre-installed the customer’s choice of operating system.
+The customers can then deploy middleware, install applications, and run workloads on these VMs. They can also and create storage for their workloads and backups.
+Cloud providers often provide customers the ability to track and monitor the performance and usage of their cloud services and manage disaster recovery.
+key components of cloud infrastructure:
+
+1. Physical data centers
+
+IaaS providers manage large data centers that contain the physical machines required to power the various layers of abstraction on top of them. 
+In most IaaS models, end users do not interact directly with the physical infrastructure but experience it as a service provided to them.
+
+2. Compute
+
+IaaS providers manage the hypervisors and end-users programmatically provision virtual instances with desired amounts of compute, memory, and storage resources.
+Cloud compute typically comes with supporting services like auto scaling and load balancing that provide scalability and high performance.
+
+3. Network
+
+Users get access to networking resources on the cloud through virtualization or programmatically, through APIs.
+
+4. Storage
+
+There are three types of cloud data storage: object, file, and block storage
+Object storage is the most common mode of storage in the cloud, given that it is highly distributed and resilient.
+
+
+
+============
+Use Cases
+============
+
+
+Organizations today are using cloud infrastructure services to enable their teams to set up test and development environments faster, helping create new applications more quickly.
+helping developers focus more on business logic than infrastructure management.
+Business continuity and disaster recovery require a significant amount of technology and staff investments. 
+IaaS is helping organizations reduce this cost and make applications and data accessible as usual during a disaster or outage.
+Organizations are using cloud infrastructure to deploy their web applications faster and also scale infrastructure up and down as demand fluctuates.
+Organizations are leveraging the high-performance computing capabilities of cloud infrastructure to solve complex problems involving millions of variables and calculations such as climate and weather predictions and financial modeling.
+Mining massive data sets to locate valuable patterns, trends, and associations requires a huge amount of processing power.
+Cloud infrastructure not only provides the required high-performance computing but also makes it economically viable.
+
+
+2. PaaS - Platform as a Service
+
+A cloud computing model that provides customers a complete platform to develop, deploy manage, and run applications created by them or acquired from a third-party.
+The PaaS provider hosts everything—servers, networks, storage, operating system, application runtimes, APIs, middleware, databases, and other tools at their data center.
+The provider also takes responsibility for the installation, configuration, and operation of the application infrastructure, leaving the user responsible for only the application code and its maintenance.
+PaaS clouds are distinguished by the high level of abstraction they provide to the users, eliminating the complexity of deploying applications, configuring infrastructure, and provisioning and configuring supporting technologies like load balancers and databases.
+PaaS clouds provide services and APIs that help simplify the job of developers in delivering elastically scalable and highly available cloud applications.
+These services typically include a variety of capabilities such as APIs for distributed caching, queuing and messaging, file and data storage, workload management, user identity, and analytics, thus eliminating the need to integrate disparate components.
+The PaaS runtime environment executes end-user code according to policies set by the application owner and cloud provider.
+Many of the PaaS offerings provide developers with rapid deployment mechanisms, or “push and run” mechanism, for deploying and running applications.
+PaaS offerings support a range of application infrastructure or middleware capabilities, such as application servers, database management systems, business analytics servers, mobile back-end services, integration services, business process management systems, rules engines, and complex event processing systems.
+Such an application infrastructure assists developers by reducing the amount of code that must be written while expanding the application’s functional capabilities. 
+The most important use case for PaaS is strategic—build, test, deploy, enhance, and scale applications rapidly and cost-effectively.
+
+Use Cases
+
+1. API development and management
+2. Internet of Things, or IoT
+3. Business analytics/intelligence
+4. Business Process Management, or BPM
+5. Master data management, or MDM
+
+
+Advantages of using PaaS
+
+1. The APIs, support services, and middleware capabilities that PaaS clouds provide assist developers in focusing their efforts on application development and testing, resulting in faster time to market for their products and services.
+2. Middleware capabilities also reduce the amount of code that needs to be written while expanding the application’s functional capabilities. 
+3. Greater agility and innovation because using PaaS platforms means that you can experiment with multiple operating systems, languages, and tools without having to invest in these resources.
+4. You can evaluate and prototype ideas with very low risk exposure resulting in faster, easier, less-risky adoption of a wider range of resources.
+
+
+Risks
+
+1. PaaS clouds do come with some risks—risks that all cloud offerings have in general, such as information security threats and dependency on the service provider’s infrastructure.
+2. Services can get impacted when a service provider’s infrastructure experiences downtime. 
+3. Customers also don’t have any direct control over the changes that may take place when a provider makes changes in its strategy, service offerings, or tools.
+
+
+3. SaaS - Software as a Service
+
+A cloud offering that provides users with access to a service provider’s cloud-based software.
+SaaS providers maintain the servers, databases, and code that constitute an application.
+They also manage access to the application, including security, availability, and performance. 
+Applications reside on a remote cloud network, and users use these applications without having to maintain and update the infrastructure.
+
+
+Characteristics:
+
+SaaS clouds have a multitenant architecture.
+Infrastructure and code are maintained centrally and accessed by all users.
+SaaS makes it easy for users to manage privileges, monitor data use, and ensure everyone sees the same information at the same time.
+Security, compliance, and maintenance are all part of the offering.
+Users can customize applications to fit their business processes with point-and-click ease.
+Users can customize the UI to work with their branding guidelines; they can modify data fields and enable or disable features within the business process.
+These customizations are preserved through upgrades.
+Users pay for the use of the services via a subscription model.
+The use of resources can be scaled easily, depending on service needs.
+
+
+Key benefits:
+
+Businesses can directly procure solutions without upfront capital and assistance from IT, greatly reducing the time from decision to value from months to days.
+SaaS greatly increases workforce productivity and efficiency.
+Users can access core business apps from wherever they are. 
+They can also buy and deploy apps in minutes, reducing the typical obstacles enterprises have to test the products they they might use.
+Using SaaS applications, individuals and small enterprises can spread out their software costs over time.
+
+
+Use cases 
+
+Organizations are moving to SaaS for their core business needs as part of their strategic transformation to reduce on-premises IT infrastructure and reduce capital expenditure.
+Oragnzaitions are leveraging SaaS to avoid the need for ongoing upgrades, maintenance, and patching, done traditionally by internal IT resources; applications run reliably with minimal input, for example, email servers and office collaboration and productivity tools. 
+Organizations are increasingly opting for SaaS eCommerce Platforms to manage their websites, marketing, sales, and operations.
+With SaaS, organizations are able to take advantage of the resilience and business continuity of the cloud provider. 
+Enterprises are now developing SaaS integration platforms (or SIPs) for building additional SaaS applications, moving SaaS beyond standalone software functionality to a platform for mission-critical applications.
+
+
+Risks
+
+Data ownership and data safety.
+Application access relies on a good internet connection. If you’re not connected, you cannot access the apps.
+
+
+
+===================
+DEPLOYMENT MODELS
+===================
+
+
+Deployment models indicate where the infrastructure resides, who owns and manages it, and how cloud resources and services are made available to users.
+
+1. Public Cloud
+
+In a public cloud model, users get access to servers, storage, network, security, and applications as services delivered by cloud service providers over the internet.
+Using web consoles and APIs, users can provision the resources and services they need.
+The cloud provider owns, manages, provisions, and maintains the infrastructure, renting it out to customers either for a subscription charge or usage-based fee. 
+Users don’t own the servers their applications run on or storage their data consumes, or manage the operations of the servers, or even determine how the platforms are maintained.
+In very much the same way that we consume and pay for utilities such as water, electricity, or gas in our everyday lives, we don’t own any of these cloud resources
+Public clouds offer significant cost savings as the provider bears all the capital, operational, and maintenance expenses for the infrastructure and the facilities they are hosted in.
+It makes scalability as easy as requesting more capacity.
+However, with a public cloud, the user does not have any control over the computing environment and is subject to the performance and security of the cloud provider’s infrastructure.
+
+
+Characteristics 
+
+A public cloud is a virtualized multi-tenant architecture enabling tenants or users to share computing resources, residing outside their firewalls.
+The cloud providers pool of resources, including infrastructure, platforms, and software, are not dedicated for use by a single tenant or organization.
+Resources are distributed on an as-needed basis offered through a variety of subscription and pay-as-you-go models.
+
+Benefits
+
+Vast on-demand resources are available, allowing applications to respond seamlessly to fluctuations in demand. 
+Considering the large number of users that share the centralized cloud resources on-demand, the public cloud offers the most significant economies of scale. 
+The sheer number of server and network resources available on the public cloud means that a public cloud is highly reliable.
+If one physical component fails, the service still runs unaffected on the remaining available components.
+
+Risks
+
+Security and data sovereignty compliance. 
+Security issues such as data breaches, data loss, account hijacking, insufficient due diligence, and system and application vulnerability seem to be some of the fears users continue to have concerning security in the public cloud.
+With data being stored in different locations and accessed across national borders, it has also become increasingly critical for companies to be compliant with data sovereignty regulations governing the storage, transfer, and security of data.
+A service provider’s ability to not just keep up with the regulations, but also the interpretation of these regulations, is a concern shared by many businesses.
+
+Use Cases
+
+Organizations are increasingly opting to access cloud-based applications and platforms so their teams can focus on building and testing applications, and reducing time-to-market for their products and services.
+Businesses with fluctuating capacity and resourcing needs are opting for the public cloud. 
+Organizations are using public cloud computing resources to build secondary infrastructures for disaster recovery, data protection, and business continuity. 
+More and more organizations are using cloud storage and data management services for greater accessibility, easy distribution, and backing up their data.
+IT departments are outsourcing the management of less critical and standardized business platforms and applications to pubic cloud providers.
+
+
+2. Private Cloud 
+
+Cloud infrastructure provisioned for exclusive use by a single organization comprising multiple consumers, such as the business units within the organization.
+It may be owned, managed, and operated by the organization, a third party, or some combination of them, and it may exist on or off premises. 
+Private cloud platforms can be implemented internally or externally.
+When the platform is provisioned over an organization’s internal infrastructure, it runs on-premises and is owned, managed, and operated by the organization. 
+When it is provisioned over a cloud provider’s infrastructure, it is owned, managed, and operated by the service provider. 
+This external private cloud offering that resides on a cloud service provider’s infrastructure is called a Virtual Private Cloud, or VPC.
+A VPC is a public cloud offering that lets an organization establish its own private and secure cloud-like computing environment in a logically isolated part of a shared public cloud.
+Using a VPC, organizations can leverage the dynamic scalability, high availability, and lower cost of ownership of a public cloud, while having the infrastructure and security tailored to the organization’s unique needs.
+A private cloud is a virtualized environment modeled to bring in the benefits of a public cloud platform without the perceived disadvantages of an open and shared public platform. 
+Users of a private cloud, such as Developers and Business Units in an organization, still get to leverage benefits such as economies of scale, granular scale, operational efficiencies, and user self-service, 
+while exercising full control over access, security, and compliances specific to their organization and business.
+
+
+Benefits
+
+The ability to leverage the value of cloud computing using systems that are directly managed or under perceived control of the organization’s internal IT.
+The ability to better utilize internal computing resources, such as the organization’s existing investments in hardware and software, thereby reducing costs. 
+Better scalability through virtualization and “cloud bursting,” i.e., leveraging public cloud instances for a period of time but returning to the private cloud when the surge is met. 
+Controlled access and greater security measures customized to specific organizational needs.
+The ability to expand and provision things in a relatively short amount of time, providing greater agility. 
+Organizations may choose to opt for private cloud because of various reasons—because their applications provide a unique competitive advantage, there are security and regulatory concerns, or because the data is highly sensitive and subject to strict industry or governmental regulations.
+
+
+Use cases
+
+A private cloud is an opportunity for organizations to modernize and unify their in-house and legacy applications.
+Moving these applications from their dedicated hardware to the cloud also allows them to leverage the power of the compute resources and multiple services available on the cloud. 
+Using the private cloud, organizations are integrating data and application services from their existing applications with public cloud services.
+Application portability is a key feature of cloud platforms. Using the private cloud gives organizations the ability to build applications anywhere, and move them anywhere, without having to compromise security and compliance in the process.
+Some of the key reasons that may prevent an organization from moving to a public cloud include security and regulatory concerns, and data sensitivity.
+A private cloud offers these organizations the benefits of on-demand enterprise resources while exercising full control over critical security and compliance issues from within the environment of their dedicated cloud.
+
+
+
+======================
+CLOUD INFRASTRUCTURE
+======================
+
+
+
+1. Virtual Machines (VM) :
+
+Simply put, virtualization is the process of creating a software based, or virtual, version of something, whether that be compute, storage, networking, servers, or applications
+and what makes virtualization feasible, is something called the hypervisor.
+What a hypervisor is, is it's simply a piece of software that runs above the physical server, or host. 
+What they do is essentially pull the resources from the physical server and allocate them to your virtual environments.
+
+There are two main types of hypervisors out there.
+
+A Type 1 hypervisor is a hypervisor that is installed directly on top of the physical server. They're also called bare-metal hypervisors.
+Remember these are the most frequently typed of use hypervisors and they're most secure, they lower the latency, and these are the ones that you'll see in the market the most
+
+Type 2 hypervisor, over here. And what makes these different is that there is a layer of host OS that sits between the physical server and the hypervisor.
+So, by that nature they are also called, Hosted. 
+These are a lot less frequent. They're mostly used for end-user virtualization 
+They have a higher latency than a Type 1 hypervisor.
+
+A VM is simply a software based computer. They're run like a physical computer. 
+They have an operating system and applications, and they're completely independent of one another,
+but you can run multiple of them on a hypervisor and the hypervisor manages the resources that are allocated to these virtual environments from the physical server.
+
+So, because they're independent you can run different operating systems on different virtual machines.
+
+You can move a virtual machine from one hypervisor to another hypervisor on a completely different machine almost instantaneously, 
+which gives you a lot of flexibility and a lot of portability within your environment. 
+
+
+Benefits
+
+Cost savings. When you think about this and the fact that you can run multiple virtual environments from one piece of infrastructure,
+means that you can drastically reduce your physical infrastructure footprint.
+
+Would be agility and speed. Like I said, spinning up a virtual machine is relatively easy and quick - a lot more simple than provisioning an entire new environment for your developers
+if they say they want to spin up a new environment so that they can run a test scenario.
+
+lowers your downtime. So, let's say that this host goes out unexpectedly. The fact that you can move virtual machines from one hypervisor to another, on a different physical server,
+means that you have a great backup plan in place right? So, if this host goes down you can simply move your VMs very quickly to another hypervisor on a machine that is working.
+
+
+2. Bare metal server
+
+A bare metal server is a single-tenant, dedicated physical server. It's dedicated to a single customer.
+
+The cloud provider manages the server up to the operating system or OS,
+which means if anything goes wrong with the hardware or rack connection, they will fix or replace it and then reboot the server. 
+The customer is responsible for administering and managing everything else on the server.
+
+Bare metal servers are either preconfigured by the cloud provider to meet workload packages or they can be custom-configured as per customer specifications. 
+This includes the processors, RAM, hard drives, specialized components, and the OS. 
+Customers can also install their own OS and can install certain hypervisors that aren't available from the cloud provider, and thus create their own virtual machines and farms. 
+
+With bare metal servers you can also add GPUs, which are designed for accelerating scientific computation, data analytics, and rendering professional grade virtualized graphics.
+Because bare metal servers are physical machines, they take longer to provision than virtual servers.
+Pre-configured builds of bare metal can take 20 to 40 minutes to provision and custom-builds can take around three or four hours, but these provisioning times can vary by Cloud provider.
+
+As Bare Metal servers are dedicated for use by a single client at any given time, they tend to be more expensive than similarly sized Virtual Machines.
+Also note that unlike virtual servers, not all cloud providers provide Bare Metal servers.
+
+Since bare metal servers are fully customizable, they can do what a customer wants in the most demanding environments.
+Bare metal servers are dedicated and intended for long term, high performance use in highly secure and isolated environments.
+Clients have full access and control of bare metal servers because there’s no hypervisor required.
+
+As there is no sharing underlying server hardware with other customers,
+Bare metal servers fulfil the demanding needs of high-performance computing or HPC and data intense applications that require minimal latency-related delays
+These servers also excel in big data analytics applications and GPU-intensive solutions. 
+Some workload examples that bare metal servers satisfy are ERP, CRM, AI, Deep Learning, and virtualization.
+If you use any applications that require high degrees of security control or apps that you’ve typically run in an on-premises environment,
+then a bare metal server is a good alternative in the cloud
+
+
+Bare metal servers work best for: CPU and I/O intensive workloads, excel with highest performance and security,
+satisfy strict compliance requirements, and offer complete flexibility, control and transparency but come with added management and operational overhead.
+
+Whereas, virtual servers are rapidly provisioned, provide an elastic and scalable environment,
+and are low cost to use, however since they share underlying hardware with other virtual servers, they can be limited in throughput and performance.
+
+
+3. Secure Networking In Cloud
+
+
+As one might expect, the notion of building a cloud network is not much different from deploying a network in an on-premises data center.
+The main difference stems from the fact, that in the cloud, we use logical instances of networking elements as opposed to physical devices.
+For example, Network Interface Controllers (NICs) would be represented by vNICs in cloud environments. 
+
+In the cloud, networking functions are delivered as a service rather than in the form of rack-mounted devices.
+To create a network in the cloud, one starts by defining the size of the network, or the IP address range that establishes the boundaries or the cloud network.
+
+Cloud networks are deployed in networking spaces that are logically separated segments of the networks using options,
+including Virtual private Cloud (VPC) that in turn can be divided into smaller segments called subnets.
+Logically segmented cloud networks are private carveout of the cloud that offer customers the security of private clouds and the scalability of public clouds.
+
+Cloud resources, such as VMs or Virtual Server Instances (VSIs), storage, network connectivity and load balancers are deployed into subnets.
+Using subnets allows users to deploy enterprise applications using the same multi-tier concepts used in on-premises environments.
+Subnets are also the main area where security is implemented in the cloud. 
+Every subnet is protected by Access Control Lists (ACLS) that serve as a subnet-level fire wall.
+Within the subnet, one could create Security Groups that provide security at the instance level such as VSIs.
+Once you build a subnet, then it is time to add some VSIs and storage to it so that you could run your applications. 
+
+Let’s say you have a 3-tier application that requires web access VSIs, applications tier VSIs and backend database VSIs.
+In this case, we would place the web facing VSIs into one Security Group, the Application VSIs in a second Security Group, while the database VSIs in a third Security Group.
+It goes without saying that the web-facing VISs need Internet access. A public Gateway instance is added to the network to enable users’ access to the application in the internet tier.
+While public gateways are great for Internet access to the cloud, enterprises are interested in extending their on-premises resources to the cloud by securely connecting them using Virtual Private Networks, or VPNs.
+
+When building many subnets and deploying several workloads, it becomes necessary to ensure that applications continue to be responsive. 
+That is achieved with Load Balancers that ensure availability of bandwidth for the different applications. 
+Enterprises with hybrid cloud environment find using dedicated high-speed connections between clouds and on-premises resources
+is a more secured and more efficient way than public connectivity solutions. 
+
+Building a cloud network entails creating a set of logical constructs that deliver networking functionality that is akin to the data center networks
+that all IT professionals have come to rely on for securing their environments and ensuring high performing business applications.
+
+
+4. Containers
+
+Containers are an executable unit of software in which application code is packaged, along with its libraries and dependencies,
+in common ways so that it can be run anywhere, whether it be on desktop, traditional IT, or the cloud.
+
+Containers are small, fast, and portable, and unlike virtual machines, they do not need to include a guest OS in every instance and can,
+instead, simply leverage the features and resources of the host OS. 
+
+
+
+===============
+CLOUD STORAGE
+===============
+
+
+1. File Storage
+
+Like direct attached storage, file storage must be attached to a compute node before it can be accessed and have data stored on it.
+File Storage can be less expensive, more resilient to failure, and involve lesser disk management and maintenance for you as the user to do , as compared to direct attached storage
+You can also provision much larger amounts of File Storage and present it as a disk to a server.
+
+File storage is mounted from remote storage appliances.
+That is, the physical disks are contained in a separate, specialised piece of hardware and they are then connected to the compute node via the underlying infrastructure in the datacenter.
+These storage appliances are not only extremely resilient to failure, the data is also far more secure in them as these storage appliances offer services such as encryption in transit and encryption at rest. 
+File Storage is mounted to compute nodes via an ethernet network – the same kind of network that you might receive email or browse the internet over, although this ethernet network is normally dedicated to the task.
+One of the issues with ethernet networks is that their speed can vary – the more loaded an ethernet network is, the more likely it becomes that it’s speed or bandwidth will be affected. 
+Of course, Cloud Providers build their storage networks to handle very high volumes of traffic. But even so, consistent speed cannot be guaranteed. 
+
+File Storage can typically be mounted onto more than one compute node at a time, where the mounted disk or volume looks just like another drive on the compute node.
+The ability for File Storage to be mounted to multiple compute nodes at a time make it an ideal solution where some sort of common storage is required
+for example, a departmental file share, a ‘landing zone’ for incoming files that need to be processed by an application, or a repository of files that a web service might access. 
+When you provision file storage, one consideration you need to take into account is the IOPS capacity of the storage.
+IOPS stands for Input/Output Operations Per Second and refers to the speed at which the disks can write and read data (note this is not the speed of the network between the storage and the compute node).
+The higher the IOPS value, the faster the speed of the underlying disk. A higher IOPS will also normally cost more.
+
+
+2. Block Storage 
+
+Block storage breaks files into chunks (or blocks) of data and Stores each block separately under a unique address.
+Like direct attached storage and file storage, block storage also must be attached to a compute node before it can be utilized for your workloads.
+Block storage, like file storage, can be mounted from remote storage appliances, making it extremely resilient to failure, and keeping data far more secure in them,
+on account of encryption in transit, and encryption at rest services, available on these appliances.
+
+Block storage is mounted as a volume to compute nodes using a dedicated network of fibres, through which signals move at the speed of light.
+These fibre optic networks are more expensive to build than the ethernet ones which deliver File Storage, which is one reason why Block Storage tends to have a higher price-point.
+However, since the traffic is moving faster and with speed consistency, they are perfect for workloads that need low-latency storage to work effectively.
+Unlike File Storage, which can be mounted onto 80 computer nodes or more, Block storage is normally mounted onto only one compute node at a time.
+Since these disks run at a consistent high speed, they are perfect for workloads that need consistently fast storage, such as databases and mail servers. 
+Block storage is not suitable for workloads where there needs to be some level of disk sharing between compute nodes.
+Remember to consider the IOPS requirements of the application when provisioning either file or block storage.
+
+
+3. Object Storage
+
+The first thing to note about Object Storage is that you do not connect it to a particular compute node in order to use it
+Instead, you provision an Object Storage service instance and use an API (or Application Program Interface) to upload, download, and manage your data.
+This means you can directly use Object Storage with anything that can call an API and you don’t need an underlying compute node. 
+The second thing to note about Object Storage is that it’s less expensive that other cloud storage options
+The third and possibly most important thing to note about Object Storage is that it’s effectively infinite.
+With file and block storage, you specify the size of the storage you want in gigabytes or terabytes and then pay a fee based on the size you provisioned.
+With Object Storage, you just consume the storage you need and pay per gigabyte cost for what you use.
+Object Storage is great for storing large amounts of unstructured data.
+By unstructured this means that the data is not stored in any kind of hierarchical folder or directory structure 
+Object Storage uses ‘buckets’, and objects are stored within these buckets in a structurally flat way.
+You can have multiple buckets for different object-types but you cannot place a bucket within a bucket.
+Pretty much any data which is static and where fast read and write speeds are not necessary would make a good fit for object storage.
+Object Storage would, however, not be suitable for running operating systems, nor applications such as databases or anything else where the contents of the files changes. 
+Object Storage is used to store files or Objects which are static.
+
+
+4. Content Delivery Network (CDN)
+
+
+It is a distributed server network that delivers temporarily stored, or cached, copies of website content to users, based on the user's geographic location.
+A CDN stores this content in distributed locations and reduces the distance between your website visitors, and your website server. 
+
+
+====================
+HYBRID MULTI-CLOUD
+====================
+
+Is a computing environment that connects and organizations on-premise private cloud and third-party public cloud into a single infrastructure for running the organization's applications.
+For example, a business may consume email as a service from one provider, a CRM application from another, and infrastructure from yet another provider. 
+
+
+Use cases
+==========
+
+1. Cloud scaling: If business has cyclic demand then it can scale up depending upon the load and deprovision resources when they do not need them. 
+2. Composite cloud: This allows companies scale up portions of their app e.g. billing & UI in response to high demand in some part of the world. For example 
+   due to holidays there is high demand in US so a company might scale up their billing and UI in America while keeping their EU portions individually scaled. 
+3. Another reason for adopting hybrid multicloud strategy is to prevent lock-in to a specific vendor's cloud platform and having flexibility of being able to move workloads from one cloud platform to another as the need arises.
+4. Comapnies can hook their legacy data on cloud and connect them up to ML & AI.  This allows industries to take advantage of predictive analytics and insights.
+
+
+===============
+MICROSERVICES
+===============
+
+Microservices architecture is an approach in which a single application is composed of many loosely coupled and independently deployable, smaller components or services.
+These services typically have their own stack running on their own containers.
+They communicate with one another over a combination of APIs, event streaming, and message brokers.
+
+
+Advantages
+===========
+
+1. Application components can be developed and updated more efficiently by multiple developers working independently.
+
+2. Teams can use different stacks and runtime environments for different components. 
+
+3. Components facing too much load can be scaled independently, reducing the waste and cost associated with having to scale entire applications.
+
+
+Cloud development platforms provide developers with an ecosystem of code that can be easily and securely integrated into applications.
+Now, instead of building one huge application on one team, developers break into small independent teams where they write smaller amounts of code called microservices.
+Microservices breakdown large applications into their core functions, for example, search, recommendations, customer ratings, or product catalogs.
+Each is developed independently of one another, yet work together on the cloud development platform to create a functioning application.
+A container is the distribution method for each microservice, meaning it delivers the code where it needs to go.
+Containers are plug-and-play, so if one microservice isn’t working for an application, developers can take it out and put in a different one without disrupting how the rest of the app functions.
+But before they can work together, they have to find one another.
+They do this by using something called service discovery, which creates a roadmap for these and many other microservices to communicate.
+When microservices find each other, they communicate using an application programming interface or an API.
+
+
+======================
+SERVERLESS COMPUTING
+======================
+
+
+1. Serverless is an approach to computing that offloads responsibility for common infrastructure management tasks such as scaling, scheduling, patching, and provisioning application stacks to cloud providers,
+   allowing developers to focus their time and effort on the code and business logic specific to their applications or process. 
+
+2. Serverless doesn’t mean there are no servers; only that the management of the underlying physical or virtual servers is removed from their users.
+
+3. The serverless computing environment allocates resources as needed for the applications.
+
+
+Difference between serverless and other computing models
+===========================================================
+
+1. The serverless model requires no provisioning of servers, installation of application stacks and software, or operation of the infrastructure by the developer.
+
+2. Serverless computing runs code only on-demand on a per-request basis, scaling transparently with the number of requests being served. 
+
+3. Serverless enables end users to pay only for resources being used, never paying for idle capacity,
+   which is unlike virtual servers on the cloud—where end users pay for VMs as long as they are running even if idle. 
+
+4. Effectively, serverless abstracts the infrastructure away from developers.
+   Code is executed as individual functions where each function runs inside a stateless container. 
+
+5. No prior execution context is required to serve a request; and with each new request, a new instance of the function is invoked.
+
+6. It is important to note that serverless may not be the best fit for all applications or scenarios.
+   You need to evaluate application characteristics and ensure that the application is aligned to serverless architecture patterns.
+
+7. Applications that qualify for a serverless architecture include some of the following characteristics:
+   Short-running stateless functions (seconds or minutes).
+   Seasonal workloads with varying off-peak and peaks.
+   Production volumetric data that shows too much idle time.
+   Event-based processing or asynchronous request processing for implementing use cases.
+   Microservices that can be built as functions that are stateless.
+   Serverless architectures are well-suited for use cases around data and event processing, IoT, microservices, and mobile backends.
+
+8. Given its inherent and automatic scaling, rapid provisioning, and a pricing model that does not charge for idle time,
+   supporting microservices architecture has become one of the most common use cases of serverless computing today.
+
+9. Serverless is well-suited to working with structured text, audio, image, and video data around tasks such as data enrichment,
+   transformation, validation and cleansing, PDF processing, audio normalization, thumbnail generation, and video transcoding.
+
+10. Parallel tasks such as data search and processing, and genome processing, are also well-suited to be run on a serverless runtime.
+    Serverless is also well-suited for working with all sorts of data stream ingestions, including business data streams, IoT sensor data, log data, and financial market data.
+
+
+CHANLLANGES
+=============
+
+
+1. Serverless workloads are designed to scale up and down in response to workload,
+   but for workloads characterized by long-running processes managing a traditional server environment might be simpler and more cost-effective. 
+
+2. The serverless application architecture can be vendor dependent, and so there is a potential for vendor lock-in, 
+   particularly involving platform capabilities such as authentication, scaling, monitoring, or configuration management. 
+
+3. Because serverless architectures scale up and down in response to workload, they also sometimes need to start up from zero to serve a new request.
+   For certain applications, this delay isn’t much of an impact, but for something like a low-latency financial application, this delay wouldn’t be acceptable.
+
+
+
+============================
+CLOUD NATIVE APPLICATIONS
+============================
+
+1. Simply put, a cloud native application is an application developed from the outset to work only in the cloud environment,
+   or an existing app that has been refactored and reconfigured with cloud native principles.
+
+2. A cloud native application consists of microservices working together as a whole to comprise an application,
+   yet each can be independently scaled and iterated through automation and orchestration processes.
+
+3. These microservices are often packaged in containers,
+   which are executable units of software in which the application code is packaged along with its libraries and dependencies so that it can be run anywhere.
+
+4. This independence enables frequent, iterative improvement of cloud native applications, without disrupting the experience of end-users. 
+
+5. Cloud native applications are unlike traditional, or monolithic applications, that are built out of one huge piece of software;
+   applications that tightly couple the user interface, business-logic layer, and data-layer. 
+
+
+=========
+DEVOPS
+=========
+
+1. Continuous Delivery:  which is about delivering small, well-designed, high-quality, increments of software to customers.
+
+2. Continuous Deployment: which involves progressing each new packaged build through the deployment lifecycle as rapidly as possible.
+
+3. Continuous Monitoring: with tools that help developers understand the performance and availability of their applications, even before they are deployed to production.
+
+4. Delivery Pipeline: which is an automated sequence of steps that involves the stages of Ideation, Coding, Building, Deploying, Managing.
+
+5. Continuous Improvement: which loops back to the Ideation phase in the delivery pipeline. 
+                           While DevOps can apply to applications anywhere, there is especially a compelling case for DevOps when it comes to cloud-ready, and cloud-native applications. 
+
+
+
+DEVOPS IN CLOUD COMPUTING
+============================
+
+1. Cloud native applications form a complex distributed system with multiple moving parts, independent tech stacks, and rapid release cycles. 
+
+2. DevOps principles are essential to define how people work together to build, deploy, and manage applications in a cloud native approach. 
+
+3. With the DevOps best practices of automated provisioning and continuous deployment, developers, quality professionals,
+   and other stakeholders can test in low-cost, production-like test environments that were previously not available—enhancing both productivity and quality.
+
+4. When systems are compromised or struggling to recover from natural disasters, DevOps best practices make it possible to rebuild these systems quickly and reliably. 
+
+5. DevOps provides a powerful set of principles, practices, and tools to realize the full potential of cloud-native computing,
+   as well as for modernizing existing applications to leverage cloud benefits.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

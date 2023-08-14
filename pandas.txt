@@ -1,0 +1,257 @@
+import numpy as np
+import pandas as pd
+
+dict1 = {
+    'name': ['Larry', 'Rohan', 'skillf', 'Shubham'],
+    'marks': [92, 34, 24, 17],
+    'city': ['rampur', 'kolkata', 'bareilly', 'antarctica']
+}
+
+df = pd.DataFrame(dict1)
+
+df - This will show data in the notebook in rows and columns.
+
+df.to_csv('friends.csv') - This will create csv file of the data.
+
+df.to_csv('friends_index_false.csv', index=False) - This will create file without index. 
+
+df.head(2) - This will show 2 rows from begining.
+
+df.tail(2) - This will show 2 rows from the end. 
+
+df.describe() - This will show analysis of the numerical cloumn data. e.g. mean, min, max, count etc
+
+
+TO READ, WRITE & EDIT A CSV FILE:
+=================================
+
+1. First creat a csv file, e.g. Larry.csv
+
+2. larry = pd.read_csv('Larry.csv') - use this code snippet
+
+3. larry - Then press shift+enter and the contents will be displayed.
+
+4. larry['Speed'] - This will show the column speed and its contents
+   data['Date'] = pd.to_datetime(data['timestamp'], unit='ms') - to coverting date to readable format.
+
+5. larry['Speed'][0] = 50 - This will change the contents of the index value at 0.
+
+6. larry.to_csv('Larry.csv') - This will create the new csv file with modified contents 
+
+7. larry.index = ['first', 'second', 'third', 'fourth'] - To change the index.
+
+
+ABOUT PANDAS
+============
+
+1. Pandas is an open source data analysis library written in python.
+
+2. It leverages the power and speed of numpy to make data analysis easy.
+
+3. It provides rich and highly robust data operations.
+
+
+PANDAS DATA STRUCTURES
+=======================
+
+1. SERIES: It is one dimentional array with indexes. It stores a single column and row of data in Dataframe.
+           A one dimentional array capable of holding any type of data.
+
+2. DATAFRAME: Its a tabular spreadsheet like structure containing single or multiple rows and columns. 
+              A two dimentional data structure with columns of potentially different types of data.
+
+
+TO CREATE & ANALYZE SERIES & DATAFRAME
+======================================
+
+1. ser = pd.Series(np.random.rand(34))
+
+   ser - Then press shift+enter. This will create a series. 
+
+2. newdf = pd.DataFrame(np.random.rand(334, 5), index=np.arange(334))
+
+3. newdf.head() - This will show data from the begining upto 4 colums and rows. newdf will show some data from begining and end. 
+
+4. newdf.dtypes - This will give info about the data types in the columns e.f int, float etc
+
+5. newdf.index - This will print all the indexes upto 334.
+
+6. newdf.columns - This will print the columns.
+
+7. newdf.to_numpy() - To convert newdf dataframe to numpy array.
+
+8. newdf.T - This will transpose the data. Change rows to cloumns and columns to rows. 
+
+9. newdf.sort_index(axis=0, ascending=False ) - This will sort the index in decending order, ascending default is true, axis=0 is rows, axis=1 is columns.
+
+10. newdf2 = newdf.copy() - To create a copy newdf2 = newdf will create a view not a copy. 
+
+11. newdf.loc[0, 0] = 64 - to change the data here [rows, columns], newdf[0][0] is not the correct method because pandas sometimes shows views and sometimes copy. 
+                          
+12. newdf.columns = list('ABCDE') - This will change column to ABCDE from 01234.
+
+13. newdf.drop(['A'], axis=1) - This will remove column, here A is the name of column. If we write newdf = newdf.drop(['A'], axis=1) then it will change the newdf
+                                or If we write newdf.drop(['A'], axis=1, inplace=True) then it will change the original dataframe then and there.
+                                Otherwise it will keep the original dataframe intact while returning a copy. 
+
+14. newdf.loc[[1, 2], ['C', 'D']] - This will show rows 1,2 & columns C,D
+
+15. newdf.loc[[1, 2], : ] - This will show rows 1,2 & all columns. Same for showing all rows.
+
+16. newdf.loc[(newdf['A'] < 0.3)] - This is to filter data in column A. 
+
+17. newdf.loc[(newdf['A'] < 0.3) & (newdf['C'] > 0.1)] - Same as above.
+
+18. newdf.iloc[0, 4] - This will return data value at index[0, 4], in loc we need to mention the column name e.g. E in this case. 
+
+19. newdf.reset_index(drop=True, inplace=True) - This will reset the row index. If we do not write drop=True then it will insert a new column of index aside old one.
+
+20. newdf['B'].isnull() - This will print where there is data value is null as true or false, notnull() can also be used.
+
+21. newdf.dropna() - This will drop all the na from values. 
+
+22. newdf.drop_duplicates(subset=["A"] keep=False) - This will remove all duplicates from column A.
+
+23. newdf.shape - This return number of rows and columns.
+
+24. newdf.info() - This will give a brief info about the dataframe.
+
+25. newdf["A"].value_count(dropna=False) - Dropna means do not count na. This will count the values
+
+26. newdf["Names"].unique()
+
+27. x = df[['Length']] - Access to the column Length
+    x = df['Length'] - Get the column as a series
+    y = df[['Artist','Length','Genre']] - Access to multiple columns
+
+28. df.iloc[0:2, 0:3] - Slicing the dataframe
+
+29. df.loc[0:2, 'Artist':'Released'] - Slicing the dataframe using name
+    Note that 2 is included here & so are both the column names. 
+
+30. df_warriors=df_teams[df_teams['nickname']=='Warriors']
+    df_warriors
+
+31. Transform Function in Pandas:
+
+    Python's Transform function returns a self-produced dataframe with transformed values after applying the function specified in its parameter.
+
+    df = df.transform(func = lambda x : x + 10)
+
+    df = df.transform(func = ['sqrt'])
+
+32. Reading with xml.etree.ElementTree:
+
+    1. Download the file from url:
+
+    import xml.etree.ElementTree as etree
+
+    filename = "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0101EN-SkillsNetwork/labs/Module%205/data/Sample-employee-XML-file.xml"
+
+    async def download(url, filename):
+        response = await pyfetch(url)
+        if response.status == 200:
+            with open(filename, "wb") as f:
+                f.write(await response.bytes())
+    
+    await download(filename, "Sample-employee-XML-file.xml")
+
+    2. You would need to firstly parse an XML file and create a list of columns for data frame, 
+       then extract useful information from the XML file and add to a pandas data frame.
+
+       tree = etree.parse("Sample-employee-XML-file.xml")
+       root = tree.getroot()
+       columns = ["firstname", "lastname", "title", "division", "building","room"]
+
+       datatframe = pd.DataFrame(columns = columns)
+
+       for node in root: 
+
+         firstname = node.find("firstname").text
+
+         lastname = node.find("lastname").text 
+
+         title = node.find("title").text 
+    
+         division = node.find("division").text 
+    
+         building = node.find("building").text
+    
+         room = node.find("room").text
+    
+         datatframe = datatframe.append(pd.Series([firstname, lastname, title, division, building, room], index = columns), ignore_index = True)
+
+     3. Reading xml file using pandas.read_xml function:
+
+        # Herein xpath we mention the set of xml nodes to be considered for migrating  to the dataframe which in this case is details node under employees.
+          
+        df=pd.read_xml("Sample-employee-XML-file.xml", xpath="/employees/details") 
+
+33. Reading the Image file:
+
+    PIL is the Python Imaging Library which provides the python interpreter with image editing capabilities.
+    
+    # importing PIL 
+    from PIL import Image 
+
+    # Uncomment if running locally
+    # import urllib.request
+    # urllib.request.urlretrieve("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg", "dog.jpg")
+
+    filename = "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg"
+
+    async def download(url, filename):
+        response = await pyfetch(url)
+        if response.status == 200:
+            with open(filename, "wb") as f:
+                f.write(await response.bytes())
+
+    await download(filename, "dog.jpg")
+
+
+    # Read image 
+    img = Image.open('dog.jpg') 
+  
+    # Output Images 
+    display(img)
+
+
+34. Visualization:
+
+    Seaborn and Matplotlib are two of Python's most powerful visualization libraries.
+
+    
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

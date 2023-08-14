@@ -1,0 +1,71 @@
+we have downloaded post css using reference from tailwaind docs using npm
+Then run command npm install vite. For starting the server.
+Add "scripts": { "start": "vite"}, this code in package.json.
+Then run command npx tailwindcss init
+It will create file with tailwind.config.js and add * in content. Which means I want to use tailwind in entire file.
+Add extension tailwaind intellisense. It will suggest tailwind classes etc. 
+-------------------------------------------------------------------
+--TO SETUP TAILWIND CSS FOR PRODUCTION--
+-------------------------------------------------------------------
+
+npm init -y //This will initialize the directory as node.js project. 
+npm install -D tailwindcss postcss autoprefixer vite // This will install required packages.
+npx tailwindcss init -p
+Create a css file "input.css", add it to your html and edit it with this content:
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+In tailwind.config.js file replace content[] with content["*"]
+Add "start": "vite", to your scripts in package.json
+Run npm run start command to start a dev server.
+
+--------------------------------------------------------------------
+SQUARE BRACKET NOTATION - Pls read. 
+--------------------------------------------------------------------
+
+-------------------------------------------------------------------
+APPLY DIRECTIVE
+-------------------------------------------------------------------
+
+To create a new class. Open input.css file & copy & paste before @tailwind utilities let's say u want to create class btn. 
+
+.btn{
+@apply copy & paste all the classes 
+
+}
+
+If u want to override tailwind utility classes due to some reasons then copy & paste above code after @tailwind utilities.
+
+-------------------------------------------------------------------
+LAYER DIRECTIVE
+-------------------------------------------------------------------
+It will add btn after component layer. It will also become part of component layer. Likewise u can make it part of utilities layer.
+
+@layer components{
+.btn{
+@apply copy & paste all the classes here.
+
+}
+
+}
+
+-------------------------------------------------------------------
+CUSTOM TAILWIND - V12
+-------------------------------------------------------------------
+Generate full config file using npx tailwindcss init --full 
+Go to tailwind.config.js and add your property in extend e.g we added spacing here taking reference from full config file.
+For customizing screen size u need to add properties directly in theme. 
+theme: {
+    extend: {
+   spacing{
+	15: 4.5rem
+},
+  },
+
+-------------------------------------------------------------------
+DEPLOYING TAILWIND WEBSITE TO PRODUCTION 
+-------------------------------------------------------------------
+Add "build": "vite build" in scripts in package.json file.
+run command npm run build. It will create build folder dist. This contains all the files for our website.
+If we modify our content afterwards then we need to run command npm run build again. 
+
