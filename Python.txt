@@ -6,7 +6,7 @@ In python everything is an object.
 
 1. Number - Integer, Float & Complex
 2. String - Data is immutable
-3. Boolean
+3. Boolean - True & False 
 4. Lists - just like array [1, 2, 3] - Data is mutable
 5. Tuples - ( ("parrot", "sparrow"), ("lion", "tiger") ) - Data is immutable 
 6. Dictionary - mapped data - key-value pairs - just like objects

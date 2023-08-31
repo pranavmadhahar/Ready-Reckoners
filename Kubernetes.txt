@@ -12,7 +12,18 @@ Helps in deploy and manage containers dynamically. Kubernetes perform this role:
    3. Scale
    4. Self-heal containers
 
-Applications that are designed to meet above requirements are called cloud native. 
+
+CLOUD NATIVE APPLICATIONS
+===========================
+
+1. Applications that are designed to meet above requirements are called cloud native. 
+
+2. Cloud native applications are built from the ground up—optimized for cloud scale and performance.
+   They’re based on microservices architectures, use managed services, and take advantage of continuous delivery to achieve reliability and faster time to market.
+
+3. Cloud native is the software approach of building, deploying, and managing modern applications in cloud computing environments.
+
+4. These cloud-native technologies support fast and frequent changes to applications without impacting service delivery, providing an innovative, competitive advantage.
 
 
 CONTAINER ORCHESTRATION
@@ -264,7 +275,6 @@ NODE STRUCTURE
 Worker node which is a server, contains container runtime which contains POD which contains container. 
 
 
-
 How to work with Kubernetes?
 ==============================
 
@@ -274,7 +284,7 @@ How to work with Kubernetes?
 
 3. Put every container in pods. 
 
-4. Deploy these pods to controlers. 
+4. Deploy these pods to controllers. 
 
 
 COMMANDS
@@ -293,9 +303,13 @@ Imperative commands:
 Create, update & delete live objects directly.
 kubectl run nginx --image nginx
 
+This is imperative command because we explicitly told Kubernetes what to do i.e run nginx.
+
 
 Imperative object configuration: 
 ---------------------------------
+
+Imperative object configuration lets you create objects by specifying the action to take (e.g., create, update, delete) while using a configuration file.
 
 Uses templates to ensure proper deployment.
 kubectl create -f nginx.yaml
@@ -318,7 +332,7 @@ Declarative commands or Declarative object configuration:
 
 4. minikube status
 
-5. kubectl get pods
+5. kubectl get pods or kubectl get pods -o wide (for more details)
 
 6. kubectl get nodes
 
@@ -343,6 +357,9 @@ Declarative commands or Declarative object configuration:
 16  kubectl delete deployments deployment id
 
 17. kubectl port-forward nginx-pod 8080:80 : Whenever I go to port 8080 of my local host rout it to port 80 of nginx.
+    kubectl port-forward deployment.apps/guestbook 3000:3000
+
+18. kubectl describe pod pod-name 
 
 
 Steps for creating Pod
@@ -438,9 +455,9 @@ IMAGESTREAM
 
 3. A single ImageStream can consist of many different tags such as latest, dev and test. And each tag points to a certain image in a registry. 
 
-4. To deploy an application, you’ll refer to the image stream tag rather than hardcode the registry URL and tag. 
+4. To deploy an application, you’ll refer to the imagestream tag rather than hardcode the registry URL and tag. 
 
-5. If the source image location changes, you’ll update the image stream definition, rather than individually updating all the deployments.
+5. If the source image location changes, you’ll update the imagestream definition, rather than individually updating all the deployments.
 
 6. An ImageStream also provides a trigger capability that automatically invokes builds and deployments when a new version of an image is available. 
    Rather than running builds manually, we can automate the process using triggers: 
@@ -449,7 +466,7 @@ IMAGESTREAM
                         which send the trigger request to the API endpoint on any new commit or a pull request or other circumstances. 
 
    2. Image change trigger: Triggers builds when a new version of an image is available. 
-                            For instance, if you build your application using a Node.js base image, that image is updated when security fixes are released, and other updates occur. 
+                            For instance, if you build your application using a Node.js base image, that image is updated when security fixes are released, & other updates occur. 
 
    3. Configuration change trigger: Causes a new build to run when you create a new BuildConfig resource. 
 
@@ -499,7 +516,7 @@ OPERATOR FRAMEWORK
 
 14. The Operator Lifecycle Manager (or OLM) controls the install, upgrade, and role-based access control (or RBAC) of Operators in a cluster. 
 
-15. The Operator Registrystores CRDs, cluster service versions (or CSVs), and Operator metadata for packages and channels. 
+15. The Operator Registry stores CRDs, cluster service versions (or CSVs), and Operator metadata for packages and channels. 
     It runs in Kubernetes or OpenShift clusters to provide the Operator catalog data to OLM.
 
 16. The OperatorHub web console lets cluster administrators find Operators to install on their cluster. 
@@ -522,14 +539,18 @@ OPERATOR FRAMEWORK
 
        To deploy a whole application: 
 
-       Create a custom resource(CRD) for that app. And then a custom controller for that CRD.
-       The Operator logic determines how to reconcile the actual and configured states. 
-       A CRD requires the creation of deployments, services, storage, and other objects. 
-       The OperatorHub view of the OpenShift web console enables operator installation with one click. 
-       OperatorHub has many different types of Operators available,
-       including: Red Hat Operators, Certified Operators from independent service vendors partnered with Red Hat, 
-       Community Operators from the open-source community but not officially supported by Red Hat, And custom Operators defined by users.
-       You can install many tools from the Kubernetes ecosystem via the OperatorHub. An example is the Istio service mesh.
+       1. Create a custom resource(CRD) for that app. And then a custom controller for that CRD.
+
+       2. The Operator logic determines how to reconcile the actual and configured states. 
+
+       3. A CRD requires the creation of deployments, services, storage, and other objects. 
+
+       4. The OperatorHub view of the OpenShift web console enables operator installation with one click. 
+
+       5. OperatorHub has many different types of Operators available, including:
+          Red Hat Operators, Certified Operators from independent service vendors partnered with Red Hat, 
+          Community Operators from the open-source community but not officially supported by Red Hat, And custom Operators defined by users.
+          You can install many tools from the Kubernetes ecosystem via the OperatorHub. An example is the Istio service mesh.
 
     2. Scaling the application with the help of multiple replicas based on the application type. 
 
@@ -604,8 +625,159 @@ HOW ISTIO WORKS WITH MICROSERVICES?
 
 
 
+STEPS FOR DEPLOYMENT IN KUBERNETES
+===================================
+
+1. First create an image using Dockerfile and save it in the repository.
+
+   docker build -t us.icr.io/$MY_NAMESPACE/hello-world:1 
+   docker push us.icr.io/$MY_NAMESPACE/hello-world:1
+
+2. Create deployment using this image. Pods will be created as a result of this.
+
+   kubectl apply -f deployment.yaml
+
+3. Expose the application to the internet in order to access it.
+
+   kubectl expose deployment/hello-world
+
+4. Create a proxy to access the application, because cluster IPs are only accesible within the cluster. This is not applicable in production scenario.
+
+   kubectl proxy
+
+5. You can ping the application using the below command.
+
+   curl -L localhost:8001/api/v1/namespaces/sn-labs-$USERNAME/services/hello-world/proxy
+
+
+SCALING THE APPLICATION USING REPLICASETS
+===========================================
+
+kubectl scale deployment hello-world --replicas=3
+
+This will create two similar pods. 
+
+kubectl get pods
+
+This will show 3 pods running.
+
+
+PERFORMING ROLLLING UPDATES
+=============================
+
+1. Build and push the new version of app to Container Registry. 
+
+   docker build . -t us.icr.io/$MY_NAMESPACE/hello-world:2   
+   docker push us.icr.io/$MY_NAMESPACE/hello-world:2
+
+   #Pls do not forget to export your namespace first, by using command export MY_NAMESPACE=sn-labs-$USERNAME.
+
+2. List images in Container Registry to see all the different versions of this application that you have pushed so far.
+
+   ibmcloud cr images
+
+3. Update the deployment to use this version of image instead.
+
+   kubectl set image deployment/hello-world hello-world=us.icr.io/$MY_NAMESPACE/hello-world:2
+
+4. Get a status of the rolling update by using the following command:
+
+   kubectl rollout status deployment/hello-world
+
+5. It’s possible that a new version of an application contains a bug. In that case, Kubernetes can roll back the Deployment like this:
+
+   kubectl rollout undo deployment/hello-world
+
+6. Get a status of the rolling update by using the following command:
+
+   kubectl rollout status deployment/hello-world  or  kubectl get deployments -o wide
+
+7. Run the below command to see the history of deployment rollouts:
+   kubectl rollout history deployment/guestbook
+
+8. Run the below command to see the details of Revision of the deployment rollout:
+   kubectl rollout history deployments guestbook --revision=2
+
+9. Run the below command to undo the deploymnent and set it to Revision 1:
+   kubectl rollout undo deployment/guestbook --to-revision=1
+
+
+USING CONFIGMAP TO STORE CONFIGURATION
+========================================
+
+ConfigMaps and Secrets are used to store configuration information separate from the code so that nothing is hardcoded.
+It also lets the application pick up configuration changes without needing to be redeployed. 
+
+1. Create a ConfigMap that contains a new message.
+
+   kubectl create configmap app-config --from-literal=MESSAGE="This message came from a ConfigMap!"
+
+2. Build and push a new image that contains your new application code.
+
+   We will create a new yaml file deployment-configmap-env-var.yaml
+   In this we mention that, environment variables should be defined in the container from the data in a ConfigMap named app-config.
+
+   The new app code will be: res.send(process.env.MESSAGE + '\n') 
+   Which means, this change indicates that requests to the app will return the environment variable message instead of hardcoded one used earlier. 
+
+3. Apply the new Deployment configuration.
+
+   kubectl apply -f deployment-configmap-env-var.yaml
+
+4. Because the configuration is separate from the code, the message can be changed without rebuilding the image.
+   Using the following command, delete the old ConfigMap and create a new one with the same name but a different message.
+
+   kubectl delete configmap app-config
+   kubectl create configmap app-config --from-literal=MESSAGE="This message is different, and you didn't have to rebuild the image!"
+
+5. kubectl rollout restart deployment hello-world
+
+   
+AUTOSCALING THE APPLICATION (HPA)
+===================================
+
+1. Add the following section to the deployment.yaml file under the template.spec.containers section for increasing the CPU resource utilization
+
+    name: http
+        resources:
+          limits:
+            cpu: 50m
+          requests:
+            cpu: 20m
+
+2. Apply the deployment:
+
+   kubectl apply -f deployment.yaml
+
+3. Autoscale the hello-world deployment using the below command:
+
+   kubectl autoscale deployment hello-world --cpu-percent=5 --min=1 --max=10
+
+4. Check the current status of the newly-made HorizontalPodAutoscaler, by running:   
+
+   kubectl get hpa hello-world
+
+5. Run the proxy:
+
+   kubectl proxy
+
+6. Open another new terminal and enter the below command to spam the app with multiple requests for increasing the load:
+
+   for i in `seq 100000`; do curl -L localhost:8001/api/v1/namespaces/sn-labs-$USERNAME/services/hello-world/proxy; done
+or kubectl run -i --tty load-generator-1 --rm --image=busybox:1.36.0 --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- https://pranavmadhah-3000.theiaopenshift-1-labs-prod-theiaopenshift-4-tor01.proxy.cognitiveclass.ai/
+/env /info; done"
+
+7. Run the below command to observe the replicas increase in accordance with the autoscaling:
+
+   kubectl get hpa hello-world --watch
+   
+
+
 
 #NOTE: Check Lens tool video by KK. Other tools kubescape, kubeshop(monokle), datree
+
+
+
 
 
 
