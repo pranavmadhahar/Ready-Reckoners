@@ -24,14 +24,27 @@ It is a plain text file. This is used to create custom docker image.
 Docker file to image process flow -  Docker file -> Docker Client -> Docker Server -> Usable Image -> Container
 ----------------------------------
 
+
 HOW TO CREATE A CUSTOM IMAGE
 =============================
+
+
+Image consist of: 
+------------------
+
+file system snapshot + startup command 
+
+
+STEPS:
+-------
 
 1. Choose a base image. 
 2. Run commands for your software.
 3. Specify base command to be run on startup. 
 
+
 Commands -
+-----------
 
 Create a file naming Dockerfile and write the below code in it. 
 
@@ -41,9 +54,10 @@ Create a file naming Dockerfile and write the below code in it.
 
 3. CMD ["redis-server"] - This will set the base command which will run on startup. It means run this executable command when the container has started. 
 
-                          Then run docker build . or docker build -t myimage:v1 . command and it will generate custom image, myimage is the name if image. 
+                          Then run docker build . or docker build . -t myimage:v1 . command and it will generate custom image, myimage is the name of image. 
+		          v1 is the tag name.
                           
- 			  Then run docker run myimage:v1 command to for creating the container. 
+ 			  Then run docker run myimage:v1 command for creating the container. 
 
 
 IMAGE
@@ -71,10 +85,6 @@ Images are templates or blueprints for a container. Immutability means, Images a
    Consider the image name docker.io/ubuntu:18.04. The hostname docker.io refers to the Docker Hub registry.
    When using the Docker CLI, you can exclude the docker.io hostname.
    The repository name ubuntu indicates an Ubuntu image. Finally, the tag, shown here as 18.04, represents the installed Ubuntu version.
-
-Image consist of: 
-
-file system snapshot + startup command 
 
 
 CONTAINER
@@ -119,7 +129,7 @@ docker ps -a - This will show all the containers that are stopped.
 
 docker rm container id - This will remove the container. 
 
-docker inspect continer id - This will show all the info about the container.
+docker inspect container id - This will show all the info about the container.
 
 docker container prune -f - Delete all the containers that are stopped. 
 
@@ -138,6 +148,8 @@ docker commit -m "added names.txt file" container id names_ubuntu:1.01 - This wi
 docker images -q - This will show all the container ids. 
 
 docker rmi $(docker images -q) - This will remove all the images. 
+
+docker stop $(docker ps -q) - This will stop all the running containers.
            
 
 DOCKER RUN 
@@ -154,7 +166,7 @@ docker start -a  - This will execute the container and display the output of the
 TAGGING IMAGES
 ===============
 
-docker build -t larry/redis:latest .  - Here -t means we want to add a tag. Larry is the docker username. Redis is the image name. Latest refers to version details.  
+docker build -t larry/redis:latest .  - Here -t means we want to add a tag. Larry is the docker username. Redis is the image name. Latest refers to version or tag. 
 
 docker run larry/redis - This will run the image which is created in above step. 
 

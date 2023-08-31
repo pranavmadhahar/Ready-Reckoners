@@ -1,0 +1,769 @@
+MICROSERVICES
+===============
+
+WHY MICROSERVICES?
+--------------------
+
+Monolithic: One big application with all functions, is difficult to maintain.
+
+Microservices:
+
+1. Simplify maintainence
+
+2. Easily managed.
+
+3. Provide speed.
+
+4. Scalability.
+
+5. Easy to build.
+
+
+WHAT ARE MICROSERVICES?
+--------------------------
+
+1. Break down larger applications into smaller pieces.
+
+2. Are independently scalable and maintainable.
+
+3. Provides cost benefits and team autonomy.
+
+
+CHARACTERSTICS
+----------------
+
+1. Each have their own technology stack.
+
+2. Components communicate with one another.
+
+3. Segregated and organized by business functionality, with the line separating services referred to as a bounded context. 
+
+
+BENEFITS
+----------
+
+1. No interdependency
+
+2. Different stack-Varied expertise.
+
+3. Smaller components-Can be scaled independently.
+
+
+SCALING
+---------
+
+1. Horizontal scaling.
+
+2. Precise scaling: Precise scaling of only the components that require it, instead of the entire application in the case of monolithic applications.
+
+3. Event driven.
+
+
+WHY SERVERLESS?
+-----------------
+
+1. Ability to run applications without managing underlying infrastructure.
+
+2. Requires only a serverless architecture for core code.
+
+3. Apps deployed quickly and free up resourses when not in use. 
+
+
+
+TWELVE FACTOR APP METHODOLOGY
+===============================
+
+
+MODERN SOFTWARE DEVELOPMENT
+-----------------------------
+
+1. Delivered as a service
+
+2. Centrally hosted and accessed through the internet.
+
+3. Web apps, software as a service (SaaS)
+
+4. Twelve factor app methodology is suited for web apps, it is frequently used with microservices.
+
+
+GROUPING THE TWELVE FACTORS
+-----------------------------
+
+The twelve factors can be grouped into the code, deploy, and operate phases of the software delivery lifecycle.
+
+
+CODE FACTORS
+-------------
+
+
+1. FACTOR 1: CODEBASE
+
+   1. You should always track the codebase for an application in a version control system, such as Git. 
+ 
+   2. There is a one-to-one relationship between a codebase and an app. An app should be contained in a single codebase. 
+
+   3. Deploy multiple instances of the app: However, there will be multiple deploys, or instances, of the app.
+
+   4. And while the codebase is the same across those deploys, different app versions can be present in each deployment.
+
+2. FACTOR 5: BUILD, RELEASE, RUN 
+
+   This phase demonstrates how a codebase becomes a production deployment.
+
+   1. The build stage compiles the code, gathers dependencies, and then transforms the codebase into an executable unit called a build. 
+
+   2. The release stage combines the build with the deployment’s current configuration so that the code is ready to run.
+
+   3. The run stage implements the application.
+
+3. FACTOR 10: DEV/PROD PARITY
+
+   1. This factor minimizes the differences between development and production environments, 
+      which is necessary to enable continuous delivery to quickly implement changes into production.
+
+   2. This action reduces the chance that code runs appropriately in one environment but not in another. 
+      Parity is particularly essential for backend services. 
+      If you use a MySQL database in production, you should use the same version of MySQL database in your development environments.
+      Parity helps catch failures earlier in the development process.
+
+4. FACTOR 2: DEPENDENCIES
+
+   1. An app is only as reliable as its least reliable dependency.
+
+   2. You must explicitly declare all dependencies. 
+      This way, when a new developer grabs the codebase, there is no assumption that any dependencies already exist on their machine.
+
+
+DEPLOY FACTORS
+---------------
+
+
+1. FACTOR 3: CONFIG
+
+   1. Keep everything that varies between deployments such as credentials and backend service(databases) locations in config. 
+
+   2. Keep config separate from the code, it should not be hardcoded, because config might differ among environments.
+
+   3. Store config in environment variables.
+
+2. FACTOR 4: BACKEND SERVICES
+
+   1. A twelve-factor app should not distinguish between local and third-party services.
+      Both should be accessible via a URL or other locator information along with any credentials
+      so that a developer can easily swap out the backend service without changing the code. 
+      For example, if a database experiences problems, a new database can be spun up and substituted in without having to change code.
+
+3. FACTOR 6: PROCESSES
+
+   1. Processes should be stateless and share nothing.
+
+   2. You should store persistent data in a backend service like a database since memory and filesystems aren’t shared across processes.
+
+   3. Data needs to be centrally stored:
+      If another process handles a subsequent transaction, the subsequent transaction won’t have access to data within the prior process.
+
+4. FACTOR 7: PORT BINDING
+
+   1. Export servvices by port binding.
+
+   2. Export HTTP and other services.
+
+   3. Binding a port is generally done in the code by declaring a web server library as a dependency. 
+
+   4. Because these apps are accessible via a URL, they can become backend services for other apps.
+
+
+OPERATE FACTORS
+-----------------
+
+
+1. FACTOR 8: CONCURRENCY
+
+   1. Scale an application:  An application runs concurrent processes to handle the increasing load.
+
+   2. Since processes are stateless and share nothing, an application can start additional stateless processes to scale horizontally 
+      and handle additional incoming requests without creating interdependencies among processes.
+
+
+2. FACTOR 9: DISPOSABILITY
+
+   1. Application processes require minimal startup time and should end gracefully when terminated.
+
+   2. Quickly deploy code or config changes.
+
+   3. Easily scale apps.
+
+
+3. FACTOR 11: LOGS
+
+   1. App should not concern itself with storing logs. Because Logs give visibility into application performance. 
+
+   2. Treat logs as an event stream: Application environment should handle logs as a stream of events written to standard output.
+
+   3. Execution environment captures, aggregates, and routes logs to their destination. This action is especially beneficial when the destination is a log analysis tool.
+
+
+4. FACTOR 12: ADMIN PROCESSES
+
+   1. Admin processes are one-off processes for managing an app, such as a database migration. 
+
+   2. Admin processes run against a release using the same codebase and config.
+
+   3. Part of application code: Application code should include admin processes so that they remain synchronized with the app.
+
+
+
+MICROSERVICES PATTERNS
+========================
+
+
+1. SINGLE PAGE APPLICATIONS(SPA)
+
+   1. Enabled by more powerful browers, faster networks and client side languages.
+
+   2. User loads one interface that never reloads.
+
+   3. Updates dynamically using calls to backend REST based services.
+
+   4. Simplifies the front end experience.
+
+   5. While a single-page application works well for single-channel user experiences, 
+      it delivers poor results across user experiences through different channels, like mobile and web. 
+
+2. BACKEND FOR FRONTEND(BFF)
+
+   1. Provides superior support than a generic backend.
+
+   2. A Backend for Frontend pattern inserts a layer between the user experience and the resources.
+
+   3. Allows for customized user experiences for different channels. 
+      For example, an app used on a desktop will have a different screen size, display, and performance limits than an app used on a mobile device. 
+
+   4. Supports one backend type per user interface.
+
+3. STRANGLER PATTERN
+
+   1. The Strangler pattern helps manage the refactoring of a monolithic application in stages. 
+
+   2. Gets its name from the vine that strangles the tree. 
+
+   3. Split an application into multiple functional domains and replace them with a new microservice per domain, one at a time. 
+
+   4. This enables two applications to exist side by side.
+ 
+   5. Over time, the newly refactored application replaces the original application until finally, you can shut off the monolithic application. 
+
+   6. The Strangler Pattern includes these steps: 
+
+      1. Transform: Create a parallel new site. 
+  
+      2. Coexist: This leaves the existing site functional and live for a specified time. 
+                  It incrementally redirects from the current location to the new site for newly implemented functionality. 
+
+      3. Eliminate: This removes the outdated functionality from the existing site or 
+                    stops maintaining that functionality when you redirect traffic from the original site.
+
+4. SERVICE DISCOVERY
+
+   1. Helps applications and services discover each other.
+
+   2. Provides flexibility:  Service instances change dynamically due to scaling, upgrades, service failure, and even service termination.
+
+   3. Could be used by load balancers to conduct health checks and rebalance traffic on service failures.
+
+
+5. OTHER PATTERNS
+
+   1. Entity and aggregate pattern:  Which could be used in an e-commerce site, where an order would be an aggregate of products grouped by a buyer. 
+
+   2. Adapter pattern: Helps translate relationship between incompatible objects. Example, integration with third party API. 
+
+
+
+WHAT IS REST?
+==============
+
+
+1. REST stands for Representational State Transfer. 
+
+2. REST APIs provide a flexible, lightweight way to integrate applications, 
+   and have emerged as the most common method for connecting components in microservices architectures.
+
+3. It is an architectural style that defines how applications should communicate with each other within a network. 
+
+
+CHARACTERSTICS
+----------------
+
+An API has three characteristics that classify it as RESTful. 
+
+1. It manages all requests through HTTP.
+
+2. It provides stateless, client-server communication.
+
+3. It consists of uniform interface between components.
+
+
+REQUESTS USE HTTP
+------------------
+
+1. REST API's communicate via HTTP to perform CRUD.
+
+   1. Create - POST
+
+   2. Read - GET
+
+   3. Update - PUT
+
+   4. Delete - DELETE
+
+
+STATELESS COMMUNICATION
+--------------------------
+
+1. Each request contains all the necessary information to process it. 
+
+2. Roy Fielding, the originator of REST, said in his dissertation. 
+  “Each request from client to server must contain all of the information necessary to understand the request, 
+   and cannot take advantage of any stored context on the server. Session state is therefore kept entirely on the client.”
+
+3. This stateless nature of API's make them highly scalable.
+
+
+UNIFORM INTERFACE
+===================
+
+1. The main benefit of RESTful APIs is the uniform interface, regardless of where the request originates.
+   API request for resources should look the same regardless of origin.
+
+2. The REST API should ensure that the same piece of data, such as the product id, belongs to only one uniform resource identifier (or URI). 
+
+
+
+API GATEWAY
+============
+
+
+WHAT IS API GATEWAY?
+---------------------
+
+1. API management tool. It's a door to the backend services. 
+
+2. Sits between client and collection of backend services.
+
+
+WHY USE API GATEWAY?
+----------------------
+
+1. Protect your API's from malicious usage or oversuse: Thus, you can use an authentication service with rate limiting. 
+
+2. Analyze your API usage: It helps to understand how your APIs are used, using an analytics and monitoring service. 
+
+3. Monetize your API's: By using a billing system. 
+
+4. Provides single point of contact to various microservices.
+
+5. Add and remove API's seamlessly:  Without the client’s knowledge about the services running at the back end.
+
+
+GATEWAY TO MICROSERVICES
+--------------------------
+
+Example:
+
+Services for an online store: 
+
+1. Product information service.
+
+2. Inventory service.
+
+3. Order service.
+
+4. Authentication service. 
+
+How does a client access these individual microservices?
+
+There is a problem interacting with multiple API's.
+
+API gateway can remove this problem by:
+
+1. Hosts can change.
+
+2. Services can be scaled up or down.
+
+3. Services can be replaced (for example an ordering service with a new one.)
+
+While, The client’s access to the services remains undisturbed.
+
+
+BENEFITS
+----------
+
+1. It insulates the clients from how the application is partitioned into microservices.
+   In other words, it simplifies the client side by moving the logic for calling multiple services from the client to the API Gateway.
+
+2. Provide unified access to API's: It provides the optimal API for each client, regardless of who the client is.
+
+3. Fewer requests to the backend:  It reduces the number of requests or round trips.
+   For example, the API Gateway enables clients to retrieve data from multiple services with a single round trip. 
+
+4. Standard protocol to the outside world: 
+   Irrespective of how your microservices communicate internally, an API Gateway will provide a standard protocol to communicate with the outside world.
+
+
+DRAWBACKS
+-----------
+
+1. Complexity:  As it’s another component that needs to be developed and maintained.
+
+2. Single point of failure: If not designed carefully.
+
+3. Extra Step: Gateway will increase the response time due to this additional network step in the execution of the application. 
+
+
+API GATEWAY PRODUCTS
+----------------------
+
+1. MANAGED GATEWAYS
+
+   1. IBM DataPower Gateway
+
+   2. Google Apigee/Cloud Endpoints
+
+   3. Microsoft Azure API Gateway
+
+   4. Amazon API Gateway
+
+2. OPEN SOURCE GATEWAYS
+
+   1. Kong Gateway
+
+   2. Apache APISIX
+
+   3. Tyk
+
+   4. Gloo
+
+ASIDE: OpenAPI specification is a standard way of representing your APIs
+
+
+
+SERVERLESS COMPUTING
+======================
+
+
+1. The concept of building and running applications that do not require server management.
+
+2. In other words, serverless computing offloads the responsibility of infrastructure management to cloud providers,
+   enabling developers to focus on the application business logic. 
+
+3. Think of serverless computing as a combination of function-as-a-service (or FaaS) platforms and backend-as-a-service (or BaaS) services. 
+   FaaS platforms are used to run functions. BaaS represents backend cloud services, such as cloud databases, object storage services, and message queues. 
+
+
+SERVERLESS ARCHITECTURE CONCEPTS
+-----------------------------------
+
+1. Abstracts both infrastructure and software environments.
+
+2. Code runs in a cloud platform.
+
+3. The cloud provider manages the hardware and software setup, security, scalability, and so on.
+
+4. The client is billed only for usage and not for CPU idle time.
+
+5. Developers only need to focus on their application code. 
+
+
+CHARACTERSTICS
+-----------------
+
+1. Hostless: Developers do not have to procure, manage, and maintain servers.
+
+2. Elastic: Because autoscaling is immediate and inherent for serverless.
+
+3. Load Balanced: It offers automated load balancing that distributes the incoming traffic across multiple backend systems.
+
+4. Stateless: Which results in faster performance and higher scalability. 
+
+5. Event Driven: Meaning functions are triggered only when events occur.
+
+6. High Availability: It provides high availability with no extra effort or cost. 
+
+7. Usage Based: It is usage-based with granular billing.
+
+
+HOW SERVERLESS FUNCTIONS WORK?
+--------------------------------
+
+1. The developer creates a function by writing code in a language supported by the cloud provider, such as Python, Java, Node.js, C#, or Go. 
+
+2. The developer uploads the function to the cloud.
+
+3. Then, events are defined that trigger the function, such as a user click. And, once the event occurs, the trigger is invoked.
+   
+4. The cloud provider runs the function, resulting in the container object.
+
+
+CLOUD PROVIDER RESPONSIBILITIES
+---------------------------------
+
+1. Routine infrastructure management and maintenance tasks:
+
+   1. Maximizing utilization: Of compute, memory and networking resources. 
+
+   2. Minimizing costs 
+
+   3. Server management: That includes OS updates and security patches.
+
+   4. Autoscaling.
+
+   5. High availability.
+
+   6. Security.
+
+   7. High performance or low latency.
+
+   8. Monitoring and logging. 
+
+
+ASIDE: E:\Learning\Ready-Reckoners\serverless_responsibility_model
+
+
+
+FaaS MODEL
+============
+
+
+Function-as-a-Service or FaaS, is a type of cloud-computing service that allows you to execute code in response to events without
+the complex infrastructure typically associated with building and launching microservices applications.
+
+
+CHARACTERSTICS
+---------------
+
+1. Subset of serverless computing.
+
+2. It creates applications in the form of multiple functions where a function is a piece of software written in any programming language.
+
+3. Deployed on hybrid clouds as well as on-premises environments.
+
+4. Stateless but can maintain state using external caches.
+
+5. Includes functions that executes in milliseconds and are instantaneously scalable.
+
+6. Lightweight and uses the decoupling architecture mechanism. 
+
+7. Billed on consumption and execution and not on server size.
+
+
+BENEFITS
+---------
+
+1. Divide the server into functions that can be scaled automatically and independently so you don’t have to manage infrastructure.
+
+   1. Focus more on code.
+
+   2. Reduce time to market.
+
+2. Pay for what you use.
+
+3. Functions are stateless independent pieces of code.
+
+   1. They can be scaled automatically, independently, and instantaneously, as required.
+
+   2. They automatically scale down, if demand drops.
+
+   3. Offers high availability because it is spread across regions and availability zones and can be deployed without incremental costs.
+
+
+SERVERLESS STACK COMPONENTS
+-----------------------------
+
+1. FaaS
+
+2. BaaS
+
+3. API Gateway
+
+
+HOW COMPONENTS WORK
+--------------------
+
+1. Event requests are received from different channels like an HTTP request, webhooks from repositories such as Github and Docker Hub, and scheduled jobs.
+
+2. These requests go through the API Gateway which identifies and forwards them to the respective functions. 
+
+3. The functions then process these requests, and they are further directed (if necessary) 
+   toward the backend services (such as file and object storage, block storage, notification services, and so on) for further processing and/or storage. 
+
+4. The output or response is then sent back to the client through the FaaS component and the API Gateway.
+
+
+FaaS PRINCIPLES OR BEST PRACTICES
+-----------------------------------
+
+1. Each function should perform only one action:
+
+   1. Make your code scope limited, efficient, and lightweight 
+
+   2. So that, functions load and execute quickly.
+
+2. Avoid function chaining:
+ 
+   1. Too many functions increases costs.
+
+3. Limit dependencies on third party libraries:
+
+   1. Slows down initialization.
+
+   2. Harder to scale.
+
+
+
+CHALLENGES OF SELF HOSTING MICROSERVICES
+===========================================
+
+
+1. Deliberated Configuration and Build: 
+
+   1. First, you need to deliberately configure and build your microservices to make them production-ready, 
+      including necessary assets like library dependencies, resources, credentials, and so on. 
+  
+   2. Then compile and build them into one executable binary to run on hosting environments.
+
+2. Manage Infrastructure:
+
+   Next, you need to carefully choose the infrastructure to run your microservices, such as web servers, operating systems, networks, databases, and so on.
+
+3. Dynamic Scaling:
+
+   Since your microservices undergo fluctuating traffic, you will need to scale up or down dynamically. 
+
+4. Communication & Security: 
+
+    1. You will need to deploy multiple related microservices that work and communicate.
+   
+    2. The communication among the microservices needs to be reliable and secure. 
+
+5. Logging & Monitoring: 
+
+   Activities like logging, monitoring, and working on dashboards are also required to ensure all microservices are stable
+   and any production issues are identifiable or even foreseen. 
+
+6. Other Challenges: 
+
+   There can be other challenges of self-hosting which are dependent and specific to the implementation and build of the microservices.
+
+   Example : Deploy a python based microservice
+
+   1. Suppose you have built a Python-based microservice, which may be a Flask, Django, or any other Python web application.
+      The microservice cannot start providing the required service directly. 
+
+   2.  It requires a web server interface or entry point to call your microservice. 
+
+   3. Web Server Gateway Interface, or WSGI, is the main Python standard for communication between web servers and web applications or microservices.
+
+   4. There are many popular WSGI web servers, such as Green Unicorn and uWSGI. 
+
+   5. An Asynchronous Server Gateway Interface, or ASGI, is another web server interface. 
+      The main difference from WSGI is that it supports asynchronous code so that your microservice can be called asynchronously.
+
+   6. Some popular ASGI web servers are Daphne and Hypercorn.
+
+   7. Either WSGI or ASGI web servers need to be running on a certain type of infrastructure.
+
+   8. Depending on your service requirements or agreements, the infrastructure can be a laptop, a dedicated workstation, 
+      or a sophisticated cluster with hundreds of computing and data nodes. 
+
+
+As can be observed, you will need to make many tradeoffs and efforts to deploy a microservice on production. 
+
+
+
+CLOUD HOSTING
+==============
+
+
+IBM CLOUD CODE ENGINE
+-----------------------
+
+1. It abstracts the operational burden of building, deploying, and managing workloads so that developers can focus on code development. 
+
+2. IBM Cloud Code Engine can be seen as a fully managed, serverless platform. 
+
+3. It combines all features that are required by Platform as a Service (PaaS), Containers as a Service (CaaS), and serverless deployment models.
+
+4. It runs your workloads, including microservices, web apps, event-driven functions, or batch jobs.
+
+5. IBM Cloud Code Engine has three main use cases or deployment modes:
+
+   1. Deploy Application: 
+
+      Deploying a built application to Code Engine. 
+      An application could be a microservice, a web app, or a console app. 
+
+   2. Build & Deploy: 
+
+      Pushing the source code directly.
+      The Code Engine can build your application from source code, either from a remote repository like GitHub repo or your local workspace. 
+      The built application can then be automatically deployed without worrying about the building process.
+
+   3. Run Jobs: 
+
+      Creating and running batch jobs like a data processing or analytics task. A job runs code one time and exits. 
+      If one of your microservices needs to analyze results, you can deploy a batch job to perform the analytics tasks on the same platform. 
+      So, all your deployed microservices and jobs can work seamlessly together because they are all hosted within the same infrastructure. 
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
