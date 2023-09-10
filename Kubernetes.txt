@@ -557,6 +557,30 @@ OPERATOR FRAMEWORK
     3. Automation of rote tasks in a cluster, like taking and restoring back-ups of an application’s state.
 
 
+HOW OPENSHIFT WORKS
+====================
+
+1. OpenShift has two different ways of enabling developers to work on their platform. CLI & Web console.
+
+2. There's templates for all different kinds of source code and programming languages that the dev wants to work with.
+   Dev's can use these to push their code and deploy their application.
+
+3. In case of updating an app, the very first step is to push changes to a repository. e.g Github. That's really all they need to do.
+
+4. OpenShift in the back end will create a jenkins job and pipeline that helps power deploying this application.
+
+5. Once code gets pushed into that GitHub, it'll trigger a web hook, which kicks off a Jenkins job. Which is going to do two things:
+
+   1. Source to image, which is going to create a docker image out of that source code. 
+
+   2. It'll going to push image into a registry. A private registry, which comes built-in in OpenShift.
+
+6. OpenShift will go ahead and push that into the actual cluster.
+
+7. OpenShift takes advantage of something called image streams, what it enables you to do is whenever a change is detected with that image, 
+   it will allow you to push those with no downtime to your applications. It'll bring down the old version & start the new version. 
+
+
 ISTIO
 ======
 
@@ -580,7 +604,7 @@ Istio exhibits these four concepts:
 
 1. Connection to control traffic
 
-2. Secures services
+2. Secures services(encrypt traffic)
 
 3. Enforces policies
 
@@ -600,28 +624,64 @@ HOW ISTIO WORKS WITH MICROSERVICES?
 4. All network traffic is intercepted by, a proxy, called Envoy proxy(which is present in every service), 
    which is used by the service mesh(ISTIO), and allows many features depending on the configuration.
 
-5. The control plane takes the desired configuration and its view of the services and dynamically programs and updates the proxy servers as the environment changes.
-
-6. Consider the application architecture in which the UI talks to an ordering microservice. 
+5. Consider the application architecture in which the UI talks to an ordering microservice. 
    The ordering microservice interacts with the Inventory microservice, which then talks to a database. 
    Service-to-service communication enables any microservices architecture, but as that communication gets more complex, a service mesh can help improve it.
 
-7. Istio performs traffic shifting by gradually migrating the traffic from one version of a microservice to other versions.
+6. Istio performs traffic shifting by gradually migrating the traffic from one version of a microservice to other versions.
 
-8. The team begins by sending 5 percent of traffic to that second version. And over time, the team can increase this to 50 percent and eventually to 100 percent.
+7. The team begins by sending 5 percent of traffic to that second version. And over time, the team can increase this to 50 percent and eventually to 100 percent.
    Similarly, Istio request routing allows you to perform A/B tests and direct a particular version of a microservice to a subset of users
    while sending the original version to the remaining users. The process ensures that a new version increases user engagement or performance. 
 
-9. Istio defends from man-in-the-middle attacks by encrypting traffic between microservices. 
+8. Istio defends from man-in-the-middle attacks by encrypting traffic between microservices. 
 
-10. Istio makes it easy to implement policies for service access control so that services can only talk to the other required services.
-    In above example, the UI service would be unable to directly communicate with the Inventory service, even if it tried. 
+9. Istio makes it easy to implement policies for service access control so that services can only talk to the other required services.
+   In above example, the UI service would be unable to directly communicate with the Inventory service, even if it tried. 
 
-11. Istio provides service communication metrics. These metrics cover the four basic service monitoring needs: latency, traffic, errors, and saturation. 
+10. Istio provides service communication metrics. These metrics cover the four basic service monitoring needs: latency, traffic, errors, and saturation. 
     For example, Istio provides metrics on request counts so that you can see how much traffic your requests are receiving and request duration, 
     so that you can find bottlenecks and ensure that there are prompt responses.
 
-12. Istio is a service mesh that supports four concepts of connection, security, enforcement, and observability. It is commonly used with Microservices applications. 
+11. Istio is a service mesh that supports four concepts of connection, security, enforcement, and observability. It is commonly used with Microservices applications. 
+
+12. To get started with Istio and to configure Istio, there's three main resources that you need to learn about. 
+
+    1. Gateway: Gateway is like a load balancer that sits at the edge of your mesh and accepts incoming and outgoing HTTP and TCP connections.
+
+    2. Virtual service: Virtual service can be bound to a gateway and direct traffic to UI or it could be bound to a service and 
+                        then direct traffic to your other services, where you can apply policies like ninety percent and ten percent traffic split rules. 
+       
+    3. Destination Rules: Once traffic is routed, you can apply rules on top of that traffic such as TLS settings or circuit breaking, 
+                          and those are done using destination rules.
+
+13. ISTIO Components & Architecture:
+
+   1. ISTIO automatically inject proxies in the containers. 
+
+   2. The proxy itself runs in a container next to your application container, but it runs inside the same Kubernetes pod.
+      For example, UI wants to talk to catalog, the proxy will actually intercept that request, apply any policies, and then route traffic to the proxy on the other side, 
+      and then the catalog proxy will receive that request and then forward it down to the catalog.
+
+   3. Istio will configure each one of these proxies with your desired configuration. Istio extends Kubernetes using CRDs. 
+      So, to apply Istio configuration, you just write your YAML and then apply it to Kubernetes. 
+
+   Components:
+
+   Components are part of the control plane. 
+      
+   4. Galley & Pilot: The Istio galley component will receive that YAML, validate it, and then hand it over to Istio pilot. 
+                      Pilot will convert that configuration to envoy configuration and distribute it to each one of the proxies.
+
+   6. Policy: If you want the proxies to add additional policies and rules there's a policy component.
+
+   7. Telemetry: And then these proxies constantly report telemetry information about what's going on into your system to the Istio telemetry component.
+
+   8. Citadel: Citadel is responsible for providing a strong identity to each one of the services in your system. 
+               It also generates certificates and rolls it out to each one of the proxies so that the proxies can do mutual TLS when they're talking to one another.
+
+14. There's some refactoring that's going on with Policy & Telemetry components. 
+    The logic is being moved outside of this control plane and into the proxies themselves to avoid the additional network hop.
 
 
 

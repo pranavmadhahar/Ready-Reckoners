@@ -716,29 +716,18 @@ IBM CLOUD CODE ENGINE
       So, all your deployed microservices and jobs can work seamlessly together because they are all hosted within the same infrastructure. 
 
 
+https://prodlist.173g6oqa0c3f.us-south.codeengine.appdomain.cloud
+https://prodlist.174osioy5rob.us-south.codeengine.appdomain.cloud
+
+https://dealerdetails.173g6oqa0c3f.us-south.codeengine.appdomain.cloud
+https://dealerdetails.174osioy5rob.us-south.codeengine.appdomain.cloud
+
+https://frontend.173g6oqa0c3f.us-south.codeengine.appdomain.cloud/
+
+ibmcloud ce application create --name frontend --image us.icr.io/${SN_ICR_NAMESPACE}/frontend --registry-secret icr-secret --port 5001 --build-source .
 
 
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ibmcloud ce application create --name frontend --image us.icr.io/${SN_ICR_NAMESPACE}/frontend --registry-secret icr-secret --port 5001 --build-source .
 
 
 
