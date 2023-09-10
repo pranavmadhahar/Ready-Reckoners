@@ -54,10 +54,12 @@ Create a file naming Dockerfile and write the below code in it.
 
 3. CMD ["redis-server"] - This will set the base command which will run on startup. It means run this executable command when the container has started. 
 
-                          Then run docker build . or docker build . -t myimage:v1 . command and it will generate custom image, myimage is the name of image. 
-		          v1 is the tag name.
+                          1. Then run docker build . or docker build . -t myimage:v1 . command and it will generate custom image, myimage is the name of image. 
+		             v1 is the tag name. or docker build . -t us.icr.io/${SN_ICR_NAMESPACE}/helloworld2 i.e. registry/namespace/image name with tag.
                           
- 			  Then run docker run myimage:v1 command for creating the container. 
+                          2. Push the image to the registry, docker push us.icr.io/${SN_ICR_NAMESPACE}/helloworld2
+                          
+ 			  3. Then run docker run myimage:v1 command for creating the container. 
 
 
 IMAGE
