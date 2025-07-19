@@ -4,25 +4,29 @@ CRUD OPERATION --CREATE READ UPDATE DELETE
 CREATING & SHOWING DB & COLLECTIONS
 ------------------------------------
 
-show dbs - It will show all the databases.
-use Larry - It will switch to db Larry. If there is no such db then it will create a db with name Larry.
-show collections - It will show all collections in the database. 
-db.text.insert({"name": "Sherry" }) - It will insert 'name: Sherry' in collection 'text' (also it will create one if it doesn't exists earlier) in db Larry.
-db.anotherCollection.insertOne({a: 89}) --This will insert collection by name of anotherCollection with a:89 as data in sherrykart database.
+1. show dbs - It will show all the databases.
+2. use Larry - It will switch to db Larry. If there is no such db then it will create a db with name Larry.
+3. show collections - It will show all collections in the database. 
+4. db.text.insert({"name": "Sherry" }) - It will insert 'name: Sherry' in collection 'text' (also it will create one if it doesn't exists earlier) in db Larry.
+5. db.anotherCollection.insertOne({a: 89}) --This will insert collection by name of anotherCollection with a:89 as data in sherrykart database.
 --Database and collections are only visible when there is some data in it. 
 
 FINDING DATA 
 -------------
 
-db.items.find() --For finding all items in collection in selected db.
+db.name of collection.find() 
+
+db.items.find() --For finding all documents in collection named 'items'in selected db.
 db.items.find({rating: 3.5}) --This query will return objects with rating 3.5.
 db.items.find({rating: {$gte: 3.5}}) --This query will return objects with rating greater than equal to (gte) 3.5.
 db.items.find({ rating: {$lt: 3.5}, price: {$gt: 4000} }) --And Operator
 db.items.find({ $or:[ {rating: {$gt: 3.0}}, {price: {$gt: 100000}} ] }) --OR Operator
 --Projection for getting only ratings or getting both ratings & quantity--
-db.items.find({rating: {$gt: 3.5}}, {rating: 1}) --This will return rating field only--
-db.items.find({rating: {$gt: 3.5}}, {rating: 1, qty: 1}) --This will return rating & quantity fields. 
+db.items.find({rating: {$gt: 3.5}}, {rating: 1}) --This will return rating field only--rating:1 means show only ratings.
+db.items.find({rating: {$gt: 3.5}}, {rating: 1, qty: 1}) --This will return rating & quantity fields. rating:1, qty:1 means show only ratings & qty.
 
+
+db.items.find({$or:[{rating:{$lt: 3.5}, price:{$gt: 4000}}]})
 
 INSERTING DATA
 ---------------
@@ -30,7 +34,7 @@ INSERTING DATA
 db.items.insertOne({name: 'Samsung 30s', price: 22000, rating: 4.5, qty: 233, sold: 98})
 db.items.insertMany([{name: 'Samsung 30s', price: 22000, rating: 4.5, qty: 233, sold: 98}, {name: 'Moto 30', price: 15000, rating: 3.5, qty: 135, sold: 345}, {name: 'Realme 80s', price: 125000, rating: 2.5, qty: 650, sold: 52}])
 db.items.insertMany([{name: 'Samsung 30s', price: 22000, rating: 4.5, qty: 233, sold: 98}, {name: 'Moto 30', price: 15000, rating: 3.5, qty: 135, sold: 345}, {name: 'Realme 80s', price: 125000, rating: 2.5, qty: 650, sold: 52, isBig: 'True'}] )
---Here 'items' is the name of the collection we want to create and insert our data. 
+--Here 'items' is the name of collection we want to create and insert our documents. 
 
 DELETING DATA
 --------------
@@ -114,4 +118,18 @@ var myData = new Contact(req.body); --This syntax is used when storing data from
   await Contact.find({ name: 'Larry'}); --Contact is contact we need to find in Conts.
 
   await Contact.findById(id);
+
+
+ASIDE
+-------
+
+1. Database->Collections->Documents in mongodb.
+
+2. Database->Tables->Rows in relational dbms.
+
+3. mongod is the host process
+
+4. mongosh is the command line shell that connects to host process mongod. It connects to port 27017 by default.
+
+5. You can also connect to mongod process hosted on other machine from your computer by using host_machine:port combination. 
 

@@ -1,4 +1,4 @@
-======================
+ ======================
 DATA TYPES IN PYTHON
 ======================
 
@@ -9,15 +9,15 @@ In python everything is an object.
 3. Boolean - True & False 
 4. Lists - just like array [1, 2, 3] - Data is mutable
 5. Tuples - ( ("parrot", "sparrow"), ("lion", "tiger") ) - Data is immutable 
-6. Dictionary - mapped data - key-value pairs - just like objects
-7. Sets - Sets are immutable.
+6. Dictionary - mapped data - key-value pairs - just like objects. Data is mutable. 
+7. Sets - Sets are mutable. Data in sets is unique and immutable. 
 8. Expressions - Are the operations python performs e.g. 45+30+67 is an expression. Add operations, multiplication operations etc
 
 ======================
 ARTHEMETIC OPERATORS
 ======================
 
-1. // - Floor division operator - Divides and returns whole numbers without decimals 
+1. // - Floor division operator - Divides and returns whole numbers without decimals
 
 2. % - Modulus operator - Divides and returns the remainder. 
 
@@ -49,6 +49,7 @@ STRINGS
 ==========
 
  Strings are immutable.
+ String is like array of characters. 
 
  Anything enclosed in ''' ''' will get printed.
  
@@ -58,7 +59,7 @@ STRINGS
  name = "larry"
 
  for character in name:
- print(character)
+     print(character)
  prints l a r r y 
 
 
@@ -112,7 +113,8 @@ STRINGS
  7. center()
 
     Moves the string to the center by adding space. 
-    print(bloghead.center())
+    This will add (50-length) spaces to the  bloghead.
+    print(bloghead.center(50))
 
  8. count()
 
@@ -213,6 +215,11 @@ STRINGS
 
     e = 'clocrkr1e1c1t'
     print(e[::2])
+
+25. Reverse the String:
+
+    str = "Larry"
+    print(str[::-1]
 
 
 
@@ -325,10 +332,10 @@ LOOPS
    range(): 
 
    for k in range(5):
-    print(k + 1) - This prints 0-5
+    print(k) - This prints 0-4
 
    for k in range(1, 9):
-    print(k + 1) - This prints 1-9
+    print(k) - This prints 1-8
 
    for k in range(1, 12, 3):
     print(k + 1) - This prints 1, 4, 7, 10, 
@@ -361,7 +368,7 @@ LOOPS
   ------------------------
 
   count = 5
-  while(count > 0 )
+  while(count > 0 ):
    print(count)
    count = count - 1
 
@@ -451,7 +458,7 @@ FUNCTION ARGUMENTS
 
 2. Variable length argument
 
-   As tuple:
+   As tuple: 
 
    def average(*numbers): 
      sum = 0
@@ -459,18 +466,33 @@ FUNCTION ARGUMENTS
        sum = sum + i
      print("Average is: ", sum/len(numbers))
 
+   Then we can use this fn as average(2, 4) or average(2, 4, 6, 8) 
+
    As dictionary:
 
    def name (**name):  
 
      print("Hello", name[fname], name[mname], name[lname])
 
-   name(mname="Barnes", lname="Buchnan", fname="James") prints Hello James Buchnan Barnes.
+   name(mname="Barnes", lname="Buchnan", fname="James") 
+   prints Hello James Buchnan Barnes.
 
+3. Pass Keyword:
+
+   def add(a, b):
+     pass
+
+   This will not throw error, if we want to write fn later. 
+
+4. Build In Functions:
+
+   Python provides several build in functions, you can search on the net. 
 
 =======
 LISTS
 =======
+
+Lists  are mutable. 
 
 
 marks = [3, 5, 6, "Larry", True]
@@ -479,6 +501,13 @@ print(marks) prints [3, 5, 6, "Larry", True]
 print(marks[:]) prints [3, 5, 6, "Larry", True]
 print(marks[1:-1]) This is same as print(marks[1:4]), len(marks)-1 = 5-1 = 4, prints [5, 6, "Larry"]
 print(marks[1:4:2]) prints [5, "Larry"]
+
+Use of in keyword: (and same applies for strings as well).
+
+if 5 in marks:
+  print('Yes')
+else:
+  print('No')
 
 
 List Comprehension:
@@ -543,6 +572,12 @@ List Methods:
    Incase we do not want to modify original list:
    k = l + m
    print(k) prints [11, 45, 1, 2, 4, 6, 1, 900, 1000, 1100]
+
+
+TUPLES
+---------
+
+Same as lists, only difference is tuples are not mutable. 
 
 
 ======================
@@ -794,6 +829,10 @@ try:
   code
 except exception as e: - We can also suffix valueerror, indexerror, memoryerror to except. 
   code 
+except ValueError:
+  code
+except IndexError:
+  code 
 
 
 ==========
@@ -1009,8 +1048,13 @@ import os
 # Open the file in write-only mode
 f = os.open("myfile.txt", os.O_WRONLY)
 
+s = "Hello World"
+line = str.encode(s) 
+
 # Write to the file
 os.write(f, b"Hello, world!")
+or
+os.write(f, line)
 
 # Close the file
 os.close(f)
@@ -1704,7 +1748,7 @@ class MyClass:
 obj1 = MyClass()
 obj2 = MyClass()
 
-obj1.print_class_variable() # Output: 2
+obj1.print_class_variable() # Output: 1
 obj2.print_class_variable() # Output: 2
 
 
@@ -1972,17 +2016,23 @@ This allows you to extend the behavior of the base class method, while still mai
 
 
 class Shape:
-    def area(self):
-        print("Calculating area...")
+     def __init__(self, x, y):
+          self.x = x
+          self.y = y
+          print("Calculating area...")
+    
+     def area(self):
+         return self.x * self.y
 
 class Circle(Shape):
     def __init__(self, radius):
         self.radius = radius
+    super().__init__(radius, radius)
 
     def area(self):
         print("Calculating area of a circle...")
-        super().area()
-        return 3.14 * self.radius * self.radius
+        return 3.14*super().area()
+        
 
 
 ====================
@@ -2089,15 +2139,19 @@ SHUTIL MODULE
 
  The following are some of the most commonly used functions in the shutil module:
 
- 1. shutil.copy(src, dst): This function copies the file located at src to a new location specified by dst. If the destination location already exists, the original file will be overwritten.
+ 1. shutil.copy(src, dst): This function copies the file located at src to a new location specified by dst. 
+                           If the destination location already exists, the original file will be overwritten.
 
  2. shutil.copy2(src, dst): This function is similar to shutil.copy, but it also preserves more metadata about the original file, such as the timestamp.
 
- 3. shutil.copytree(src, dst): This function recursively copies the directory located at src to a new location specified by dst. If the destination location already exists, the original directory will be merged with it.
+ 3. shutil.copytree(src, dst): This function recursively copies the directory located at src to a new location specified by dst.
+                               If the destination location already exists, the original directory will be merged with it.
  
- 4. shutil.move(src, dst): This function moves the file located at src to a new location specified by dst. This function is equivalent to renaming a file in most cases.
+ 4. shutil.move(src, dst): This function moves the file located at src to a new location specified by dst. 
+                           This function is equivalent to renaming a file in most cases.
 
- 5. shutil.rmtree(path): This function recursively deletes the directory located at path, along with all of its contents. This function is similar to using the rm -rf command in a shell.
+ 5. shutil.rmtree(path): This function recursively deletes the directory located at path, along with all of its contents. 
+                         This function is similar to using the rm -rf command in a shell.
 
 
 EXAMPLE:

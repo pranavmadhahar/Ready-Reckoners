@@ -1,0 +1,453 @@
+
+BASIC COMMANDS 
+
+NAVIGATION
+-------------
+
+pwd - print working directory - shows present directory user is working in, it shows the parent
+ls - shows files and directories or the children inside the parent directory
+ls -R - shows files inside children directories in addition to ls above. It shows all files recursively.
+ls -a - shows hidden files as well.
+ls -lart - It lists all files including hidden ones, in long format, sorted by modified time, in reverse order, along with permissions.
+ls -l *file1* - This will matches file1 in any position and list it. e.g. file1.txt, abfile1.txt 
+ls -lR file1* - This will list recursively in all subdirectories. file1* means begins with. 
+/ - root directory, linux has tree like structure, windows has drive based structure e.g  C,D,E
+~$ - home/user directory
+cd - change directory
+cd .. - change directory to parent directory
+cd -  - change to the previous directory
+cd ~  - change to the home directory
+tab - Enter first three char and then press tab and it will auto complete the directory name e.g cd Dow+tab autocompletes Downloads
+
+
+MKDIR, TOUCH, MOVE, COPY
+--------------------------
+
+mkdir - creates directory or folder e.g. mkdir pranav
+touch - creates a blank file e.g touch 1.txt
+touch .pr  - creates a hidden file with pr 
+case sensitivity - Changing the case sensitivity with same name, several files can be created e.g. abcd.txt, ABCD.txt, abCD.txt 
+mv - move a file to folder e.g mv 1.txt this/  - it will move 1.txt in this folder 
+cp - copy a file to folder e.g mv 2.txt this/  - it will copy 2.txt in this folder 
+absolute path - cp /home/maverick/pranav/56.txt /home/maverick  - it will copy file to the mentioned directory and same applies for mv
+
+
+USERS, SUDO, APT, PATHS
+--------------------------
+
+Users - There are two kinds of users, regular user and root user or super user or admin 
+        Regular user has limited rights and permissions while super user has all the access and rights even for other users with all permissions.
+sudo - user with certain permissions
+sudo su - super user or root user with all permissions. 
+sudo apt update - This will update the list of softwares for upgrade but will not install
+sudo apt-get update - Only update the existing sofware not new ones available.
+sudo apt upgrade - This will check the list of softwares which can be updated and then installs the updates.
+sudo apt-get upgrade - Upgrade only whats already installed on system, no new packages even if they are available. 
+sudo apt install vlc - This will install the mentioned software.
+apt - is the package manager for ubuntu linux. It stands for advanced package tool. It is dpkg(debian package) based.
+
+Relative Path - cd pranav - This will take to the pranav folder in present working directory.
+Absolute Path - cd /home/user - If u want to go to some other directory which is not in present working directory.
+
+clear - clears the console.
+history - will show all commands ran by user.
+
+echo - echo pranav will print pranav.
+printf - will do the same as above.
+
+
+CHOWN, CHMOD, CHGRP
+----------------------
+
+owner group other - ls -l command will list all the permissions in that order. 
+chmod calculator - it tells u a number based on permissions granted for read, write and execute. 
+chmod - chmod 734 1.txt - it will reset the permissions for owner, group & other as per chmod calculator. 
+chmod & chgrp - chmod is used to change permissions for file, and chgrp is used to change permissions for group.
+chown - for file owner
+
+top - this will show top processes which are consuming resources in decending order.
+      after that press q to get the cursor.
+      It can be used with several flags t, m, A, r, k, f, o
+
+ps - shows all the processes which are running.
+ps -a - shows hidden or background processes as well.
+kill - kill 1234 - This will kill the process with given process id(PID)
+
+vim - press i (insert) for start typing.
+    - press esc and press :
+    - press q for exiting without saving(:q)
+    - press qw for saving and returning to console(:qw)
+    - If u r editing in vim which already contains text and do not wish to save then press :q! after pressing esc.
+
+
+BOOTING PROCESS
+-----------------
+
+1. When the power button is on it activates the BIOS (basic input output system). BIOS software is stored on rom chip on motherboard.
+
+2. Initializes the screen and keyboard and tests memory. This process inculding one above is also known as POST. Power on self test.
+
+3. System control is passed from BIOS to the bootloader which is part of the OS. Rest of the boot process is taken care by OS.
+   Bootloader is stored in the hard drive. 
+
+4. GRUB is grand unified bootloader for linux. ISOlinux for booting from removable media e.g usb.
+
+5. Bootloader is responsible for loading kernel image and initial filesystem into memory.
+
+6. init process is the parent process. It is responsible for keeping the system running and shutting it down cleanly.
+   It also act as a process manager for all other processes. It is also responsible for loggin in and log out the user.
+
+7. systemd is the newer process which is now taken over from init. init now just points to the systemd process and it takes over. 
+   It starts several other processes simultaneously. 
+
+8. systemctl is used for most basic tasks. Use case:
+
+   1. Starting, stopping, restarting service (e.g. httpd for apache web server)
+      sudo systemctl start|stop|restart httpd.service
+
+   2. enabiling or disabling a service to start at boot
+      sudo systemctl enable|disable httpd.service.
+
+
+BASIC COMMANDS
+----------------
+
+A command has three elements - command -options arguments e.g ls -a /home/pranav
+
+usb and other removable drives are available at /run/media/yourusername/disklabel
+mount - this will show all the mounted devices
+
+df -h --total - This will show disk usage with free space available.
+
+sudo shutdown - From terminal will shutdown the computer.
+sudo shutdown -h - Will halt or activate the sleep mode on computer
+sudo shutdown -r - Will reboot the computer.
+
+which - which firefox - This will return the directory where the program is located.
+whereis - whereis firefox - This will look for broader options to find the program.
+
+pushd - pushd /temp - It shows i was at home and want to go to temp directory.
+popd - takes you to the previous directory in the stack visited. 
+dirs - list of directories visited in the pushd & popd stack
+
+tree -d - Will show the tree of directories
+
+
+LINKS
+-------
+
+Hard Link
+
+ln - ln file-1 file-2 - File-2 becomes link to file-1. They refer to the same data. They  have same incode.
+                        There is one file but there is more than one name associated with it.
+ls -li file? - Same as ls -l. It includes incode number & matches file suffix with single character because there is single ? 
+               It will match fileA fileB but not fileAB 
+
+Soft Link
+
+ln -s file1 file3 - File3 becomes soft link to file1. File3 will refer to file1. They have separate incode number. They are symbolic links, takes no extra space.
+                    Creating shortcut to directory on destop is an example of such link. 
+ls -li file1 file3 - They will show separate incode number.
+
+
+FILE DISPLAY
+--------------
+
+wc - This shows the basic data for the file e.g. word count, lines, characters.
+cat - Displays the content of the file.
+cat -n - Displays content with line no.
+tac - Displays files backwards.
+less - Displays one screen at a time, hit spacebar for next. 
+less -N - Will also show line no's.
+head - This will display only few lines from the start. head -20 will show first 20 lines.
+tail - Displays few lines from the end.
+
+
+MAKE, REMOVE, RENAME, MOVE
+----------------------------
+
+mkdir - creates directory - /home/media - This will create media folder/directory home directory.
+rmdir - remove directory - this will remove directory, it must be empty otherwise command will fail.
+rm -rf - forcefully remove a directory recursively. Should be avoided.
+rm -f - forcefully remove a file.
+rm -i - interactively remove a file. It will prompt before removal.
+mv - move a file and for rename a file
+
+
+FILE CREATION
+----------------
+
+touch - touch file1.txt - creates a new file and update timestamp in case already exists.
+echo - echo > file1.txt - creates a new file in case it do not exist and overwrites a file in case already exists.
+
+
+SEARCHING FILES & DIRECTORIES
+-------------------------------
+
+locate - locate bin
+find - find . -name "file1" -ls 
+       find . -iname "file1" , i flag here will ignore the case of the file.
+       find /user -type f -name "file1" type will find only within given filetype here f is normal file, d means for directories
+       find . -name d -maxdepth 1 - This will show directories excluding subfolders
+       find . -size 0 -ls - This will show all the files with size 0.
+       find . -type f -exec grep -H log {} \;  - This will find all regular files with log in it and returns its filename. 
+updatedb - This is system generated and updated daily directory of all files. Use with sudo command to run for instant update.
+grep - like a filter in msexcel. It will return the line containing the given variable. e.g grep "developer" file1.txt 
+wildcards - ?  matches any single character
+            * matches any string of character
+           [set] e.g [a,b,c] will match any occurance of a,b,c
+           [!set] matches any character not in the set of characters
+du - disk usage for a file or directory. 
+di -sh - summarize total size of a folder
+
+
+DOCUMENTATION
+----------------
+
+man - man topic less or man topic | head 7
+info - info make 
+help - --help man 
+
+
+PROCESSES
+-------------
+
+ps - show all the processes
+ps -lf - This will show processes with priority. 
+kill -SIGKILL pid - to kill a process
+kill -9 pid - to kill a process
+RUID - Identifies user who started the process
+RGID - Identifies group who started the process
+EUID - Determines access rights of user
+EGID - Determines access rights of group
+nice - will set a new process with priority nice -n 10 python myscript.py
+renice - will reset the already running process with assigned priority. renice +10 pid 
+gnome-system-monitor - This will open gui for processes.
+w or top or uptime - Anyone of the command will show load averages.
+
+
+FILESYSTEM
+-------------
+
+/home - user directory
+/bin - system binary files to boot the system.
+/sbin - essential binaries related to system adminstration
+/proc - sudo filesystems becuase they do not have permanent presence on the disk, These contain virtual files containing constantly changing kernel data.
+/dev - contain device nodes,kind of sudo files used by harware and software devices.
+/var - contains files which change in size and content as system is running
+/etc - contains system configuration files, contains no binaries
+/boot - contains essential files to boot the system
+/lib - contain comman code shared by applications
+/run - removable media can be accessed on this directory. e.g. /run/media/yourusername/disklabel
+/temp - temporary files
+/opt - optional application softwware packages
+/sys - virtual pseudo-filesystem giving info about system and hardware, can be used for debugging and alterting system parameters.
+/srv - site specific data served up by system seldom used 
+/usr - multiuser applications, utilities and data.
+/etc/fstab - for automatic mounting of filesystems at boot.
+
+
+DIFF & PATCH
+--------------
+
+diff - diff is used to compare text files (flags c, r, i, w, q) e.g. diff -c file1 file2
+cmp -  it is used to compare binaries. Same as diff.
+diff3 - it is used to compare 3 files. A comman file or base file and 2 other for comparasion. e.g. diff -c file1 commanfile file2
+diff -Nur originalfile newfile > patchfile
+      Distributing only patch is more efficient than entire newfile. A patch will only update the changes.
+patch - patch -p1 < patcchfile
+        patch originalfile patchfile
+
+
+BACKING UP
+--------------
+
+cp - to copy
+rsync - rsync sourcefile destinationfile
+        rsync --progress -avrxH --delete sourcedir destdir (this is a good combination of rsynnc command)
+
+File compression
+
+gzip, bzip2(more efficient than gzip), xz, zip
+
+
+TEXT EDITING
+----------------
+
+echo - echo line one > file1 This will create a new file and send text to it
+       echo line two >> file1 This will send text to already existing file
+       echo line three >> file1
+
+cat - cat << EOF > myfile
+      > line one
+      > line two
+      > line three
+      > EOF
+
+nano - this will open a terminal based editor
+
+vim - vi filename 
+      vim is by default is in command mode
+      press i to enter text
+      esc will bring to the command line
+      press : and enter wq and press enter to save
+      h, j keys will navigate cursor left and right 
+      w will take cursor to the beginning of next word
+      $ will move the cursor to the end of line
+      /pattern command will search text forward
+      pattern? will search text backwards
+      n key will move to next occurance of search pattern
+      N key will move to previous occurance of search pattern
+      type :! wc % in the file will return word count.
+      :qi file will close without saving the changes
+
+emacs - refer to emacs tutorials on net
+
+
+USER MANAGEMENT
+-----------------
+
+whoami - will tell the current user 
+who - currently logged on users
+who -a - with more info
+
+
+MANIPULATING TEXT
+-------------------
+
+cat file1 -display the contents of file1.
+cat file1 file2 - concatenate both the files and display output
+cat file1 file2 > file3 - concatenate both files and save output in file3
+cat file >> file4 - append file to file4
+cat > file - any subsequent text typed will go into file until ctrd+D is typed
+cat >> file - any subsequent text typed will append in file until ctrd+D is typed
+tac file - this will print file in reverse order
+cat > newfile - this will create newfile, and wait user to add text till ctrd+D is pressed
+
+Example with EOF
+cat << EOF > newfile
+> hello
+> world!!!
+> EOF
+
+cat somefile | less - for viewing less of large files
+less somefile - same as above
+head -15 - display first 15 lines
+tail -10 - display last 10 lines
+tail -f logfile - to continue monitoring new additions to a growing logfile
+
+
+SED & AWK
+------------
+
+sed - sed -e s/is/are infile.txt - this will change first occurance of is and changes to are 
+      sed -e 1,2s/is/are infile.txt - this will change occurances in 1st and 2nd line and changes to are 
+      sed -e s/is/are/g infile.txt > outfile.txt - this will change all occurances of is and changes to are and save it in outfile.txt
+
+awk - pls explore on net
+
+
+SORT & UNIQ
+---------------
+
+sort - sort filename - sort file according to characters at beginning of each line.
+cat file1 file2 | sort - combine two files, sort and display contents
+sort -r filename - sort in reverse order
+sort -k 3 filename - sort lines by 3rd field on each line instead of begining
+sort -u filename - sort and then check for unique values
+sort file1 file2 | uniq > file3 - sort file1, file2 remove duplicate entries and save in file3.
+sort -u file1 file2 > file3 - same as above
+uniq -c filename - to count no of duplicate enteries
+
+
+JOIN, SPLIT & PASTE
+---------------------
+
+paste - paste -d ':' phone.txt names.txt - this show phonefield:namesfield
+join - join file1 file2 - retains comman field and add non comman
+split - split filename - split file which contains more than 1000 lines into files with 1000 lines each 
+
+
+GREP, STRINGS, TR
+--------------------
+
+grep pattern filename - searches for pattern and return all matching lines
+grep -v pattern filename - prints all lines that do not match the pattern
+grep [0-9] filename - print lines containing numbers from 0-9
+grep -C 3 pattern filename - print context of lines (specified no. of lines above and below the pattern) for matching the pattern
+
+strings book1.xls | grep my_string - string is used for non-text files
+
+tr - tr abc ABC - converts lower case to upper case
+tr '{}' '()' < inputfile > outputfile - changes braces into parenthesis
+echo 'this is for testing' | tr [:space:] '\t' - changes white spaces to tab
+echo 'this is for testing' | tr -s [:space:] - squeeze repetetion of characters using -s
+echo 'this is geek stuff' | tr -d 't'- delete specified character
+echo 'my username is 432234' | tr -cd [:digit:] - complement the sets using c option
+tr -cd [:print:] < file.txt - remmove all non printable characters from file
+tr -s '\n' ' ' < file.txt - join all lines in a single line
+
+tee - ls -l | tee newfile - This will display the newfile and save it as well
+
+wc -l - displays no of lines
+wc -c - diplays no of bytes
+wc -w - displays no of words
+
+cut - pls search online
+
+
+NETWORKING
+-------------
+
+host linuxfoundation.org - this will show ip addresses of the site
+nslookup linuxfoundation.org - this will also show ip addresses of the site
+dig linuxfoundation.org - this will also show ip addresses of the site
+/sbin/ip addr show - to view ip address
+/sbin/ip route show - to view routing info
+ping hostnamme - To check remote host is recieving data
+ip route - show current routing table
+ip route add - add static route
+ip route del - delete static route
+traceroute - to inspect route the data package take to reach destination
+
+
+NETWORK TOOLS
+---------------
+
+ethtool - queries network interfaces and also set various parameters like speed
+netstat - displays all active connections and routing tables, monitoring performance and troubleshooting
+nmap - scans open ports on network, important for security analysis
+tcpdump - dump network traffic for analysis
+iptraf - monitors network traffic in text mode
+mtr - combines functionality of ping and traceroute and gives a continuously updated display
+dig - tests dns workings, a good replacement for host and nslookup
+wget - is a command line tool for downloading files
+curl - for getting info about url like source code being used
+curl -o saved.html url - to save info into a file
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

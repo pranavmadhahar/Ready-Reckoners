@@ -35,7 +35,7 @@ LOOPS
 	for (a in obj){
 	console.log('Marks of' +a+ 'are' + obj[a])
 	}
-3. for of loop. (applies to values of object)
+3. for of loop. (applies to values of object) //This will not work where data is in key-value pairs in obj. e.g. {larry: 48, Sherry: 62}// More useful in arrays.//
 	for (b of 'larry'){
 	console.log(b)
 	}
@@ -281,7 +281,7 @@ Loops in Arrays
 
 4. for of loop
 
-   This a better way to access the array elements(value) than for loop mentioned above. 
+   This a better way to access the array elements(values) than for loop mentioned above. 
 
    for (let items of num){
 	console.log(items)
@@ -320,7 +320,7 @@ Loops in Arrays
 
 6. filter()
 
-   This runs a function on each item and returns a new array. 
+   This runs a function on each item and filters based on given criteria, returns a new array. 
    
    let arr = [1, 2, 3, 4, 5]
    let arr2 = arr.filter((a) => {
@@ -351,7 +351,17 @@ Loops in Arrays
    Returns an array of object values.
 
 9. array.find()
+   The first element in the array that satisfies the provided testing function.
 
+
+------------
+SCRIPT FILE
+------------
+
+Benefits of using separate js file
+
+1. Separation of concerns.
+2. Browser caching: Browser will download the sparate js file and store it in its cache.
 
 =================
 WALKING THE DOM
@@ -359,6 +369,7 @@ WALKING THE DOM
 
 
 DOM tree refers to the html page where all the nodes are objects.
+DOM means entire html is available as document object. We can access html elements as object e.g. document.body or document.head etc 
 Three main node types are
 1. Element Nodes
 2. Text Nodes
@@ -407,8 +418,8 @@ Searching The DOM
 1. Get Element
 
    let nav = document.getElementbyId('navbar'); 
-   let cards = document.querySelectorAll('.cards'); This uses css selector (represented by .cards )
-   let this = doument.queryselector('.this'); This will return element with unique class this. Lets assuem there is one element with class 'this'.
+   let cards = document.querySelectorAll('.cards'); This uses css selector (represented by class .cards )
+   let this = doument.queryselector('.this'); This will return element with unique class this. Lets assume there is one element with class 'this'.
    let a = document.getElementsByTagName('a'); This will return all a elements. 
    let a = document.getElementsByClassName('cards'); This will return all elements with class cards.
    let a = document.getElementsByName('search'); This will return all elements with name = 'search', mostly used for input tags.
@@ -554,14 +565,20 @@ console.log(e); It will print the event object
 PROMISES
 ==========
 
-We need promises where task execution will take some time and we do not want to wait for that. 
-For example we give order for the cake at bakery and tell them to inform us when done and we carry on with our other tasks.
-We use promises for parallel code execution. And we need to be informed back for the code execution. We do not want some of our code to be blocked for some parallel tasks.
-Whatever code you will write inside a promise, it will be executed in the background and will be notified when done. V56 will clear all doubts. 
-You can chain .then and keep adding new codes or you can add another promise in .then. This is known as promise chaining.
-You can also add multiple .then handlers which will run simultaneously after a promise is resolved
-When you define a promise object in your script, instead of returning a value immediately, it returns a promise.
-The promise has three states, which are pending, fulfilled, and rejected. 
+1. We need promises where task execution will take some time and we do not want to wait for that. 
+   For example we give order for the cake at bakery and tell them to inform us when done and we carry on with our other tasks.
+
+2. We use promises for parallel code execution. And we need to be informed back for code execution. We do not want some of our code to be blocked for some parallel tasks.
+   Whatever code you will write inside a promise, it will be executed in the background and will be notified when done. V56 will clear all doubts. 
+
+3. You can chain .then and keep adding new codes or you can add another promise in .then. This is known as promise chaining.
+   Promise chaining can be done in two ways, a) You can add a new promise in .then and take its value and add another and so on. b) You can directly return a value in .then
+   and it will be automatically taken as promise, e.g. return 5 then 5 will automatically taken as value for next .then if you want to add another .then. V56
+
+4. You can also add multiple .then handlers which will run simultaneously after a promise is resolved
+
+5. When you define a promise object in your script, instead of returning a value immediately, it returns a promise.
+   The promise has three states, which are pending, fulfilled, and rejected. 
 
 let p1 = New Promise ((resolve, reject) => {
 		alert("Hello");
@@ -572,7 +589,7 @@ let p2 = New Promise ((resolve, reject) => {
 		
 		reject(new Error ('I'm an error'));
 	      })
-console.log(p1); prints 56, This will return a promise object. This contains two fields :
+console.log(p1);      This will return a promise object. This contains two fields :
 		      1. State : Initially pending and changes to fulfilled. It is fulfilled with resolve or rejected, depending upon which one called.
       		      2. Result: Undefined initially, changes to value if resolved or error when rejected. 
 
@@ -612,11 +629,11 @@ Promise API
 4. Promise.any : let promise_any = Promise.any([p1, p2, p3])
 		 promise_race.then((value){ console.log(value) }); This will print first resolved promise.  
 
-5. Promise.resolve : let promise_reject = Promise.resolve(7)
+5. Promise.resolve : let promise_resolve = Promise.resolve(7)
 		 promise_reject.then((value){ console.log(value) }); Returns a resolved promise with given value. 
 
 6. Promise.reject : let promise_reject = Promise.reject(new Error('Hey'))
-		 promise_reject.then((value){ console.log(value) }); Returns a rejected promise with given error. 
+		 promise_resolve.then((value){ console.log(value) }); Returns a rejected promise with given error. 
 
 
 =============
@@ -863,10 +880,83 @@ ASIDE
 
    This will show local time currDate.toLocaleTimeString()
 
+MODULES
+=========
+
+1. Common JS Modules: (tut68)
+ 
+   module.exports = {hello, ahello} - in the end of the file that needs to be exported.
+
+   Two Methods: 
+   
+   On top of the imported file.
+
+   1. const hello = require ("./module1")
+
+   2. const {hello, ahello} = require ("./module1") 
+
+   Note : The function is exported as object so to use the fn, hello.hello() syntax must be used in 1st case but we have used destructuring in second point above, 
+          so we can use the fn directly like hello() and ahello() in that case.
+
+2. ES6 Modules: (Also MJS)
+
+   We directly use export keyword before writing the function e.g. export const hello = ()=>{"console.log("Hello")}
+
+   In the import file we write, import {hello, ahello} from "./module1.js" on the top. We are using destructuring here as well.
+
+   If we use default keyword e.g. const harry = ()=>{"console.log("Hello Harry")}, and we write export default harry in the end of the file, 
+   then it will not be exported as object and we can directly use this fn e.g.
+
+   import harry, {hello, ahello} from "./module1.js" and use it directly e.g. harry() and not as harry.harry(). 
+
+3. Node.js build in modules:
+
+   For example for fs module (file systems), we need to write below code on the top of the file. (see E:\Learning\JS\tut64.js)
+
+   const fs = require("fs") 
 
 
+ASIDE
+======
+
+1. JSON.stringify converts js object into a JSON string.
+
+2. JSON.parse converts a valid JSON string into js object.
+
+3. From NPM we install third party modules which other ppl has created.
 
 
+NODE JS
+========
+
+1. If we type _ and press enter then it will print last variable.
+
+2. Double tab prints all global variables available in nodejs.
+
+3. REPL is read evaluate print loop. 
+
+4. Port 80 doesn't require to be written along with local host in url, only local host is required, e.g. 127.0.0.1
+   For others it is like 127.0.0.1:7000, where 7000 is the port.
+
+5. Version of packages:
+   
+   1. 1.3.4 - Major.Minor.Patch
+
+   2. npm i ^1.3.4 - It will install exactly the same package.
+
+   3. npm i ~1.3.4 - It will install latest package.
+
+   4. npm i >1.3.4 - It will install package which is later than the mentioned. 
+
+   5. npm view slugify version - This will show the version of the installed package (e.g.slugify)
+
+6. npm install nodemon --global 
+   This will install it as global dependency and can be used in any project.
+
+7. npm install nodemon --save-dev
+   This will save it as dev dependency, after project completion it will not be required or used.
+
+8. Running npm init in a folder will initiate the folder as node project & npm will create all relevent files and folders.
 
 
 
@@ -880,6 +970,11 @@ ASIDE
 
 
 	
+# NEXT_PUBLIC_ANALYTICS_ID = '527d9a7085ce4fdd89216c50b91d9add'
+
+# Old Key: 527d9a7085ce4fdd89216c50b91d9add
+
+# &page=${this.state.page}&pagesize=${this.props.pageSize}
 		
 
 

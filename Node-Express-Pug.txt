@@ -1,14 +1,14 @@
 NODE.JS
 --------
 
-Node.js is a runtime environment for js.
-Server can be set up for code reference go to their website. 
-Built in modules can be used for different purposes, you do not need to remember them all, for reference you can search for them on the internet. 
-There are three kinds of modules. 1. Build in 2. Custom modules (built by you) 3. Third party modules (we can install them with npm)
-Node REPL - Node works on Read Evaluate Print Loop. Node.Js REPL or Read-Evaluate-Print Loop is an interactive shell for the Node.js environment which means we can write any valid Javascript code in it.
-In REPL shell _ stores the previous variable. If we type _ then it will return the last variable. 
-If we print tab twice it will return certain variables which are globally available. You do not need to import them. 
-We can create node server (V67) by using if else statements, use reference from node.js website. But it is inconvenient.
+1. Node.js is a runtime environment for js.
+2. Server can be set up for code reference go to their website. 
+3. Built in modules can be used for different purposes, you do not need to remember them all, for reference you can search for them on the internet. 
+4. There are three kinds of modules. 1. Build in 2. Custom modules (built by you) 3. Third party modules (we can install them with npm)
+5. Node REPL - Node works on Read Evaluate Print Loop. Node.Js REPL or Read-Evaluate-Print Loop is an interactive shell for the Node.js environment which means we can write any valid Javascript code in it.
+6. In REPL shell _ stores the previous variable. If we type _ then it will return the last variable. 
+7. If we print tab twice it will return certain variables which are globally available. You do not need to import them. 
+8. We can create node server (V67) by using if else statements, use reference from node.js website. But it is inconvenient.
 
 MODULES
 ---------
@@ -43,6 +43,43 @@ if you write code . and press enter in console it will open the folder in new wi
 PUG 
 -----
 
-Template engine - we give inputs and engine produces and serves html files based on that. 
-Things to remember in gym & dance projects is how to take references for express, pug. And how to write html in pug.
-Template Inheritance-V79- You need to create a file base.pug. Content of this file will be displayed accross entire website. It is a kind of form which needs to filled with help of e.g home.pug, about.pug, contact.pug. 
+1. Template engine - we give inputs and engine produces and serves html files based on that. 
+2. Things to remember in gym & dance projects is how to take references for express, pug. And how to write html in pug.
+3. Template Inheritance-V79- You need to create a file base.pug. Content of this file will be displayed accross entire website. 
+   It is a kind of form which needs to filled with help of e.g home.pug, about.pug, contact.pug, & index.pug is the where we created our entire page.
+   Some content will be same across website e.g navbar and footer so these will be fixed in base.pug, rest of the details must be filled according to the page 
+   home, about or contact.
+
+NODE JS
+========
+
+1. If we type _ and press enter then it will print last variable.
+
+2. Double tab prints all global variables available in nodejs.
+
+3. REPL is read evaluate print loop. 
+
+4. Port 80 doesn't require to be written along with local host in url, only local host is required, e.g. 127.0.0.1
+   For others it is like 127.0.0.1:7000, where 7000 is the port.
+
+5. Version of packages:
+   
+   1. 1.3.4 - Major.Minor.Patch
+
+   2. npm i ^1.3.4 - It will install exactly the same package.
+
+   3. npm i ~1.3.4 - It will install latest package.
+
+   4. npm i >1.3.4 - It will install package which is later than the mentioned. 
+
+   5. npm view slugify version - This will show the version of the installed package (e.g.slugify)
+
+6. npm install nodemon --global 
+   This will install it as global dependency and can be used in any project.
+
+7. npm install nodemon --save-dev
+   This will save it as dev dependency, after project completion it will not be required or used.
+
+8. Running npm init in a folder will initiate the folder as node project & npm will create all relevent files and folders.
+
+9. ../ means go to previous folder.

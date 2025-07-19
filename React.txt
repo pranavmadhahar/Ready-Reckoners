@@ -22,14 +22,15 @@ JSX
 5. We can write js in {} brackets. 
 6. Only one html element is allowed to be returned. 
 7. Using <>  </> JSX fragment you can write more than one html elements in the given tags. 
-8. Parenthesis is used after return because js can automatically insert semicolon. 
+8. Parenthesis() is used after return because js can automatically insert semicolon. 
+9. Babel is used to convert jsx into html which is rendered. 
 
 
 Components & Props
 --------------------
 
 1. File name of component always begins with capital letter.
-2. We can create a component e.g Navbar and we can set certain variables we call these as props.
+2. We can create a component e.g Navbar and we can set certain variables we call these as props.(short for properties)
 3. We add these components e.g in App.js and we can pass the props from there. 
 4. We need to import propTypes from propTypes.
 5. We need to add the below code at the end of the component 
@@ -101,7 +102,7 @@ Types:
 1. useState
 
    const [state, setState] = useState('state1')
-   The initial state is set to null. Function setState(state2) is used to change the state. 
+   The initial state is set to state1. Function setState(state2) is used to change the state. 
 
 
 2. useEffect 
