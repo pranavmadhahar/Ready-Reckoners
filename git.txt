@@ -8,28 +8,34 @@ git add --a or git add . - to stage all files or changes.
 git add first.txt - to stage a particular file.
 git commit -m "initial commit" - to commit and add message. 
 git log - will return the log along with commit and key.
-rm -rf .git - it will deleted all the files and folder of git. Use it carefully.
+rm -rf .git - it will delete all the files and folder of git. Use it carefully.
 git clone https://github.com/tensorflow/tensorflow.git Tensorflow- - will create clone of repository.
+
 git diff - it compare working directory with staging area.
 git diff --staged - it compare present staging area with last commit.
-git commit -a -m "Direct commit"- This is used to directly commit skipping the staged part. It stage and creates commit for all tracked files. Untracked file will not go to commit.
-git rm ""third.txt" - It will remove/delete the file and also stage the file.
+git commit -a -m "Direct commit"- This is used to directly commit skipping the staged part. 
+                                  It stage and creates commit for all tracked files. Untracked file will not go to commit.
+
+git rm "third.txt" - It will remove/delete the file and also stage the file.
 git mv first.txt first_renamed.txt - It will rename the file and also stage the file.
-git rm --cached first.txt - If git was tracking this file earlier and now it has been mentioned in gitignore then we need to run this command to now stop tracking this file. 
-git log -p - It will show only all commits(with diff/changes) along with logs.
-git log -p -n - It will show only n commits(with diff/changes) along with logs.
+git rm --cached first.txt - If git was tracking this file earlier and now it has been added in gitignore
+                            then we need to run this command to stop tracking this file.
+ 
+git log -p - It will show all commits(with diff/changes) along with logs.
+git log -p -n - It will show n commits(with diff/changes) along with logs. e.g git log -p -3
 git log --stat - Return all commits with short summary.
 git log --pretty=oneline - Show all the commits, with one commit in one line. 
 git log --pretty=short - Show all the commits, with short details.
 git log --pretty=full - Show all the commits, with some details.
-git log --pretty=format:"%h -- %an" - %h will show hash commit in short & %an will show author name. Read git log docs for more commands. 
+  - %h will show hash commit in short & %an will show author name. Read git log docs for more commands. 
 git log --since=2.days - Show logs for past 2 days. Likwise u can use .weeks, .months, .years
-git commit --amend - This is used to merge the commits. Vim editor will get opened and you can press i for edit and then press esc and then :wq and then press enter.
+
+git commit --amend - This is used to change the commit message. Vim editor will get opened and you can press i for edit and then press esc and then :wq and then press enter.
 git restore --staged first.txt - It will unstage the file and restore to previous status as modified.
-git restore - It will restore all the files. Use it carefully. 
+git restore - It will restore all the files to previous commit. Use it carefully. 
 git checkout --first.txt - It will restore the file to previous commit. 
 git checkout --f - It will restore all the files to the last commit.
-git config --global alias.st status - It means status will be displayed by using coomand st (git st). Alias is used to modify commands into aliases. 
+git config --global alias.st status - It means status will be displayed by using command st (git st). Alias is used to modify commands into aliases. 
 git config --global alias.unstage 'restore --staged--' - This will replace the command git restore --staged to git unstage.
 git config --global alias.last 'log -p -1' - This will replace the command git log -p -1 to git last.
 git revert HEAD --no-edit -  you can back out your changes by using a git revert command like the following.  
@@ -40,7 +46,8 @@ git revert HEAD --no-edit -  you can back out your changes by using a git revert
 
 --BRANCHING--
 
-git checkout -b develop - It will create new branch with the name develop. It will also take u into the new branch develop.
+git checkout -b develop - It will create new branch with the name develop. 
+                          It will also take u into the new branch develop. -b is used while creating new branch only.
 git branch branchname - It will also create a new branch with given name.
 git checkout master - It will take u into the master branch.
 git checkout develop - It will take u into the develop branch.
@@ -108,6 +115,7 @@ git-format-patch
 git am
 git-daemon
 git revert
+git reset - to remove all files from staging area
 
 
 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
@@ -117,6 +125,7 @@ wmic useraccount where sid="S-1-5-32-544" get name
 
 w-2 link:
 https://github.com/pranavmadhahar/agfzb-CloudAppDevelopment_Capstone/actions/runs/6200506447
+
 
 
 

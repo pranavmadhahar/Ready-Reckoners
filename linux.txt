@@ -198,7 +198,8 @@ wildcards - ?  matches any single character
            [set] e.g [a,b,c] will match any occurance of a,b,c
            [!set] matches any character not in the set of characters
 du - disk usage for a file or directory. 
-di -sh - summarize total size of a folder
+di -sh - summarize total size of a file/folder
+df -h - Check overall disk space (free/used)
 
 
 DOCUMENTATION

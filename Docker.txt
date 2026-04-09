@@ -149,7 +149,7 @@ docker commit -m "added names.txt file" container id names_ubuntu:1.01 - This wi
 
 docker images -q - This will show all the container ids. 
 
-docker rmi $(docker images -q) - This will remove all the images. 
+docker rmi -f $(docker images -q) - This will remove all the images. 
 
 docker stop $(docker ps -q) - This will stop all the running containers.
            
@@ -183,5 +183,16 @@ DOCKER OBJECTS
 3. Storage: By default, data doesn’t persist when the container no longer exists. Docker uses volumes and bind mounts to persist data even after a container stops.
 
 4. Plugins: such as storage plugins, provide the ability to connect to external storage platforms.
+
+
+
+
+
+
+
+
+
+
+
 
 

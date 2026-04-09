@@ -1,0 +1,1012 @@
+BASICS
+=======================================================================================================================================================
+
+
+Write clear & specfic instructions
+-----------------------------------
+
+
+1. Use Delimiters:
+
+   """ ``` --- <> XML Tags : <tag> </tag>
+
+
+Example: 
+
+text = f"""
+You should express what you want a mode to do by \
+providing instructions that are as clear and \
+specific as you can possibly make them. \
+This will guide the model towards the desired output, \
+and reduce the chance of receiving irrelevant \
+or incorrect responses. Don't confuse writing a \
+clear prompt with writing a short prompt. \
+In many cases, longer prompts provide more clarity \
+and context for the model, which can lead to \
+more detailed and relevant outputs. 
+"""
+
+prompt = f"""
+Summarize the text delimited by triple backticks \
+into a single sentence.
+```{text}```
+
+
+2. Ask for structured output
+   HTML, JSON
+
+
+Example:
+
+prompt = f"""
+Generate a list of three made up book titles along \
+with their authors and genres. 
+Provide them in JSON format with the following keys:
+book_id, title, author, genre.
+Make sure there are no extra characters or formatting in the output.
+"""
+
+
+3. We can ask model to check whether conditions are satisfied.
+   Check assumptions required to do the task.
+
+
+Example-1:
+
+text_1 = f"""
+Making a cup of tea is easy! First, you need to get some \
+water boiling. While that is happening, \
+grab a cup and put a tea bag in it. Once the water is \
+hot enough, just pour it over the tea bag. \
+Let it sit for a bit so the tea can steep. After a \
+few minutes, take out the tea bag. If you \
+like, you can add some sugar or milk to taste. \
+And that's it! You've got yourself a delicious \
+cup of tea to enjoy.
+"""
+
+prompt = f"""
+You will be provided with text delimited by triple quotes. 
+If it contains a sequence of instructions, \
+re-write those instructions in the following format:
+
+Step 1 - ...
+Step 2 - ...
+...
+Step N - ...
+
+If the text does not contain a sequence of instructions, \
+then simply write "No steps provided."
+
+\"\"\"{text_1}\"\"\"
+"""
+
+Example-2:
+
+text_2 = f"""
+The sun is shining brightly today, and the birds are \
+singing. It's a beautiful day to go for a \
+walk in the park. The flowers are blooming, and the \
+trees are swaying gently in the breeze. People \
+are out and about, enjoy the lovely weather. \
+Some are having picnics, while others are playing \
+games or simply relaxing on the grass. It's a \
+perfect day to spend time outdoors and appreciate the \
+beauty of nature.
+"""
+
+
+4. Few-shot prompting
+   Give successful examples of completing tasks.
+   Then ask model to perform the task.
+
+Example:
+
+prompt = f"""
+Your task is to answer in a consistent style.
+
+<child>: Teach me about patience.
+
+<grandparent>: The river that carves the deepest \
+valley flows from a modest spring; the \
+grandest symphony originates from a single note; \
+The most intricate tapestry begins with a solitary thread.
+
+<child>: Teach me about resilience.
+"""
+
+
+
+Give Model Time To Think
+--------------------------
+
+
+1. Specify the steps required to complete a task
+
+   Step-1 ...
+   Step-2 ...
+   ----
+   Step N ...
+
+
+Example-1:
+
+text = f"""
+In a charming village, siblings Jack and Jill set out on \
+a quest to fetch water from a hilltop \
+well. As they climbed, singing joyfully, misfortune \
+struck-Jack tripped on a stone and tumbled \
+down the hill, with Jill following suit. \
+Though slightly battered, the pair returned home to \
+comforting embraces. Despite the mishap, \
+their adventurous spirits remained undimmed, and they \
+continued exploring with delight.
+"""
+
+prompt_1 = f"""
+Perform the following actions:
+1 - Summarize the follwing text delimited by triple \
+backticks with 1 sentence. 
+2 - Translate the summary into French.
+3 - List each name in the French summary.
+4 - Output a json object that contains the follwing \
+keys: french_summary, num_names.
+
+Separate your answers with line breaks.
+
+Text:
+```{text}```
+"""
+
+Example-2:
+
+text = f"""
+In a charming village, siblings Jack and Jill set out on \
+a quest to fetch water from a hilltop \
+well. As they climbed, singing joyfully, misfortune \
+struck-Jack tripped on a stone and tumbled \
+down the hill, with Jill following suit. \
+Though slightly battered, the pair returned home to \
+comforting embraces. Despite the mishap, \
+their adventurous spirits remained undimmed, and they \
+continued exploring with delight.
+"""
+
+prompt_2 = f"""
+Perform the following actions:
+1 - Summarize the follwing text delimited by triple \
+backticks with 1 sentence. 
+2 - Translate the summary into French.
+3 - List each name in the French summary.
+4 - Output a json object that contains the follwing \
+keys: french_summary, num_names.
+
+Use the following format:
+Text: <text to summarize>
+Summary: <summary>
+Translation: <summary translation>
+Names: <list of names in Italian summary>
+Output JSON: <json with summary and num_names>
+
+Text to summarize: <{text}>
+"""
+
+
+2. Instruct Model to work out its own solution before rushing to a conclusion.
+
+
+Example-1:
+
+prompt = f"""
+Determine if the student's solution is correct or not. 
+
+Question:
+I'm building a solar power installation and I need \
+help working out the financials.
+- Land costs $100 / square foot 
+- I can buy solar panels for $250 / square foot 
+- I negotiated a contract for maintenance that will cost \
+me a flat $100k per year, and an additional $10 / square \
+foot 
+What is the total cost for the first year of operations
+as a function of the number of square feet. 
+
+Student's Solution:
+Let x be the size of the installation in square feet.
+Costs:
+1. Land cost: 100x
+2. Solar panel cost: 250x
+3. Maintenance cost: 100,000 + 100x
+Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
+"""
+
+
+
+Example-2:
+
+prompt = f"""
+Determine if the student's solution is correct or not. 
+To solve the problem do the following:
+1. Work out your own solution to the problem.
+2. Then, compare your own solution to the student's solution \
+and evaluate if student's solution is correct or not.
+Don't decide if the student's solution is correct untill \
+you have done the problem yourself.
+
+Use the following format:
+Question:
+```
+question here
+```
+Student's solution:
+```
+student's solution here
+```
+Actual solution:
+```
+steps to work out the solution and your solution here
+```
+Is the student's solution the same as actual solution \
+just calculated:
+```
+yes or no
+```
+Student's grade:
+```
+correct or incorrect
+```
+
+Make sure there are no extra characters or formatting in the output.
+
+Question:
+I'm building a solar power installation and I need \
+help working out the financials.
+- Land costs $100 / square foot 
+- I can buy solar panels for $250 / square foot 
+- I negotiated a contract for maintenance that will cost \
+  me a flat $100k per year, and an additional $10 / square \
+  foot.
+What is the total cost for the first year of operations
+as a function of the number of square feet. 
+
+Student's Solution:
+Let x be the size of the installation in square feet.
+Costs:
+1. Land cost: 100x
+2. Solar panel cost: 250x
+3. Maintenance cost: 100,000 + 100x
+Total cost: 100x + 250x + 100,000 + 100x = 450x + 100,000
+"""
+
+
+ITERATIVE
+==========
+
+
+SUMMARIZING
+=======================================================================================================================================================
+
+
+Example-1:
+
+prod_review = """
+Got this panda plush toy for my daughter's birthday, \
+who loves it and takes it everywhere. It's soft and \
+super cute, and its face has a friendly look. It's \
+a bit small for what i paid though. I think there \
+might be other options that are bigger for the \
+same price. It arrived a day earlier than expected, \
+so i got to play with it myself before i gave it \
+to her. 
+"""
+
+prompt = f"""
+Your task is to generate a short summary of a product \
+review from an ecommerce site.
+
+Summazrize the review below, delimited by triple 
+backticks, in at most 30 words.
+
+Review: ```{prod_review}```
+"""
+
+result1 = get_completion(prompt)
+print(result1)
+
+
+Example-2: With focus on shipping and delivery
+
+prod_review = """
+Got this panda plush toy for my daughter's birthday, \
+who loves it and takes it everywhere. It's soft and \
+super cute, and its face has a friendly look. It's \
+a bit small for what i paid though. I think there \
+might be other options that are bigger for the \
+same price. It arrived a day earlier than expected, \
+so i got to play with it myself before i gave it \
+to her. 
+"""
+
+prompt = f"""
+Your task is to generate a short summary of a product \
+review from an ecommerce site to give feedback to the \
+Shipping department.
+
+Summazrize the review below, delimited by triple 
+backticks, in at most 30 words, and focusing on any aspects \
+that mention shipping and delivery of the product. 
+
+Review: ```{prod_review}```
+"""
+
+result2 = get_completion(prompt)
+print(result2)
+
+
+
+Example3 : With focus on pricing
+
+prod_review = """
+Got this panda plush toy for my daughter's birthday, \
+who loves it and takes it everywhere. It's soft and \
+super cute, and its face has a friendly look. It's \
+a bit small for what i paid though. I think there \
+might be other options that are bigger for the \
+same price. It arrived a day earlier than expected, \
+so i got to play with it myself before i gave it \
+to her. 
+"""
+
+prompt = f"""
+Your task is to generate a short summary of a product \
+review from an ecommerce site to give feedback to the \
+Pricing department.
+
+Summazrize the review below, delimited by triple 
+backticks, in at most 30 words, and focusing on any aspects \
+that are relevant to price and percieved value. 
+
+Review: ```{prod_review}```
+"""
+
+result3 = get_completion(prompt)
+print(result3)
+
+
+
+
+Example4: Extract relevant information
+
+prod_review = """
+Got this panda plush toy for my daughter's birthday, \
+who loves it and takes it everywhere. It's soft and \
+super cute, and its face has a friendly look. It's \
+a bit small for what i paid though. I think there \
+might be other options that are bigger for the \
+same price. It arrived a day earlier than expected, \
+so i got to play with it myself before i gave it \
+to her. 
+"""
+
+prompt = f"""
+Your task is to extract relevant information from \
+a product review from an ecommerce site to give \
+feedback to the Shipping department.
+
+Summazrize the review below, delimited by triple 
+backticks, extract the information relevant to shipping \
+and delivery, in at most 30 words.  
+
+Review: ```{prod_review}```
+"""
+
+result4 = get_completion(prompt)
+print(result4)
+
+
+Example5: Processing Multiple reviews 
+
+
+# Standing Lamp Review
+review_1 = """
+I recently bought this standing lamp for my living room, \
+and it has been a game-changer. The lamp arrived on time, \
+well-packed, and with no damage. Assembly was surprisingly \
+easy—just a few pieces that snapped into place, and I was good to go. \
+The lamp’s design is sleek and modern, which fits perfectly with my \
+minimalist décor. The light it provides is bright but not harsh, \
+which is exactly what I was looking for. I love that it has a dimmer function, \
+allowing me to adjust the brightness depending on the mood I want to set. \
+One downside is that the base is a little lighter than I expected, \
+so it tips over if I accidentally bump it. I think it could be more stable. \
+However, the quality of the light and its stylish design make up for this \
+minor inconvenience. Overall, I’m happy with the purchase, and I’d recommend \
+it to anyone looking for a good, affordable standing lamp that \
+adds a touch of elegance to any room. \
+"""
+
+# Electric Toothbrush Review
+review_2 = """
+I’ve been using this electric toothbrush for about a week now, \
+and I’m really impressed with it. The brushing experience is \
+so much more thorough compared to my manual toothbrush. \
+The vibrations are strong, and my teeth feel super clean after every use. \
+The brush has different settings, so I can adjust the intensity \
+based on my preferences. The battery life is great—I only need to \
+charge it once a week. The toothbrush’s handle is ergonomic, \
+making it easy to grip and control. One feature I really  \
+like is the built-in timer, which reminds me to switch to \
+another quadrant of my mouth every 30 seconds. My gums also feel healthier, \
+and I’ve noticed less plaque buildup. The only issue I’ve encountered \
+is that the brush heads can be a bit pricey to replace. Still, the quality \
+of the toothbrush makes it worth the investment. Overall, I’m really satisfied \
+with the product and would recommend it to anyone wanting \
+a better brushing experience. \
+"""
+
+# Blender Review
+review_3 = """
+This blender has become one of my favorite kitchen appliances. \
+I’ve used it almost every day since I got it for making smoothies, \
+soups, and even sauces. It blends ingredients smoothly and quickly, \
+with no chunks left behind. The power is impressive; I can blend \
+even tough ingredients like frozen berries and ice with ease. \
+I also love the large capacity, which allows me to make big batches \
+of smoothies for the entire family. The blender is surprisingly quiet, \
+which is a big plus compared to other blenders I’ve had in the past. \
+Cleaning is super easy as well, since the jar and blades are detachable \
+and dishwasher-safe. The design is sleek and doesn’t take up too \
+much counter space. The only downside is that it’s a little heavy, \
+so it’s not the most portable appliance. Also, the lid can sometimes \
+be tricky to close properly, but once you get the hang of it, \
+it works fine. Overall, this blender performs exceptionally well \
+and is definitely worth the price. It’s durable, powerful, \
+and versatile, making it an excellent addition \
+to any kitchen. \
+"""
+
+# Toy Review
+review_4 = """
+Got this panda plush toy for my daughter's birthday, \
+who loves it and takes it everywhere. It's soft and \
+super cute, and its face has a friendly look. It's \
+a bit small for what i paid though. I think there \
+might be other options that are bigger for the \
+same price. It arrived a day earlier than expected, \
+so i got to play with it myself before i gave it \
+to her. 
+"""
+
+reviews = [review_1, review_2, review_3, review_4]
+
+for i in range(len(reviews)):
+ 	prompt = f"""
+	Your task is to generate a short summmary of a product \
+	review from an ecommerce site.
+
+	Summazrize the review below, delimited by triple 
+	backticks, in at most 20 words.  
+
+	Review: ```{reviews[i]}```
+	"""
+
+result4 = get_completion(prompt)
+print(i, result4, "\n")
+
+
+
+INFERRING
+=======================================================================================================================================================
+
+
+# Example-1:
+
+# Standing Lamp Review
+lamp_review = """
+I recently bought this standing lamp for my living room, \
+and it has been a game-changer. The lamp arrived on time, \
+well-packed, and with no damage. Assembly was surprisingly \
+easy—just a few pieces that snapped into place, and I was good to go. \
+The lamp’s design is sleek and modern, which fits perfectly with my \
+minimalist décor. The light it provides is bright but not harsh, \
+which is exactly what I was looking for. I love that it has a dimmer function, \
+allowing me to adjust the brightness depending on the mood I want to set. \
+One downside is that the base is a little lighter than I expected, \
+so it tips over if I accidentally bump it. I think it could be more stable. \
+However, the quality of the light and its stylish design make up for this \
+minor inconvenience. Overall, I’m happy with the purchase, and I’d recommend \
+it to anyone looking for a good, affordable standing lamp that \
+adds a touch of elegance to any room. \
+"""
+
+prompt = f"""
+What is the sentiment of the following product review, 
+Which is delimited with triple backticks?
+
+Review Text: ```{lamp_review}```
+"""
+
+result = get_completion(prompt)
+print(result)
+
+
+# Example-2:
+
+prompt = f"""
+What is the sentiment of the following product review, 
+Which is delimited with triple backticks?
+
+Give your answer in one word either positive or negative.
+
+Review Text: ```{lamp_review}```
+"""
+
+result = get_completion(prompt)
+print(result)
+
+
+# Example-3:
+
+prompt = f"""
+Identify a list of emotions that a writer of the \
+following review is expressing. Include no more than \
+five items in the list. Format your answer as a list of \
+lower-case words separated by commas.
+
+Review Text: ```{lamp_review}```
+"""
+
+result = get_completion(prompt)
+print(result)
+
+
+# Example-4: Asking for particular emotion. ?
+
+prompt = f"""
+Is the writer of the following review expressing anger? \
+The review is delimited with triple backticks. \
+
+Give your answer as either yes or no.
+
+Review Text: ```{lamp_review}```
+"""
+
+result = get_completion(prompt)
+print(result)
+
+
+# Example-5: Extracting particular info.?
+
+prompt = f"""
+Identify following items from review text:
+- Item purchased by reviewer.
+- Company that made the item.
+
+The review is delimited with triple backticks. \
+Format your response as json object with \
+"Item" and "Brand" as keys.
+If the information is not present, use "unknown" \
+as the value.
+Make your response as short as possible.
+
+
+Review Text: ```{lamp_review}```
+"""
+
+result = get_completion(prompt)
+print(result)
+
+
+# Example-6: Multiple info in one prompt.
+
+prompt = f"""
+Identify following items from review text:
+- Sentiment (positive or negative)
+- Is reviewer expressing anger (Boolean)
+- Item purchased by reviewer.
+- Company that made the item.
+
+The review is delimited with triple backticks. \
+Format your response as json object with \
+"Sentiment", "Anger", "Item" and "Brand" as keys.
+If the information is not present, use "unknown" \
+as the value.
+Make your response as short as possible.
+Format anger value as boolean.
+
+
+Review Text: ```{lamp_review}```
+"""
+
+result = get_completion(prompt)
+print(result)
+
+
+# Example-7: Extract topics in Text
+
+article = """
+Government Workers Reflect on Their Experiences Across Agencies: Insights from NASA and Beyond
+Government workers play a vital role in the functioning of the public sector, with each agency contributing to the broader mission of serving the public. But how do employees feel about their roles, their agencies, and the work they do? From NASA's high-flying missions to local social services, government employees across different sectors have diverse perspectives on their workplaces.
+At NASA, employees often express a sense of pride and awe. The National Aeronautics and Space Administration has long been at the forefront of scientific discovery and innovation, and for many workers, this is more than just a job—it’s a mission. Astronomers, engineers, and astronauts alike talk about the exhilaration of contributing to humanity's quest for knowledge about space, with recent advancements like the James Webb Space Telescope and Mars exploration missions serving as prime examples of NASA’s continued relevance.
+“I can’t imagine working anywhere else,” says Dr. Lisa Moreno, an astrophysicist who’s been with NASA for over 10 years. “There’s a unique sense of purpose here. Knowing that the work I do has the potential to answer questions humanity has been asking for centuries is humbling. Plus, the people here are passionate about what they do. There's a real camaraderie.”
+However, even within NASA, employees acknowledge the challenges of working in a government agency. For many, bureaucracy and budget constraints can be limiting factors. “We work on some of the most advanced projects in the world, but there are always budget cuts to deal with. Some years, it feels like the red tape can be more complicated than the math we use for space calculations,” says Mark Daniels, a systems engineer with NASA’s Jet Propulsion Laboratory.
+Indeed, bureaucracy is a common theme among government workers across various agencies. The federal system is known for its layers of regulations, procedures, and administrative processes, which some employees find frustrating. Sarah Johnson, who works for the Department of Health and Human Services, shares similar sentiments. “The work is meaningful, but sometimes it feels like you're running in circles just to get approval for something that seems obvious,” she says. “We do a lot of paperwork, and by the time things get approved, the situation might have changed.”
+Yet, for many government workers, the satisfaction of public service outweighs the frustrations. While salaries in government jobs can sometimes lag behind those in the private sector, benefits like job security, pension plans, and healthcare are often cited as important positives. Additionally, the chance to make a tangible impact on society—whether it's improving public health, ensuring safe working conditions, or advancing scientific knowledge—is what keeps many employees dedicated.
+"There's no other feeling like knowing that your work directly impacts people’s lives," says James Carter, a social worker at the Department of Veterans Affairs. "Yes, the processes can be slow, but when you see a veteran’s face light up because they finally got the help they needed, it makes it all worthwhile."
+At agencies like the Environmental Protection Agency (EPA) or the Department of Education, the sentiment is similarly mixed. Workers in these departments are motivated by their desire to protect the environment, improve public education, and address inequalities in society. Yet, like NASA, they too feel the pressure of bureaucratic delays and limited funding.
+“I came to the EPA to fight for a cleaner, more sustainable world,” says Heather Powell, an environmental scientist. “But I often feel like we're pushing a boulder uphill. You can only accomplish so much when budgets are slashed every year.”
+Despite these challenges, most government employees emphasize the value of their work and the sense of mission that drives them forward. The sense of duty to serve the public and contribute to the greater good is central to their identity, even when the work becomes difficult or frustrating.
+In the end, government workers may not always feel like they’re getting the recognition they deserve. But whether they’re launching spacecraft into deep space or helping a family navigate the complex health system, there’s a deep-seated pride in the work they do. Their commitment to public service remains strong, even in the face of challenges that sometimes seem insurmountable.
+"""
+
+prompt = f"""
+Determine the topics that are being discussed in the \
+following text, which is delimited by triple bracticks.
+
+Make each item one or two words long.
+
+Format your response as a list of items separated by commas. 
+
+text: ```{article}```
+"""
+
+result = get_completion(prompt)
+print(result)
+
+
+# Example-8: Comparing topics in Text with given list of topics
+
+topic_list = ["nasa", "local government", "engineering", "employee satisfaction", "federal government" ]
+
+
+prompt = f"""
+Determine whether each item in the follwoing list of \
+topics is a topic in the text below, which is \
+delimited by backticks.
+
+Give your answer as dict with 0 and 1 as values for each topic.
+
+List of topics: {",".join(topic_list)}
+
+text: ```{article}```
+"""
+
+result = get_completion(prompt)
+print(result)
+
+
+# Example-9: Creating Alert!
+
+import json
+
+parsed_result = json.loads(result)
+
+# For creating singulart alert!
+if parsed_result['nasa'] == 1:
+    print("ALERT: New Nasa Story!")
+
+# For creating multiple alerts!
+for key, value in parsed_result.items():
+    if value == 1:
+        print(f"ALERT: New {key.capitalize()} Story!")
+
+
+
+
+TRANSFORMING
+=======================================================================================================================================================
+
+
+# Example-1: 
+
+prompt = f"""
+Translate the following English text delimited \
+by triple backticks to Spanish:
+```Hi, I would like to order a blender```
+"""
+
+result = get_completion(prompt)
+print(result
+
+
+# Example-2: 
+
+
+prompt = f"""
+Tell me what language is this, text delimited \
+by triple backticks.
+```Combien, coute le lampadaire```
+"""
+
+result = get_completion(prompt)
+print(result)
+
+
+
+# Example-3: 
+
+prompt = f"""
+Translate the given text to French and Spanish, English pirate.
+Text is delimited by triple backticks.
+```I want to order a basketball```
+"""
+
+result = get_completion(prompt)
+print(result)
+
+
+
+# Example-4: 
+
+prompt = f"""
+Translate the given text to Spanish, in both the \
+formal and informal forms:
+
+Exclude special characters.
+
+'Would you like to order a pillow?'
+"""
+
+result = get_completion(prompt)
+print(result)
+
+
+# Example-5
+
+user_messages = [
+    "I can't log in to my account.",
+    "Je ne peux pas accéder à mon profil.",
+    "No puedo encontrar la opción de configuración.",
+    "Ich kann die Datei nicht herunterladen.",
+    "我无法更新应用程序。",
+    "Non riesco a connettermi a internet.",
+    "Jeg kan ikke få tilgang til kontoen min."
+]
+
+for issue in user_messages:
+    prompt1 = f"""
+    Tell me what language is this: ```{issue}```
+    """
+    lang = get_completion(prompt1)
+    print(f"Original message ({lang}): ({issue})")
+
+    prompt2 = f"""
+    Translate the following text to English 
+    and Korean: ```{issue}```
+    """
+    result = get_completion(prompt2)
+    print(result, "\n")
+
+
+# Example: 6
+
+prompt = f"""
+Translate the following from slang to a business letter:
+'Dude, This is Joe, check out this spec on this standing lamp.
+"""
+
+result = get_completion(prompt)
+print(result)
+
+
+
+# Example: 7
+
+
+data_json = {
+  "restaurant_employees": [
+    {
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com"
+    },
+    {
+      "name": "David Smith",
+      "email": "david.smith@example.com"
+    },
+    {
+      "name": "Maria Garcia",
+      "email": "maria.garcia@example.com"
+    },
+    {
+      "name": "John Brown",
+      "email": "john.brown@example.com"
+    },
+    {
+      "name": "Emily Davis",
+      "email": "emily.davis@example.com"
+    },
+    {
+      "name": "Michael Wilson",
+      "email": "michael.wilson@example.com"
+    },
+    {
+      "name": "Sarah Lee",
+      "email": "sarah.lee@example.com"
+    }
+  ]
+}
+
+prompt = f"""
+Translate the follwoing python dictionary from JSON \
+to a HTML table with column headers and title: {data_json}
+"""
+
+result = get_completion(prompt)
+print(result)
+
+
+
+
+   
+EXPANDING
+=======================================================================================================================================================
+
+
+Example-1:
+
+
+# Blender Review
+review = """
+This blender has become one of my favorite kitchen appliances. \
+I’ve used it almost every day since I got it for making smoothies, \
+soups, and even sauces. It blends ingredients smoothly and quickly, \
+with no chunks left behind. The power is impressive; I can blend \
+even tough ingredients like frozen berries and ice with ease. \
+I also love the large capacity, which allows me to make big batches \
+of smoothies for the entire family. The blender is surprisingly quiet, \
+which is a big plus compared to other blenders I’ve had in the past. \
+Cleaning is super easy as well, since the jar and blades are detachable \
+and dishwasher-safe. The design is sleek and doesn’t take up too \
+much counter space. The only downside is that it’s a little heavy, \
+so it’s not the most portable appliance. Also, the lid can sometimes \
+be tricky to close properly, but once you get the hang of it, \
+it works fine. Overall, this blender performs exceptionally well \
+and is definitely worth the price. It’s durable, powerful, \
+and versatile, making it an excellent addition \
+to any kitchen. \
+"""
+
+prompt = f"""
+You are a customer service AI assistant. 
+Your task is to send an email reply to a valued customer.
+Given the customer email delimited by ```, \
+Generate a reply to thank the customer for their review.
+If the sentiment is positive or neutral, thank them for \
+their review.
+If the sentiment is negative, apologize and suggest that \
+they can reach out to customer service.
+Make sure to include specific details from the review.
+Write in concise and professional tone.
+Sign the email as `AI customer agent`.
+Customer review: ```{review}```
+"""
+
+result = get_completion(prompt)
+print(result)
+
+
+
+
+
+CHATBOT
+=======================================================================================================================================================
+
+# Set up hugging face inference 
+import os
+from huggingface_hub import InferenceClient
+
+client = InferenceClient()
+
+# Modified helper fn for creating chatbot
+def get_completion(chats, model="openai/gpt-oss-120b", temperature=0):
+    
+    response = client.chat.completions.create(
+        model=model,
+        messages=chats, # complete chats for contextual awareness 
+        temperature=temperature, # degree of randomness of model's output
+    )
+    
+    assistant_reply = response.choices[0].message['content']
+    return assistant_reply
+
+
+Example-1:
+
+messages = [
+{'role': 'system', 'content': 'You are an assistant that speaks like a guru'},
+{'role': 'user', 'content': 'Tell me a motivational quote'},
+{'role': 'assistant', 'content': 'Where there is no will, there is no way'},
+{'role': 'user', 'content': 'Tell me another'}
+]
+
+result = get_completion(chats, temperature=1)
+print(result)
+
+
+
+Passing the conversations both from user and bot as context:
+
+def collect_messages(_):
+    prompt = inp.value_input
+    inp.value = ''
+    context.append({'role': 'user', 'content': f"{prompt}"})
+    result = get_completion(context)
+    context.append({'role': 'assistant', 'content': f"{result}"})
+    panels.append(pn.Row('User:', pn.pane.Markdown(prompt, width=600)))
+    panels.append(pn.Row('Assistant:', pn.pane.Markdown(result, width=600)))
+
+    return pn.Column(*panels)
+	
+	
+
+
+
+import ipywidgets as widgets
+from IPython.display import display
+
+chat_area = widgets.HTML(value="")
+input_box = widgets.Text()
+send_button = widgets.Button(description="Send")
+
+chats = []
+
+def get_completion(prompt):
+    chats.append({"role": "user", "content": prompt})
+    response = client.chat.completions.create(
+        model="openai/gpt-oss-120b",
+        messages=chats,
+        temperature=0,
+    )
+    reply = response.choices[0].message["content"]
+    chats.append({"role": "assistant", "content": reply})
+    return reply
+
+def on_send(_):
+    user_msg = input_box.value
+    input_box.value = ""
+
+    global chat_area
+    chat_area.value += f"<p><b>You:</b> {user_msg}</p>"
+
+    bot_reply = get_completion(user_msg)
+    chat_area.value += f"<p><b>Bot:</b> {bot_reply}</p>"
+
+send_button.on_click(on_send)
+
+display(chat_area, input_box, send_button)
+
+
+
+
+
+from huggingface_hub import InferenceClient
+
+client = InferenceClient()
+chats = []
+
+def get_completion(prompt, model="openai/gpt-oss-120b"):
+    chats.append({"role": "user", "content": prompt})
+    response = client.chat.completions.create(
+        model=model,
+        messages=chats,
+        temperature=0,
+    )
+    reply = response.choices[0].message["content"]
+    chats.append({"role": "assistant", "content": reply})
+    return reply
+
+while True:
+    user = input("You: ")
+    if user.lower() in ["quit", "exit"]:
+        break
+    bot = get_completion(user)
+    print("Bot:", bot)
+
+
+
+
+
+
+
+
+
