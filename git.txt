@@ -118,13 +118,6 @@ git revert
 git reset - to remove all files from staging area
 
 
-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
-
-wmic useraccount where sid="S-1-5-32-544" get name
-
-
-w-2 link:
-https://github.com/pranavmadhahar/agfzb-CloudAppDevelopment_Capstone/actions/runs/6200506447
 
 
 
